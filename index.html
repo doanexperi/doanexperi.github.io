@@ -1,0 +1,2996 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My experiment</title>
+    <script src="dist/jspsych.js"></script>
+    <script src="dist/plugin-fullscreen.js"></script>
+    <script src="dist/plugin-image-keyboard-response.js"></script>
+    <script src="dist/plugin-preload.js"></script>
+    <script src="dist/plugin-survey-text.js"></script>
+    <script src="dist/plugin-html-button-response.js"></script>
+    <script src="dist/plugin-survey-likert.js"></script>
+    <script src="dist/plugin-html-keyboard-response.js"></script>
+    <script src="dist/plugin-survey-html-form.js"></script>
+    <script src="dist/plugin-image-button-response.js"></script>
+    <script src="dist/plugin-survey.js"></script>
+    <script src="dist/plugin-survey-multi-select.js"></script>
+    <script src="dist/plugin-call-function.js"></script>
+    <script src="test_sales_stimuli.js"></script>
+    <script src="dist/plugin-external-html.js"></script>
+    <link rel="stylesheet" href="dist/jspsych.css">
+    <link rel="stylesheet" href="dist/survey.css">
+    <link rel="stylesheet" href="./test_2.css">
+</head>
+
+<body>
+
+</body>
+
+<script type="text/javascript">
+    /* Global Variables */
+
+    var timeline = [];
+
+
+
+    //实验数据处理
+    //var data_list = [prac_simple, prac_complex]
+    //var test_sales_stimuli = data_list[Math.floor((Math.random() * data_list.length))]
+    //if (test_sales_stimuli == prac_simple) {
+    //    var exp_sales_stimuli = exp_simple
+    //} else {
+    //    var exp_sales_stimuli = exp_complex
+    //}
+
+    //不分难易，全部在同一数据集
+
+    //取出训练数据集
+    //var prac_samples_7 = []
+    //var index_list_prac = []
+    // for (var i = 0; i < 7; i++) {
+    //    var index = Math.floor(Math.random() * 52)
+    //    if (-1 == index_list_prac.indexOf(index)) {
+    //        index_list_prac.push(index)
+    //    } else {
+    //        i = i - 1
+    //    }
+    //}
+    //for (var index of index_list_prac) {
+    //    prac_samples_7.push(stimuli_samples[index])
+    //}
+    //var exp_sales_stimuli = stimuli_samples.filter((n, i) => !index_list_prac.includes(i));
+
+
+    //取出正式实验阶段1的数据集
+    //var exp_sales_stimuli_part1 = [] //只有5个
+    //var index_list_part1 = []
+
+    //for (var i = 0; i < 5; i++) {
+    //    var index = Math.floor(Math.random() * 45)
+    //    if (-1 == index_list_part1.indexOf(index)) {
+    //        index_list_part1.push(index)
+    //    } else {
+    //        i = i - 1
+    //    }
+    //}
+    //for (var index of index_list_part1) {
+    //    exp_sales_stimuli_part1.push(exp_sales_stimuli[index])
+    //}
+    //var exp_sales_stimuli_part2 = exp_sales_stimuli.filter((n, i) => !index_list_part1.includes(i));
+
+    //正式实验阶段2的免费阶段
+    //var exp_sales_stimuli_part2_free = []
+    //var index_list_part2_free = []
+    //for (var i = 0; i < 4; i++) {
+    //    var index = Math.floor(Math.random() * 40)
+    //    if (-1 == index_list_part2_free.indexOf(index)) {
+    //        index_list_part2_free.push(index)
+    //    } else {
+    //        i = i - 1
+    //    }
+    //}
+
+    //for (var index of index_list_part2_free) {
+    //    exp_sales_stimuli_part2_free.push(exp_sales_stimuli_part2[index])
+    //}
+    //var exp_sales_stimuli_part2_pay = exp_sales_stimuli_part2.filter((n, i) => !index_list_part2_free.includes(i));
+
+
+    //在实验开始前按照时间顺序取出对应的数据集。分别是10个，5个，7个。
+    //首先得到22个index。一共是66个。
+    var stimulus_index = []
+    for (var i = 0; i < 22; i++) {
+        var index = Math.floor(Math.random() * 66)
+        if (-1 == stimulus_index.indexOf(index)) {
+            stimulus_index.push(index)
+        } else {
+            i = i - 1
+        }
+    }
+
+    //index排序
+    for (var i = 0; i < stimulus_index.length - 1; i++) {
+        for (var j = 0; j < stimulus_index.length - i - 1; j++) {
+            // 1.对每一个值和它的下一个值进行比较
+            if (stimulus_index[j] > stimulus_index[j + 1]) {
+                // 如果第一个值更多，则将其赋予自定义计数值 count
+                var count = stimulus_index[j];
+                // 反复交换
+                stimulus_index[j] = stimulus_index[j + 1];
+                stimulus_index[j + 1] = count;
+            };
+        };
+    }
+    console.log(stimulus_index);
+
+    var index_list_prac = stimulus_index.slice(0, 10)
+    var index_list_part1 = stimulus_index.slice(10, 15)
+    var index_list_part2_free = stimulus_index.slice(15, 19)
+    var index_list_part2_pay = stimulus_index.slice(19)
+
+    var prac_samples_7 = []
+    var exp_sales_stimuli_part1 = []
+    var exp_sales_stimuli_part2_free = []
+    var exp_sales_stimuli_part2_pay = []
+
+    for (var index of index_list_prac) {
+        prac_samples_7.push(stimuli_samples[index])
+    }
+
+    for (var index of index_list_part1) {
+        exp_sales_stimuli_part1.push(stimuli_samples[index])
+    }
+
+    for (var index of index_list_part2_free) {
+        exp_sales_stimuli_part2_free.push(stimuli_samples[index])
+    }
+
+    for (var index of index_list_part2_pay) {
+        exp_sales_stimuli_part2_pay.push(stimuli_samples[index])
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var conditional_web = Math.floor(Math.random() * 4)
+
+
+    var scale = ["完全没有信心", "没有信心", "有点没有信心", "不确定", "有点信心", "有信心", "非常有信心"];
+
+
+    var jsPsych = initJsPsych({
+        default_ITI: 250,
+        on_finish: function() {
+            var date = new Date()
+            var year = date.getFullYear()
+            var month = date.getMonth() + 1
+            var date1 = date.getDate()
+            var hour = date.getHours()
+            var minute = date.getMinutes()
+            var seconds = date.getSeconds()
+            var file_name_csv = "exp_data_" + year.toString() + '-' + month.toString() + '-' + date1.toString() + '-' + hour.toString() + '-' + minute.toString() + '-' + seconds.toString() + '.csv'
+            var file_name_json = "exp_data_" + year.toString() + '-' + month.toString() + '-' + date1.toString() + '-' + hour.toString() + '-' + minute.toString() + '-' + seconds.toString() + '.json'
+            jsPsych.data.displayData();
+            jsPsych.data.get().localSave('csv', file_name_csv);
+            jsPsych.data.get().localSave('json', file_name_json);
+            document.getElementById('jspsych-content').innerHTML += `<p class='context' style='font-size:1.375rem /* 22/16 */; text-align=center'>实验结束，感谢你的参与！</p>`
+        }
+    });
+
+    var set_html_style = {
+            type: jsPsychCallFunction,
+            func: function() {
+                //document.body.style.backgroundColor = 'rgb(250, 250, 250)' // background color
+                document.body.style.backgroundColor = 'rgb(250, 250, 250)' // background color
+                document.body.style.color = 'black' // font color
+                    //document.body.style.fontSize = '20pt'
+                    //document.body.style.fontFamily = '微软雅黑'
+                    //document.body.style.fontWeight = 'bold' // 'normal', 'bold'
+                document.body.style.lineHeight = '1.6em' // line space
+                document.body.style.cursor = 'default' // 'default', 'none', 'wait', ...
+                document.body.onselectstart = function() {
+                        return false
+                    } // 禁止选中文字 <body oncontextmenu="return false">
+                document.body.oncontextmenu = function() {
+                        return false
+                    } // 禁用鼠标右键 <body onselectstart="return false">
+                document.onkeydown = function() {
+                    // 屏蔽键盘按键 (https://www.bejson.com/othertools/keycodes/)
+                    if ((event.keyCode in {
+                            27: 'Esc',
+                            116: 'F5',
+                            123: 'F12'
+                        }) ||
+                        (event.ctrlKey && event.keyCode in {
+                            85: 'U'
+                        })
+                    ) {
+                        return false
+                    }
+                }
+            },
+        }
+        //timeline.push(set_html_style);
+
+
+    //var fullscreen_trial = {
+    //    type: jsPsychFullscreen,
+    //    fullscreen_mode: true
+    //};
+
+    var preload = {
+        type: jsPsychPreload,
+        auto_preload: true
+    };
+
+    var exp_open_remarks = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+                    <p style="font: bold 28pt 微软雅黑; color: #B22222"> 判断与预测实验 </p></br>
+
+                    <div style="max-width: 75%; margin:0 atuo; ">
+  
+                    <p class='context' style='line-height: 1.8em; text-indent:3.125rem'>你好！我们是浙江大学管理学院的研究团队，正在进行一项关于判断与预测行为的研究。实验过程中需要你<font color="red"> 做出判断并进行预测 </font>。我们向您保证期间所有数据和信息的安全。
+                    <p class='context' style='line-height: 1.8em; text-indent:3.125rem'>你的主要任务是根据提供的信息<font color="red">预测产品销量，并填写相关问卷</font>。整个实验包含<font color="red">1个练习阶段和2个正式实验阶段</font>，大概需要花费<b>30-40分钟</b>的时间，完整参与实验的报酬在<font color="red">30-60元</font>之间。
+                        <p class='context' style='text-indent:3.125rem'>实验过程中请注意以下事项：
+                    <p class='context' style='text-indent:3.125rem /* 50/16 */'>1. 请保证自愿参加本实验，如果中途放弃实验你将失去相关金额。
+                    <p class='context' style='text-indent:3.125rem /* 50/16 */'>2. 请仔细阅读接下来的提示信息，<font color="red">你的表现影响你最终的实验报酬</font>。
+                    <p class='context' style='text-indent:3.125rem /* 50/16 */'>3. 在实验结束后请按照提示语及时联系实验人员，避免误操丢失数据。
+                    </br></br>
+                                  
+                    <p style='text-align:center;font-family: "微软雅黑"; font-weight:100; font-size:1.15rem'>在了解和同意以上的注意事项后，请点击按钮进入全屏模式并进入实验环节。</p></div>
+                                      
+                    <p>
+                    `,
+            button_label: '开始实验',
+            delay_after: 100
+        }
+        //timeline.push(exp_open_remarks);
+
+    var exp_game_task_intro = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+            <div style="max-width: 75%; margin:0 atuo; ">
+                    <p style="font: bold 22pt 微软雅黑; text-align: left; line-height: 1.8em"> 【实验背景介绍】</p></br></br>
+                    <p class='context'>在本实验中，你需要预测<font color="red">蛋糕销量</font>。具体信息如下：</p></br>
+                    <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.8em;'>· 你的角色是<font color="red">烘焙店店长</font>，主要任务是根据提供的信息<font color="red">预测蛋糕销量</font>，以便提前制作好蛋糕。</p>
+                    <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.8em;'>· <font color="red">蛋糕的精准预测对烘焙店盈利十分重要</font>：预测偏少，失去消费者市场；预测太多，制作的蛋糕由于新鲜度的要求会贬值甚至无法售卖。</p></br>
+                    
+                    <p class='context' style='line-height: 1.8em; text-indent:3.125rem'>作为店长，你需要根据有限的信息尽可能准确地预测蛋糕制作数量。<font color="red">你有机会通过更精确的预测获得更多的实验报酬</font>，因此请仔细阅读所有的相关信息。</p>
+                    </br><p>`,
+            button_label: '继续',
+            delay_after: 100
+        }
+        //timeline.push(exp_game_task_intro);
+
+    var exp_interest_intro = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+            
+                    <p style="font: 18pt 微软雅黑; text-align: left; line-height: 1.5em">【酬金规则介绍】</p></br>
+                    <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em; font-size:1.3rem'>
+                    本次实验酬金包括<font color="red">基本酬金和浮动酬金</font>：</br>
+                    <p> 1. 基本酬金：完整参与实验，获得<font color="red">15</font>元。</p>
+                    <p> 2. 浮动酬金：总的浮动酬金共由两个正式实验环节对应的浮动酬金组成: </p>
+                    <p style='text-indent:5rem'> (1)正式实验环节1：包含<font color="red">5次预测</font>，浮动酬金1= 5个单此预测收益的<font color="red">总和</font>。</p>
+                    <p style='text-indent:5rem'> (2)正式实验环节2：包含<font color="red">7次预测</font>，浮动酬金2= <font color="red">随机选取</font>7次中的一个单次预测收益。</p>
+                    <p style='text-indent:5rem'> (3)单次预测收益计算规则：根据预测偏差计算预测收益。</p>
+                    <div style='text-indent:6rem /* 50/16 */; line-height: 1.1em; font-size:1.1rem; font-family: "微软雅黑";font-weight:100; '>
+                    <p>· <b> 单次预测偏差=|预测值-真实值|/真实值</b>
+                    <p>· 偏差为<font color="red">0</font>，单次预测收益<font color="red">10元</font>；
+                    <p>· 偏差不超过<font color="red">4%</font>，单次预测收益<font color="red">9元</font>；
+                    <p>· 偏差不超过<font color="red">8%</font>，单次预测收益<font color="red">8元</font>；
+                    <p>· 偏差不超过<font color="red">12%</font>，单次预测收益<font color="red">7元</font>；
+                    <p>· 偏差不超过<font color="red">16%</font>，单次预测收益<font color="red">6元</font>；
+                    <p>· 偏差不超过<font color="red">20%</font>，单次预测收益<font color="red">5元</font>；
+                    <p>· 偏差不超过<font color="red">24%</font>，单次预测收益<font color="red">4元</font>；
+                    <p>· 偏差不超过<font color="red">28%</font>，单次预测收益<font color="red">3元</font>；
+                    <p>· 偏差不超过<font color="red">32%</font>，单次预测收益<font color="red">2元</font>；
+                    <p>· 偏差不超过<font color="red">36%</font>，单次预测收益<font color="red">1元</font>;
+                    <p>· 偏差超过<font color="red">36%</font>，单次预测收益<font color="red">0元</font>.
+                    </div>
+                    <p line-height: 0em> # 最终酬金=基本酬金+浮动酬金1+浮动酬金2, 最终酬金在<b><font color="red">30~60元</font></b>之间浮动。</p></div>`,
+            button_label: '已了解酬金规则',
+            delay_after: 100
+        }
+        //timeline.push(exp_interest_intro);
+
+    var exp_interest_test = {
+            type: jsPsychSurveyHtmlForm,
+            data: {
+                task: 'exp_interest_test',
+                answer1: 3,
+                answer2: 7,
+                answer3: 10
+            },
+            preamble: `
+            <div style="max-width: 100%; margin:0 atuo; ">
+
+            <p style="font: 18pt 微软雅黑; text-align: center; line-height: 1.5em">【酬金计算】</p></br>
+
+                    <div class='context' style='text-indent:6rem /* 50/16 */; line-height: 1.5em'>为了更清楚地了解酬金规则，请在3分钟之内计算以下浮动酬金：
+                    <div style='text-indent:6rem /* 50/16 */; line-height: 1.1em; font-size:1.1rem; font-family: "微软雅黑";font-weight:100; '>
+                    <p>· <b> 单次预测偏差=|预测值-真实值|/真实值</b>
+                    <p>· 偏差为<font color="red">0</font>，单次预测收益<font color="red">10元</font>；
+                    <p>· 偏差不超过<font color="red">4%</font>，单次预测收益<font color="red">9元</font>；
+                    <p>· 偏差不超过<font color="red">8%</font>，单次预测收益<font color="red">8元</font>；
+                    <p>· 偏差不超过<font color="red">12%</font>，单次预测收益<font color="red">7元</font>；
+                    <p>· 偏差不超过<font color="red">16%</font>，单次预测收益<font color="red">6元</font>；
+                    <p>· 偏差不超过<font color="red">20%</font>，单次预测收益<font color="red">5元</font>；
+                    <p>· 偏差不超过<font color="red">24%</font>，单次预测收益<font color="red">4元</font>；
+                    <p>· 偏差不超过<font color="red">28%</font>，单次预测收益<font color="red">3元</font>；
+                    <p>· 偏差不超过<font color="red">32%</font>，单次预测收益<font color="red">2元</font>；
+                    <p>· 偏差不超过<font color="red">36%</font>，单次预测收益<font color="red">1元</font>;
+                    <p>· 偏差超过<font color="red">36%</font>，单次预测收益<font color="red">0元</font>.
+                    </div>`,
+            html: `<div class='context' style='text-indent:6rem /* 50/16 */; line-height: 1.5em; font-size:1.3rem'>
+                    <p>1. 你预测需提前制作13个蛋糕，实际市场需求18个蛋糕，单次预测收益<input type="text" name="profit_calcu1" size="2"/>元；
+                    <p>2. 你预测需提前制作25个蛋糕，实际市场需求22个蛋糕，单次预测收益<input type="text" name="profit_calcu2" size="2"/>元；
+                    <p>3. 你预测需提前制作8个蛋糕，实际市场需求8个蛋糕，单次预测收益<input type="text" name="profit_calcu3" size="2"/>元。
+                    
+                    </div>`,
+            button_label: '确认提交',
+        }
+        //timeline.push(exp_interest_test);
+
+    var exp_rule_intro = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+            <div style="max-width: 100%; margin:0 atuo; ">
+                    <p style="font: 18pt 微软雅黑; text-align: left; line-height: 1.2em">【预测要点】</p></br>
+                    <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1em'>
+                    你的主要任务是根据<font color="red">有限的6项信息预测相应的蛋糕销量</font>并提前制作。7项相关信息的介绍如下：</p>
+                    <div style="text-indent:4.375rem /* 70/16 */; font:1.45rem /* 20/16 */ SimSun; line-height: 0.8em; text-align:left">
+                    <p>① <font color="red">日期</font>：例如5月27日。在3——5月随机抽取，日期并不会一直连续出现。</p>
+                    <p>② <font color="red">星期</font>：周一到周日，与日期匹配。</p>
+                    <p>③ <font color="red">两天前销量</font>：当前日期前两天的销量。例如当前是5月3日，则表示5月1日的销量。</p>
+                    <p>④ <font color="red">制作传单数</font>：为当天准备和制作的烘焙店宣传单数量。</p>
+                    <p>⑤ <font color="red">促销</font>：门店是否有促销活动。包括蛋糕的打折优惠活动。</p>
+                    <p>⑥ <font color="red">气温</font>：摄氏度，根据天气预报得到。</p>
+                    <p>⑦ <font color="red">降水量</font>：单位毫米，根据天气预报得到。</p>
+                   </div>
+                    </br>
+                   
+                    <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1em'>
+                    请注意以下提示：</p>
+                    <div style="text-indent:4.375rem /* 70/16 */; font:1.3rem /* 20/16 */ SimSun; line-height: 0.8em; text-align:left">
+                    <p>· 实验数据根据kaggle竞赛数据集进行了合理的修改，不存在根据你的回答修改答案的情况。</p>
+                    <p>· 不要过多考虑生活场景中特殊节日的影响，例如520、618等。</p>
+                    <p>· 过去年份的3-5月，蛋糕销量整体呈现<font color="red">上升再下降</font>的趋势，每天销量不可避免地存在<font color="red">波动</font></p>
+                    <p>· 实验预测过程中的数据在数据集中随机抽取，你可以<font color="red">使用提供的纸和笔</font>辅助决策。</p></div>
+                    </br>
+
+                    <p></div>`,
+            button_label: '继续',
+            delay_after: 100
+        }
+        //timeline.push(exp_rule_intro);
+
+    /* Blocks: 7 days self-prediction */
+
+    var practice_trial_intro = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+        <p style="font: 1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em; text-align:center">【练习阶段】</p></br>
+        <div style="font:1.5rem /* 24/16 */ SimSun; line-height: 1.2em; text-align:center">
+        <p>练习阶段共包括<font color='red'>10次</font>蛋糕销量预测。</p>
+        <p>练习有助于你更好地掌握蛋糕预测的基本情况、提升在正式预测阶段的表现。因此请认真练习！</p>
+        <p style='color:red;'>练习阶段的表现不计入浮动酬金随机抽取范围。</p>
+        </div>
+        <p>`,
+            button_lable: '进入练习',
+            delay_after: 100
+        }
+        //timeline.push(practice_trial_intro);
+
+    var exp_predict_practice = {
+        type: jsPsychSurvey,
+        data: {
+            task: jsPsych.timelineVariable('Date')
+        },
+        pages: [
+            [{
+                type: 'html',
+                prompt: function() {
+                    var html = `
+                    <p style="font: 18pt 微软雅黑; text-align: center; line-height: 1.5em;color:Gray; ">蛋糕销量预测</p></br>
+                <p class='context' style='line-height: 1.2em'>
+                请你根据以下信息预测蛋糕销量(提前制作蛋糕数量）：</p>
+                <div style="text-indent:4.375rem /* 70/16 */; font:1.3rem SimSun; line-height: 1em; text-align:left">
+                <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
+                <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
+                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')}</p>
+                <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
+                <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
+                <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
+                <p>⑦ 降水量：${jsPsych.timelineVariable('Rainfall')} mm</p>
+                </div>
+                </br></br>
+                <p class='context' style=' line-height: 1em'>
+                请根据提供的5项信息，进行预测：</p>
+                `;
+                    return html;
+                }
+            }, {
+                type: 'text',
+                prompt: '1. 你预计制作多少个蛋糕？',
+                name: 'pred_num_practice',
+                required: true
+            }, {
+                type: 'likert',
+                prompt: '2. 你对自己的预测结果有多大信心？',
+                name: 'pred_confi_practice',
+                required: true,
+                likert_scale_min_label: '完全没有信心',
+                likert_scale_max_label: '非常有信心',
+                likert_scale_values: [{
+                    value: 1,
+                }, {
+                    value: 2
+                }, {
+                    value: 3
+                }, {
+                    value: 4
+                }, {
+                    value: 5
+                }, {
+                    value: 6
+                }, {
+                    value: 7
+                }]
+            }]
+        ],
+        button_label_finish: '查看真实销量'
+    }
+
+    var exp_predict_practice_result_eval = {
+        type: jsPsychHtmlKeyboardResponse,
+        data: {
+            task: 'pre_eval',
+            turevalue: jsPsych.timelineVariable('Sales'),
+        },
+        stimulus: function() {
+            var self_pre = jsPsych.data.get().filter({
+                task: jsPsych.timelineVariable('Date')
+            }).values()[0]
+            var self_pre = eval(JSON.parse(JSON.stringify(self_pre))).response.pred_num_practice
+            var ture_sale = jsPsych.timelineVariable('Sales')
+            var bias = (Math.abs(self_pre - ture_sale)) / ture_sale
+            if (bias == 0) {
+                var daily_profit = 10
+            } else if (0 < bias <= 0.04) {
+                var daily_profit = 9
+            } else if (0.04 < bias <= 0.08) {
+                var daily_profit = 8
+            } else if (0.08 < bias <= 0.12) {
+                var daily_profit = 7
+            } else if (0.12 < bias <= 0.16) {
+                var daily_profit = 6
+            } else if (0.16 < bias <= 0.20) {
+                var daily_profit = 5
+            } else if (0.2 < bias <= 0.24) {
+                var daily_profit = 4
+            } else if (0.24 < bias <= 0.28) {
+                var daily_profit = 3
+            } else if (0.28 < bias <= 0.32) {
+                var daily_profit = 2
+            } else if (0.32 < bias <= 0.36) {
+                var daily_profit = 1
+            } else {
+                var daily_profit = 0
+            }
+            var bias_percent = bias * 100
+            var bias_percent = bias_percent.toFixed(2)
+            return `
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【销量预测结果评估】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>实际销量为 ${ture_sale} 个</p>
+                            <p>你的预测为 ${self_pre} 个</p>
+                            <p>你本次的预测偏差为 <b> ${bias_percent}% </b> </p>
+                            <p>你本次的预测收益为 <b> ${daily_profit} </b>元</p></br>
+                            <p style='color:Gray;'>（按任意键继续）</p>
+                            </div>`
+        },
+    }
+
+    var exp_pre_pract7 = {
+            timeline: [exp_predict_practice, exp_predict_practice_result_eval],
+            timeline_variables: prac_samples_7,
+            data: {
+                phase: 'pre_pract'
+            },
+            //sample: {
+            //    type: 'without-replacement',
+            //    size: 7
+            //}
+        }
+        //timeline.push(exp_pre_pract7)
+
+
+    /*操纵环节*/
+
+    var exp_pre_pract_end = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【练习阶段结束】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>请点击按钮进入<b>正式预测环节一</b>。</p></br>
+                            <p style='color:red;'>你的决策会影响本阶段的浮动收益，因此请认真阅读信息。</p></br></br>
+                            </div>
+                <p>`,
+            button_label: '进入正式环节一',
+            delay_after: 100
+        }
+        //timeline.push(exp_pre_pract_end);
+
+    var exp_manipu_intro = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+
+            <div style="max-width: 80%; margin:0 atuo; ">    
+            <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.5em">【蛋糕销量预测算法介绍】</p></br>
+                    <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
+                    由于蛋糕预测对烘焙店盈利的至关重要，AIplus科技公司现提供了一个<font color='red'>针对蛋糕销量的AI预测算法</font>。有关信息如下：</br>
+                    <p> · 该AI预测算法是针对蛋糕销售的。</p>
+                    <p> · 该AI预测算法是基于过去的蛋糕销售数据得到的，使用的信息与你看到的6项信息相同。 </p>
+                    <p> · 该AI预测算法是有关人员设计得到的复杂模型。 </p></br>
+
+                    <p style='text-align:center;font-family: "微软雅黑"; font-weight:300; font-size:1.3rem'> 了解关于蛋糕预测算法的更多信息，请点击按钮<b>访问AIplus的算法产品网页</b>。</p></div>
+                    
+                <p>`,
+            button_label: '查看算法介绍页面',
+            delay_after: 100
+        }
+        //timeline.push(exp_manipu_intro);
+
+
+    //不会显示出来
+    var exp_manipu_intro_copy = {
+        type: jsPsychFullscreen,
+        fullscreen_mode: false,
+        message: `
+
+        <div style="max-width: 80%; margin:0 atuo; ">    
+            <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.5em">【蛋糕销量预测算法介绍】</p></br>
+                    <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
+                    由于蛋糕预测对烘焙店盈利的至关重要，AIplus科技公司现提供了一个<font color='red'>针对蛋糕销量的AI预测算法</font>。有关信息如下：</br>
+                    <p> · 该AI预测算法是针对蛋糕销售的。</p>
+                    <p> · 该AI预测算法是基于过去的蛋糕销售数据得到的，使用的信息与你看到的6项信息相同。 </p>
+                    <p> · 该AI预测算法是有关人员设计得到的复杂模型。 </p></br>
+
+                    <p style='text-align:center;font-family: "微软雅黑"; font-weight:300; font-size:1.3rem'> 了解关于蛋糕预测算法的更多信息，请点击按钮<b>访问AIplus的算法产品网页</b>。</p></div>
+                    
+                <p>`,
+        button_label: '查看算法介绍页面',
+        delay_after: 100
+    }
+
+
+
+    var exp_algorithm_web_0 = {
+        type: jsPsychExternalHtml,
+        url: 'Algorithm_intro_control.html',
+        cont_btn: 'return',
+        data: {
+            task: 'AIAD_manip',
+            AIAD_info: 'AI算法'
+        }
+    }
+    var exp_algorithm_web_0_show = {
+            timeline: [exp_algorithm_web_0],
+            conditional_function: function() {
+                if (conditional_web == 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        //timeline.push(exp_algorithm_web_0_show);
+
+
+
+    var exp_algorithm_web_1 = {
+        type: jsPsychExternalHtml,
+        url: 'Algorithm_intro_experts.html',
+        cont_btn: 'return',
+        data: {
+            task: 'AIAD_manip',
+            AIAD_info: '由算法工程师制定目标、设计、实现和完善的AI算法'
+        }
+    }
+    var exp_algorithm_web_1_show = {
+            timeline: [exp_algorithm_web_1],
+            conditional_function: function() {
+                if (conditional_web == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        //timeline.push(exp_algorithm_web_1_show);
+
+    var exp_algorithm_web_2 = {
+        type: jsPsychExternalHtml,
+        url: 'Algorithm_intro_user_advising.html',
+        cont_btn: 'return',
+        data: {
+            task: 'AIAD_manip',
+            AIAD_info: '由多名烘焙店店主制定目标，算法工程师设计、实现和完善的AI算法'
+        }
+    }
+    var exp_algorithm_web_2_show = {
+            timeline: [exp_algorithm_web_2],
+            conditional_function: function() {
+                if (conditional_web == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        //timeline.push(exp_algorithm_web_2_show);
+
+
+    var exp_algorithm_web_3 = {
+        type: jsPsychExternalHtml,
+        url: 'Algorithm_intro_user_doing.html',
+        cont_btn: 'return',
+        data: {
+            task: 'AIAD_manip',
+            AIAD_info: '由多名烘焙店店主制定目标，并与算法工程师一起设计、实现和完善的AI算法'
+        }
+    }
+    var exp_algorithm_web_3_show = {
+            timeline: [exp_algorithm_web_3],
+            conditional_function: function() {
+                if (conditional_web == 3) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        //timeline.push(exp_algorithm_web_3_show);
+
+
+
+    likert_scale = [{
+        value: 1,
+    }, {
+        value: 2
+    }, {
+        value: 3
+    }, {
+        value: 4
+    }, {
+        value: 5
+    }, {
+        value: 6
+    }, {
+        value: 7
+    }];
+
+    //关键DV测量
+
+    var exp_algo_delegation_1 = {
+            type: jsPsychSurvey,
+            pages: [
+                [{
+                    type: 'html',
+                    prompt: `
+                            <p style='line-height: 1.2em'>* 对于接下来规定次数内的预测收益，你有<font color="red">两种选择</font>:</p>
+                            <p style='text-indent:2.1875rem /* 35/16 */; line-height: 1.2em'>① <font color="red">全部自己预测</font>，并将 <font color="red">自己预测的5次收益之和</font>作为正式实验阶段1的收益</p>
+                            <p style='text-indent:2.1875rem /* 35/16 */; line-height: 1.2em'>② <font color="red">全部算法预测</font>，并将 <font color="red">算法预测的5次收益之和</font>作为正式实验阶段1的收益</p>
+                            
+                            `
+                }, {
+                    type: 'likert',
+                    prompt: '· 请问你有多大意愿使用该算法预测接下来5次的蛋糕销量？',
+                    required: true,
+                    likert_scale_min_label: '完全不愿使用',
+                    likert_scale_max_label: '非常愿意使用',
+                    likert_scale_values: likert_scale
+                }, {
+                    type: 'multi-choice',
+                    prompt: '· 请你决定是否让该算法为你做接下来5次的销量预测:',
+                    options: ["不使用算法", "使用算法"],
+                    required: true,
+                }]
+            ],
+            data: {
+                task: 'delegate_decision_1'
+            },
+            button_label_finish: '继续'
+        }
+        //timeline.push(exp_algo_delegation_1)
+
+    var algo_delegation_yes_1_intro = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: function() {
+                var team_intro_info = jsPsych.data.get().filter({
+                    task: 'AIAD_manip'
+                }).values()[0]
+                var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                var html = `
+            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:black; text-align:center">【你已授权<b> ${algo_info}</b> 为你做接下来5次的销量预测】</p></br>
+            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+            <p>接下来你将依次看到<font color='red'>5次算法预测结果</font>。</p></br>
+         
+            </div>
+            <p>`;
+                return html;
+            },
+            delay_after: 100,
+            button_label: '继续',
+        }
+        //timeline.push(algo_delegation_yes_1_intro);
+
+    var if_shown_algo_delegation_yes_1_intro = {
+        timeline: [algo_delegation_yes_1_intro],
+        conditional_function: function() {
+            var delegated = jsPsych.data.get().filter({
+                task: 'delegate_decision_1'
+            }).values()[0]
+            var delegated = JSON.stringify(delegated)
+            var delegated = eval(JSON.parse(delegated)).response.P0_Q2
+            if (jsPsych.pluginAPI.compareKeys(delegated, '使用算法')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+    //timeline.push(if_shown_algo_delegation_yes_1_intro)
+
+    var algo_delegation_no_1_intro = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: function() {
+                var team_intro_info = jsPsych.data.get().filter({
+                    task: 'AIAD_manip'
+                }).values()[0]
+                var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                var html = `
+            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:black; text-align:center">【你未授权 <b>${algo_info}</b> 为你做接下来5次的销量预测】</p></br>
+            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+            <p>接下来你将<font color='red'>自己依次进行5次销量预测</font>。</p></br>
+         
+            </div>
+            <p>`;
+                return html;
+            },
+            delay_after: 100,
+            button_label: '继续',
+        }
+        //timeline.push(algo_delegation_yes_1_intro);
+
+    var if_shown_algo_delegation_no_1_intro = {
+        timeline: [algo_delegation_no_1_intro],
+        conditional_function: function() {
+            var delegated = jsPsych.data.get().filter({
+                task: 'delegate_decision_1'
+            }).values()[0]
+            var delegated = JSON.stringify(delegated)
+            var delegated = eval(JSON.parse(delegated)).response.P0_Q2
+            if (jsPsych.pluginAPI.compareKeys(delegated, '不使用算法')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+    //timeline.push(if_shown_algo_delegation_no_1_intro)
+
+
+    var algo_delegate_yes_1 = {
+        type: jsPsychSurvey,
+        data: {
+            task: 'exp_detail_info',
+            turevalue: jsPsych.timelineVariable('Sales'),
+            predictvalue: jsPsych.timelineVariable('pre_1'),
+            taskdate: jsPsych.timelineVariable('Date')
+        },
+        pages: [
+            [{
+                type: 'html',
+                prompt: function() {
+                    var team_intro_info = jsPsych.data.get().filter({
+                        task: 'AIAD_manip'
+                    }).values()[0]
+                    var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                    var html = `
+                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你已授权<b> ${algo_info}</b> 为你做接下来5次的销量预测】</p></br>
+                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
+                    请依次查看算法预测详情：</p>
+                <div style="text-indent:4.375rem /* 70/16 */; font:1.4rem SimSun; line-height: 1em; text-align:left">
+                    <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
+                <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
+                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')}</p>
+                <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
+                <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
+                <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
+                <p>⑦ 降水量：${jsPsych.timelineVariable('Rainfall')} mm</p>
+                </div>
+                </br>
+                `;
+                    return html;
+                }
+            }, {
+                type: 'html',
+                prompt: function() {
+                    var html = `
+                    <p style="font:1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em; text-align:left; color:black">
+                    · 算法的预测结果为：<b>${jsPsych.timelineVariable('pre_1')}</b>个。</p>
+                `
+                    return html
+                }
+            }, {
+                type: 'likert',
+                prompt: '· 如果本次你自己预测，你认为你自己的预测结果和算法的预测结果哪一个更接近真实的销量？（越接近7则认为算法结果更好）',
+                name: 'algo_delegate_part1_comparison',
+                required: true,
+                likert_scale_min_label: '自己的预测结果',
+                likert_scale_max_label: '算法的预测结果',
+                likert_scale_values: likert_scale
+            }]
+        ],
+        button_label_finish: '继续预测'
+    }
+
+    var if_shown_algo_delegation_1 = {
+        timeline: [algo_delegate_yes_1],
+        conditional_function: function() {
+            var delegated = jsPsych.data.get().filter({
+                task: 'delegate_decision_1'
+            }).values()[0]
+            var delegated = JSON.stringify(delegated)
+            var delegated = eval(JSON.parse(delegated)).response.P0_Q2
+            if (jsPsych.pluginAPI.compareKeys(delegated, '使用算法')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+    //选择不使用算法
+    var algo_delegation_no_1 = {
+        type: jsPsychSurvey,
+        data: {
+            task: 'exp_detail_info',
+            taskdate: jsPsych.timelineVariable('Date'),
+            turevalue: jsPsych.timelineVariable('Sales'),
+        },
+        pages: [
+            [{
+                type: 'html',
+                prompt: function() {
+                    var team_intro_info = jsPsych.data.get().filter({
+                        task: 'AIAD_manip'
+                    }).values()[0]
+                    var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                    var html = `
+                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你未授权<b> ${algo_info}</b> 为你做接下来5次的销量预测】</p></br>
+                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
+                    请你根据以下信息进行预测: </p>
+                <div style="text-indent:4.375rem /* 70/16 */; font:1.4rem SimSun; line-height: 1em; text-align:left">
+                    <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
+                <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
+                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')}</p>
+                <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
+                <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
+                <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
+                <p>⑦ 降水量：${jsPsych.timelineVariable('Rainfall')} mm</p>
+                </div>
+                </br>
+                `;
+                    return html;
+                }
+            }, {
+                type: 'text',
+                prompt: '· 你预计制作多少个蛋糕？',
+                name: 'pred_num',
+                required: true
+            }, {
+                type: 'likert',
+                prompt: '· 你对自己的预测结果有多大信心？',
+                name: 'pred_confi_practice',
+                required: true,
+                likert_scale_min_label: '完全没有信心',
+                likert_scale_max_label: '非常有信心',
+                likert_scale_values: likert_scale
+            }, {
+                type: 'likert',
+                prompt: '· 如果本次算法也参与预测，你认为你自己的预测结果和算法的预测结果哪一个更接近真实的销量？（越接近7则认为算法结果更好）',
+                name: 'algo_delegate_part1_comparison',
+                required: true,
+                likert_scale_min_label: '自己的预测结果',
+                likert_scale_max_label: '算法的预测结果',
+                likert_scale_values: likert_scale
+            }]
+        ],
+        button_label_finish: '继续预测'
+    }
+
+    var if_shown_no_algo_delegation_1 = {
+        timeline: [algo_delegation_no_1],
+        conditional_function: function() {
+            var delegated = jsPsych.data.get().filter({
+                task: 'delegate_decision_1'
+            }).values()[0]
+            var delegated = JSON.stringify(delegated)
+            var delegated = eval(JSON.parse(delegated)).response.P0_Q2
+            if (jsPsych.pluginAPI.compareKeys(delegated, '不使用算法')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+
+    var exp_delegation_part1_1 = {
+            timeline: [if_shown_algo_delegation_1, if_shown_no_algo_delegation_1],
+            timeline_variables: exp_sales_stimuli_part1,
+            data: {
+                phase: 'exp_delegation_part1'
+            },
+            //sample: {
+            //    type: 'without-replacement',
+            //    size: 5
+            //}
+        }
+        //timeline.push(exp_delegation_part1_1)
+
+
+    // important measurement
+    var key_factors_survey_1 = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+        <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【问卷填写】</p></br>
+        <div style="font:20pt SimSun; line-height: 1em; text-align:center">
+        <p>接下来你将进入第一阶段的问卷填写。</p>
+        <p>填写结果影响到你之后的实验报酬，因此请认真填写！</p>
+        </div>
+        <p>`,
+            button_lable: '填写问卷',
+            delay_after: 100
+        }
+        //timeline.push(key_factors_survey_1)
+
+    var variables_measurement = {
+            type: jsPsychSurvey,
+            pages: [
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 1/8 】</p>`,
+                }, {
+                    type: 'html',
+                    prompt: function() {
+                        var delegated = jsPsych.data.get().filter({
+                            task: 'delegate_decision_1'
+                        }).values()[0]
+                        var delegated = JSON.stringify(delegated)
+                        var delegated = eval(JSON.parse(delegated)).response.P0_Q2
+                        var team_intro_info = jsPsych.data.get().filter({
+                            task: 'AIAD_manip'
+                        }).values()[0]
+                        var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                        var html = `                       
+                            当看到<b>${algo_info}</b>时，请列出三个理由说明你为什么选择 <font color='red'>${delegated}</font> ：
+                        `
+                        return html
+                    }
+                }, {
+                    type: 'text',
+                    prompt: '理由1：',
+                    textbox_rows: 1,
+                    name: 'decision_reason_1',
+                    required: true
+                }, {
+                    type: 'text',
+                    prompt: '理由2:',
+                    textbox_rows: 1,
+                    name: 'decision_reason_2',
+                    required: true
+                }, {
+                    type: 'text',
+                    prompt: '理由3:',
+                    textbox_rows: 1,
+                    name: 'decision_reason_3',
+                    required: true
+                }],
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 2/8 】</p>`,
+                }, {
+                    type: 'likert',
+                    prompt: '· 根据这个公司的AI算法开发过程，你认为该公司设计出合格的AI预测算法的能力有多大高？',
+                    likert_scale_min_label: '很低',
+                    likert_scale_max_label: '很高',
+                    name: 'Ability_1',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 根据这个公司的AI算法开发过程，你认为该公司具备强的能力提供一个合格的AI预测算法吗？',
+                    likert_scale_min_label: '很弱',
+                    likert_scale_max_label: '很强',
+                    name: 'Ability_2',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 整体来说，根据这个公司的AI算法开发过程，你认为这个公司在设计AI预测算法时的能力如何？',
+                    likert_scale_min_label: '很差劲',
+                    likert_scale_max_label: '很出色',
+                    name: 'Ability_3',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }, ],
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 3/8 】</p>`,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你现在认同这个公司的算法开发团队吗？',
+                    likert_scale_min_label: '完全不认同',
+                    likert_scale_max_label: '完全认同',
+                    likert_scale_values: likert_scale,
+                    name: 'Indentification_1',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '·你认为你和这个公司的算法开发团队关系亲近吗？',
+                    likert_scale_min_label: '非常不亲近',
+                    likert_scale_max_label: '非常亲近',
+                    likert_scale_values: likert_scale,
+                    name: 'Indentification_2',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为你和这个公司的算法开发团队之间存在关系纽带吗？',
+                    likert_scale_min_label: '完全不存在',
+                    likert_scale_max_label: '完全存在',
+                    likert_scale_values: likert_scale,
+                    name: 'Indentification_3',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为你和这个公司的算法开发团队之间有关联吗？',
+                    likert_scale_min_label: '没有关联',
+                    likert_scale_max_label: '有关联',
+                    likert_scale_values: likert_scale,
+                    name: 'Indentification_4',
+                    required: true,
+                }, ],
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 4/8 】</p>`,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为算法预测比你自己预测更有准确性优势吗？',
+                    likert_scale_min_label: '绝对没有',
+                    likert_scale_max_label: '绝对有',
+                    likert_scale_values: likert_scale,
+                    name: 'Effectiveness_1',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为蛋糕销量预测的工作有趣吗？（请你选择4）',
+                    likert_scale_min_label: '一点也没趣',
+                    likert_scale_max_label: '非常有趣',
+                    likert_scale_values: likert_scale,
+                    name: 'attention_check_2',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你在多大程度上觉得算法预测会是有用的？',
+                    likert_scale_min_label: '一点也不有用',
+                    likert_scale_max_label: '非常有用',
+                    likert_scale_values: likert_scale,
+                    name: 'Effectiveness_2',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你在多大程度上认为这个算法的预测表现会是好的？',
+                    likert_scale_min_label: '一点也不认为它会表现好',
+                    likert_scale_max_label: '十分肯定它会表现好',
+                    likert_scale_values: likert_scale,
+                    name: 'Effectiveness_3',
+                    required: true,
+                }, ],
+
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 5/8 】</p>`,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你在多大程度上认为该算法的预测过程和结果是可控的？',
+                    likert_scale_min_label: '完全不可控',
+                    likert_scale_max_label: '完全可控',
+                    likert_scale_values: likert_scale,
+                    name: 'Control level',
+                    required: true,
+                }, {
+                    type: 'html',
+                    prompt: function() {
+                        var team_intro_info = jsPsych.data.get().filter({
+                            task: 'AIAD_manip'
+                        }).values()[0]
+                        var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+
+                        var html = `
+                            <p class='context'></p></br></br>
+                            <div style='text-indent:2.1875rem /* 35/16 */; line-height: 1.2em; font-weight:500'>
+                            <p >在心理学中，控制指的是个人感知自己具备的影响自己、他人、环境的能力，对自己或他人的控制可以影响个人的情绪和行为。</p>
+                            <p >研究表明，在AI情境下，<b>有人认为自己完全没有能力去控制AI</b>，AI完全是失控的；<b>也有人认为自己可以自由地控制AI</b>设计、使用和更新等环节。</p>
+                            <p >根据对控制的介绍，以及你了解的<b>${algo_info}</b>，回答下列问题。`
+                        return html
+                    }
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为你对当前这个预测算法从设计到得到结果的整体控制感有多大？',
+                    likert_scale_min_label: '控制感很低',
+                    likert_scale_max_label: '控制感很高',
+                    likert_scale_values: likert_scale,
+                    name: 'Perceived_control1',
+                    required: true,
+                }],
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 6/8 】</p>`,
+                }, {
+                    type: 'likert',
+                    prompt: '· 在面对该算法的时候，你认为自己很强大吗？',
+                    likert_scale_min_label: '完全不强大',
+                    likert_scale_max_label: '非常强大',
+                    likert_scale_values: likert_scale,
+                    name: 'Perceived_control2_1',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为自己可以控制这个算法吗？',
+                    likert_scale_min_label: '完全不可以',
+                    likert_scale_max_label: '完全可以',
+                    likert_scale_values: likert_scale,
+                    name: 'Perceived_control2_2',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你觉得你有能力改变该算法吗？',
+                    likert_scale_min_label: '完全没有能力',
+                    likert_scale_max_label: '完全有能力',
+                    likert_scale_values: likert_scale,
+                    name: 'Perceived_control2_3',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为你可以影响该算法的设计和结果吗？',
+                    likert_scale_min_label: '完全不可以',
+                    likert_scale_max_label: '完全可以',
+                    likert_scale_values: likert_scale,
+                    name: 'Perceived_control2_4',
+                    required: true,
+                }, ],
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 7/8 】</p>`,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你在多大程度上相信此算法可以预测出准确的蛋糕销量？',
+                    likert_scale_min_label: '完全不相信',
+                    likert_scale_max_label: '完全相信',
+                    likert_scale_values: likert_scale,
+                    name: 'Trust1',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为这是一个值得信任的算法吗？',
+                    likert_scale_min_label: '完全不值得信任',
+                    likert_scale_max_label: '完全值得信任',
+                    likert_scale_values: likert_scale,
+                    name: 'Trust1_2',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为自己会依赖这个算法提供一个精确的预测值吗？',
+                    likert_scale_min_label: '完全不会依赖',
+                    likert_scale_max_label: '完全会依赖',
+                    likert_scale_values: likert_scale,
+                    name: 'Trust1_3',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你相信这个算法的设计意图是好的吗？',
+                    likert_scale_min_label: '完全不相信',
+                    likert_scale_max_label: '完全相信',
+                    likert_scale_values: likert_scale,
+                    name: 'Trust1_4',
+                    required: true,
+                }],
+
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 8/8 】</p>`,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为蛋糕销量工作是一项很复杂的工作吗？',
+                    likert_scale_min_label: '一点也不复杂',
+                    likert_scale_max_label: '非常复杂',
+                    likert_scale_values: likert_scale,
+                    name: 'Complexity',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为蛋糕预测任务简单吗？',
+                    likert_scale_min_label: '一点也不简单',
+                    likert_scale_max_label: '非常简单',
+                    likert_scale_values: likert_scale,
+                    name: 'Simplity',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为你有多大信心独立预测蛋糕销量？',
+                    likert_scale_min_label: '完全没有信心',
+                    likert_scale_max_label: '非常有信心',
+                    likert_scale_values: likert_scale,
+                    name: 'Self-Confidence',
+                    required: true,
+                }, {
+                    type: 'multi-choice',
+                    prompt: '· 你会不会因为想尽快结束本次实验而选择使用算法？',
+                    options: ["不会", "会"],
+                    required: true,
+                    name: 'attention_check'
+                }],
+            ],
+            button_label_back: '上一页',
+            button_label_next: '下一页',
+            button_label_finish: '继续'
+        }
+        //timeline.push(variables_measurement);
+
+    //****************************************************第一部分反馈*****************************************************************
+    var exp_algo_part1_feedback = {
+        type: jsPsychHtmlKeyboardResponse,
+        data: {
+            taskname: 'exp_part1_feedback',
+        },
+        stimulus: function() {
+            var team_intro_info = jsPsych.data.get().filter({
+                task: 'AIAD_manip'
+            }).values()[0]
+            var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+            var algo_pre_task_info = jsPsych.data.get().filter({
+                    phase: 'exp_delegation_part1',
+                    task: 'exp_detail_info',
+                }).values()
+                //var info = eval(JSON.parse(JSON.stringify(algo_pre_task_info))).turevalue
+                //console.log(info)
+            var date_list = []
+            var sale_list = []
+            var prediction_list = []
+            var bias_percent_list = []
+            var profit_list = []
+            for (var i = 0; i < 5; i++) {
+                var algo_pre_task_info_per = algo_pre_task_info[i]
+                console.log(algo_pre_task_info_per)
+                var date = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).taskdate
+                var sale = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).turevalue
+                var prediction = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).predictvalue
+                var bias = (Math.abs(prediction - sale)) / sale
+                if (bias == 0) {
+                    var daily_profit = 10
+                } else if (0 < bias <= 0.04) {
+                    var daily_profit = 9
+                } else if (0.04 < bias <= 0.08) {
+                    var daily_profit = 8
+                } else if (0.08 < bias <= 0.12) {
+                    var daily_profit = 7
+                } else if (0.12 < bias <= 0.16) {
+                    var daily_profit = 6
+                } else if (0.16 < bias <= 0.20) {
+                    var daily_profit = 5
+                } else if (0.2 < bias <= 0.24) {
+                    var daily_profit = 4
+                } else if (0.24 < bias <= 0.28) {
+                    var daily_profit = 3
+                } else if (0.28 < bias <= 0.32) {
+                    var daily_profit = 2
+                } else if (0.32 < bias <= 0.36) {
+                    var daily_profit = 1
+                } else {
+                    var daily_profit = 0
+                }
+                var bias_percent = bias * 100
+                var bias_percent = bias_percent.toFixed(2)
+                date_list.push(date)
+                sale_list.push(sale)
+                prediction_list.push(prediction)
+                bias_percent_list.push(bias_percent)
+                profit_list.push(daily_profit)
+            }
+            //average = Math.floor(average * 100) / 100
+
+            return `
+                            <p style="font: 1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【你已授权 ${algo_info} 为你做5次的销量预测】</p></br>
+                            <p style="font: 1.375rem /* 22/16 */ 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">5次销量预测结果评估如下：</p></br>
+                            <div style="font:1.25rem /* 20/16 */ SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>第1次：预测日期为${date_list[0]}，实际销量是${sale_list[0]}个，算法的预测为${prediction_list[0]}个，预测偏差为<b>${bias_percent_list[0]}%</b>，此次收益为<b>${profit_list[0]}</b>元。</p>
+                            <p>第2次：预测日期为${date_list[1]}，实际销量是${sale_list[1]}个，算法的预测为${prediction_list[1]}个，预测偏差为<b>${bias_percent_list[1]}%</b>，此次收益为<b>${profit_list[1]}</b>元。</p>
+                            <p>第3次：预测日期为${date_list[2]}，实际销量是${sale_list[2]}个，算法的预测为${prediction_list[2]}个，预测偏差为<b>${bias_percent_list[2]}%</b>，此次收益为<b>${profit_list[2]}</b>元。</p>
+                            <p>第4次：预测日期为${date_list[3]}，实际销量是${sale_list[3]}个，算法的预测为${prediction_list[3]}个，预测偏差为<b>${bias_percent_list[3]}%</b>，此次收益为<b>${profit_list[3]}</b>元。</p>
+                            <p>第5次：预测日期为${date_list[4]}，实际销量是${sale_list[4]}个，算法的预测为${prediction_list[4]}个，预测偏差为<b>${bias_percent_list[4]}%</b>，此次收益为<b>${profit_list[4]}</b>元。</p>
+                            </br></br>
+                            <p style='color:Gray;'>（按任意键继续）</p>
+                            </div>`
+        },
+        on_finish: function(data) {
+            var algo_pre_task_info = jsPsych.data.get().filter({
+                    phase: 'exp_delegation_part1',
+                    task: 'exp_detail_info',
+                }).values()
+                //var info = eval(JSON.parse(JSON.stringify(algo_pre_task_info))).turevalue
+                //console.log(info)
+            var date_list = []
+            var sale_list = []
+            var prediction_list = []
+            var bias_percent_list = []
+            var profit_list = []
+            for (var i = 0; i < 5; i++) {
+                var algo_pre_task_info_per = algo_pre_task_info[i]
+                console.log(algo_pre_task_info_per)
+                var date = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).taskdate
+                var sale = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).turevalue
+                var prediction = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).predictvalue
+                var bias = (Math.abs(prediction - sale)) / sale
+                if (bias == 0) {
+                    var daily_profit = 10
+                } else if (0 < bias <= 0.04) {
+                    var daily_profit = 9
+                } else if (0.04 < bias <= 0.08) {
+                    var daily_profit = 8
+                } else if (0.08 < bias <= 0.12) {
+                    var daily_profit = 7
+                } else if (0.12 < bias <= 0.16) {
+                    var daily_profit = 6
+                } else if (0.16 < bias <= 0.20) {
+                    var daily_profit = 5
+                } else if (0.2 < bias <= 0.24) {
+                    var daily_profit = 4
+                } else if (0.24 < bias <= 0.28) {
+                    var daily_profit = 3
+                } else if (0.28 < bias <= 0.32) {
+                    var daily_profit = 2
+                } else if (0.32 < bias <= 0.36) {
+                    var daily_profit = 1
+                } else {
+                    var daily_profit = 0
+                }
+                var bias_percent = bias * 100
+                var bias_percent = bias_percent.toFixed(2)
+                date_list.push(date)
+                sale_list.push(sale)
+                prediction_list.push(prediction)
+                bias_percent_list.push(bias_percent)
+                profit_list.push(daily_profit)
+            }
+            var sum = 0
+            for (var j = 0; j < 5; j++) {
+                sum = profit_list[j] + sum;
+            }
+            data.profit_part1 = sum
+
+        }
+
+    }
+
+    var if_shown_exp_algo_part1_feedback = {
+        timeline: [exp_algo_part1_feedback],
+        conditional_function: function() {
+            var delegated = jsPsych.data.get().filter({
+                task: 'delegate_decision_1'
+            }).values()[0]
+            var delegated = JSON.stringify(delegated)
+            var delegated = eval(JSON.parse(delegated)).response.P0_Q2
+            if (jsPsych.pluginAPI.compareKeys(delegated, '使用算法')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+    //timeline.push(if_shown_exp_algo_part1_feedback);
+
+
+    var exp_no_algo_part1_feedback = {
+        type: jsPsychHtmlKeyboardResponse,
+        data: {
+            taskname: 'exp_part1_feedback',
+        },
+        stimulus: function() {
+            var team_intro_info = jsPsych.data.get().filter({
+                task: 'AIAD_manip'
+            }).values()[0]
+            var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+            var algo_pre_task_info = jsPsych.data.get().filter({
+                    phase: 'exp_delegation_part1',
+                    task: 'exp_detail_info',
+                }).values()
+                //var info = eval(JSON.parse(JSON.stringify(algo_pre_task_info))).turevalue
+                //console.log(info)
+            var date_list = []
+            var sale_list = []
+            var prediction_list = []
+            var bias_percent_list = []
+            var profit_list = []
+            for (var i = 0; i < 5; i++) {
+                var algo_pre_task_info_per = algo_pre_task_info[i]
+                console.log(algo_pre_task_info_per)
+                var date = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).taskdate
+                var sale = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).turevalue
+                var prediction = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).response.pred_num
+
+                var bias = (Math.abs(prediction - sale)) / sale
+                if (bias == 0) {
+                    var daily_profit = 10
+                } else if (0 < bias <= 0.04) {
+                    var daily_profit = 9
+                } else if (0.04 < bias <= 0.08) {
+                    var daily_profit = 8
+                } else if (0.08 < bias <= 0.12) {
+                    var daily_profit = 7
+                } else if (0.12 < bias <= 0.16) {
+                    var daily_profit = 6
+                } else if (0.16 < bias <= 0.20) {
+                    var daily_profit = 5
+                } else if (0.2 < bias <= 0.24) {
+                    var daily_profit = 4
+                } else if (0.24 < bias <= 0.28) {
+                    var daily_profit = 3
+                } else if (0.28 < bias <= 0.32) {
+                    var daily_profit = 2
+                } else if (0.32 < bias <= 0.36) {
+                    var daily_profit = 1
+                } else {
+                    var daily_profit = 0
+                }
+                var bias_percent = bias * 100
+                var bias_percent = bias_percent.toFixed(2)
+                date_list.push(date)
+                sale_list.push(sale)
+                prediction_list.push(prediction)
+                bias_percent_list.push(bias_percent)
+                profit_list.push(daily_profit)
+            }
+
+            return `
+                            <p style="font: 1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【你未授权 ${algo_info} 为你做5次的销量预测】</p></br>
+                            <p style="font: 1.375rem /* 22/16 */ 微软雅黑; line-height: 1.2em;color:Gray; text-align:center">5次销量预测结果评估如下：</p></br>
+                            <div style="font:1.25rem /* 20/16 */ SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>第1次：预测日期为${date_list[0]}，实际销量是${sale_list[0]}个，算法的预测为${prediction_list[0]}个，预测偏差为<b>${bias_percent_list[0]}%</b>，此次收益为<b>${profit_list[0]}</b>元。</p>
+                            <p>第2次：预测日期为${date_list[1]}，实际销量是${sale_list[1]}个，算法的预测为${prediction_list[1]}个，预测偏差为<b>${bias_percent_list[1]}%</b>，此次收益为<b>${profit_list[1]}</b>元。</p>
+                            <p>第3次：预测日期为${date_list[2]}，实际销量是${sale_list[2]}个，算法的预测为${prediction_list[2]}个，预测偏差为<b>${bias_percent_list[2]}%</b>，此次收益为<b>${profit_list[2]}</b>元。</p>
+                            <p>第4次：预测日期为${date_list[3]}，实际销量是${sale_list[3]}个，算法的预测为${prediction_list[3]}个，预测偏差为<b>${bias_percent_list[3]}%</b>，此次收益为<b>${profit_list[3]}</b>元。</p>
+                            <p>第5次：预测日期为${date_list[4]}，实际销量是${sale_list[4]}个，算法的预测为${prediction_list[4]}个，预测偏差为<b>${bias_percent_list[4]}%</b>，此次收益为<b>${profit_list[4]}</b>元。</p>
+                            </br></br>
+                            <p style='color:Gray;'>（按任意键继续）</p>
+                            </div>`
+        },
+        on_finish: function(data) {
+            var algo_pre_task_info = jsPsych.data.get().filter({
+                    phase: 'exp_delegation_part1',
+                    task: 'exp_detail_info',
+                }).values()
+                //var info = eval(JSON.parse(JSON.stringify(algo_pre_task_info))).turevalue
+                //console.log(info)
+            var date_list = []
+            var sale_list = []
+            var prediction_list = []
+            var bias_percent_list = []
+            var profit_list = []
+            for (var i = 0; i < 5; i++) {
+                var algo_pre_task_info_per = algo_pre_task_info[i]
+                console.log(algo_pre_task_info_per)
+                var date = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).taskdate
+                var sale = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).turevalue
+                var prediction = eval(JSON.parse(JSON.stringify(algo_pre_task_info_per))).response.pred_num
+                var bias = (Math.abs(prediction - sale)) / sale
+                if (bias == 0) {
+                    var daily_profit = 10
+                } else if (0 < bias <= 0.04) {
+                    var daily_profit = 9
+                } else if (0.04 < bias <= 0.08) {
+                    var daily_profit = 8
+                } else if (0.08 < bias <= 0.12) {
+                    var daily_profit = 7
+                } else if (0.12 < bias <= 0.16) {
+                    var daily_profit = 6
+                } else if (0.16 < bias <= 0.20) {
+                    var daily_profit = 5
+                } else if (0.2 < bias <= 0.24) {
+                    var daily_profit = 4
+                } else if (0.24 < bias <= 0.28) {
+                    var daily_profit = 3
+                } else if (0.28 < bias <= 0.32) {
+                    var daily_profit = 2
+                } else if (0.32 < bias <= 0.36) {
+                    var daily_profit = 1
+                } else {
+                    var daily_profit = 0
+                }
+                var bias_percent = bias * 100
+                var bias_percent = bias_percent.toFixed(2)
+                date_list.push(date)
+                sale_list.push(sale)
+                prediction_list.push(prediction)
+                bias_percent_list.push(bias_percent)
+                profit_list.push(daily_profit)
+            }
+            var sum = 0
+            for (var j = 0; j < 5; j++) {
+                sum = profit_list[j] + sum;
+            }
+            data.profit_part1 = sum
+        }
+
+    }
+
+    var if_shown_exp_no_algo_part1_feedback = {
+        timeline: [exp_no_algo_part1_feedback],
+        conditional_function: function() {
+            var delegated = jsPsych.data.get().filter({
+                task: 'delegate_decision_1'
+            }).values()[0]
+            var delegated = JSON.stringify(delegated)
+            var delegated = eval(JSON.parse(delegated)).response.P0_Q2
+            if (jsPsych.pluginAPI.compareKeys(delegated, '不使用算法')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+    var exp_part1_end = {
+        type: jsPsychFullscreen,
+        fullscreen_mode: true,
+        message: `
+
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【正式预测阶段一结束】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>请点击按钮进入<b>正式预测环节二</b>。</p></br>
+
+                            </div>
+                <p>`,
+        button_label: '进入正式预测环节二',
+        delay_after: 100
+    }
+
+    var exp_part2_intro = {
+        type: jsPsychFullscreen,
+        fullscreen_mode: true,
+        message: `
+                    <p style="font: 18pt 微软雅黑; text-align: left; line-height: 1.5em">【实验环节二】</p></br>
+                    <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
+                    <p> · 本实验环节你需要做出<font color='red'><b>7</b></font>次柠檬水销量预测。</p>
+                    <p> · 在<font color='red'>每次预测前</font>，你有机会选择<font color='red'>是否选择算法</font>进行预测。</p>
+                    <p> · 实验环节二的浮动酬金规则是：<font color='red'><b>随机抽取一次</b></font>预测收益作为浮动酬金2。</p></div>
+                    <p style='color:red; font-size:1.2rem'>你的决策会影响本阶段的浮动收益，因此请认真阅读信息。</p></br>
+                  
+                    <p>`,
+        button_label: '开始预测',
+        delay_after: 100
+    }
+
+    var exp_algo_delegation_2 = {
+            type: jsPsychSurvey,
+            pages: [
+                [{
+                    type: 'html',
+
+                    prompt: function() {
+                        var team_intro_info = jsPsych.data.get().filter({
+                            task: 'AIAD_manip'
+                        }).values()[0]
+                        var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                        var html = `
+
+                            <p style='line-height: 1.2em; font-weight:500'>现在<b>${algo_info}</b>依然可以使用，如果你选择使用算法预测，则算法预测收益将作为你本次的收益。请你做出以下决策：</p>`
+                        return html
+                    }
+                }, {
+                    type: 'likert',
+                    prompt: '1. 你有多大意愿使用该算法预测接下来1次的蛋糕销量？',
+                    likert_scale_min_label: '完全不愿使用',
+                    likert_scale_max_label: '非常愿意使用',
+                    likert_scale_values: likert_scale,
+                    required: true
+                }, {
+                    type: 'multi-choice',
+                    prompt: '2. 请你决定是否让该算法为你做接下来1次的销量预测:',
+                    options: ["不使用算法", "使用算法"],
+                    required: true,
+                }]
+            ],
+            data: {
+                task: 'delegate_decision_2'
+            },
+            button_label_finish: '继续'
+        }
+        //timeline.push(exp_algo_delegation_2)
+
+    var algo_delegation_yes_2 = {
+        type: jsPsychSurvey,
+        pages: [
+            [{
+                type: 'html',
+                prompt: function() {
+                    var team_intro_info = jsPsych.data.get().filter({
+                        task: 'AIAD_manip'
+                    }).values()[0]
+                    var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                    var html = `
+                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你已授权<b> ${algo_info}</b> 为你做接下来5次的销量预测】</p></br>
+                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
+                    请依次查看算法预测详情：</p>
+                <div style="text-indent:4.375rem /* 70/16 */; font:1.4rem SimSun; line-height: 1em; text-align:left">
+                    <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
+                <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
+                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')}</p>
+                <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
+                <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
+                <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
+                <p>⑦ 降水量：${jsPsych.timelineVariable('Rainfall')} mm</p>
+                </div>
+                </br>
+                `;
+                    return html;
+                }
+            }, {
+                type: 'html',
+                prompt: function() {
+                    var html = `
+                        
+                    <p style="font:1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em; text-align:left; color:black">
+                    · 算法的预测结果为：<b>${jsPsych.timelineVariable('pre_1')}</b>个。</p>
+                    
+                    </br>
+                `
+                    return html
+                }
+            }, {
+                type: 'likert',
+                prompt: '· 你对算法的预测结果有多大信心？',
+                name: 'pred_algo_2',
+                required: true,
+                likert_scale_min_label: '完全没有信心',
+                likert_scale_max_label: '非常有信心',
+                likert_scale_values: likert_scale
+            }]
+        ],
+        button_label_finish: '查看真实销量'
+
+    }
+
+    var algo_delegation_yes_result_eval_2 = {
+        type: jsPsychHtmlKeyboardResponse,
+        data: {
+            taskname: 'result_eval',
+            taskdate: jsPsych.timelineVariable('Date'),
+            turevalue: jsPsych.timelineVariable('Sales'),
+            algovalue: jsPsych.timelineVariable('pre_1'),
+            //algovalue: jsPsych.timelineVariable('Flyers'),
+        },
+        stimulus: function() {
+            var ture_sale = jsPsych.timelineVariable('Sales')
+            var algo_pre = jsPsych.timelineVariable('pre_1')
+            var bias = (Math.abs(algo_pre - ture_sale)) / ture_sale
+            if (bias == 0) {
+                var daily_profit = 10
+            } else if (0 < bias <= 0.04) {
+                var daily_profit = 9
+            } else if (0.04 < bias <= 0.08) {
+                var daily_profit = 8
+            } else if (0.08 < bias <= 0.12) {
+                var daily_profit = 7
+            } else if (0.12 < bias <= 0.16) {
+                var daily_profit = 6
+            } else if (0.16 < bias <= 0.20) {
+                var daily_profit = 5
+            } else if (0.2 < bias <= 0.24) {
+                var daily_profit = 4
+            } else if (0.24 < bias <= 0.28) {
+                var daily_profit = 3
+            } else if (0.28 < bias <= 0.32) {
+                var daily_profit = 2
+            } else if (0.32 < bias <= 0.36) {
+                var daily_profit = 1
+            } else {
+                var daily_profit = 0
+            }
+            var bias_percent = bias * 100
+            var bias_percent = bias_percent.toFixed(2)
+
+            return `
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【销量预测结果评估】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>实际销量为${ture_sale}个</p>
+                            <p>算法的预测为${algo_pre}个</p>
+                            <p>算法的预测偏差为<b>${bias_percent}%</b></p>
+                            <p>算法本次的预测收益为<b>${daily_profit}</b>元</p></br>
+                            <p style='color:Gray;'>（按任意键继续）</p>
+                            </div>`
+        },
+        on_finish: function(data) {
+            var ture_sale = jsPsych.timelineVariable('Sales')
+            var algo_pre = jsPsych.timelineVariable('pre_1')
+            var bias = (Math.abs(algo_pre - ture_sale)) / ture_sale
+            if (bias == 0) {
+                var daily_profit = 10
+            } else if (0 < bias <= 0.04) {
+                var daily_profit = 9
+            } else if (0.04 < bias <= 0.08) {
+                var daily_profit = 8
+            } else if (0.08 < bias <= 0.12) {
+                var daily_profit = 7
+            } else if (0.12 < bias <= 0.16) {
+                var daily_profit = 6
+            } else if (0.16 < bias <= 0.20) {
+                var daily_profit = 5
+            } else if (0.2 < bias <= 0.24) {
+                var daily_profit = 4
+            } else if (0.24 < bias <= 0.28) {
+                var daily_profit = 3
+            } else if (0.28 < bias <= 0.32) {
+                var daily_profit = 2
+            } else if (0.32 < bias <= 0.36) {
+                var daily_profit = 1
+            } else {
+                var daily_profit = 0
+            }
+            data.profit_part2 = daily_profit
+        }
+
+    }
+
+    var if_shown_algo_delegation_2 = {
+        timeline: [algo_delegation_yes_2, algo_delegation_yes_result_eval_2],
+        conditional_function: function() {
+            var delegated = jsPsych.data.get().filter({
+                task: 'delegate_decision_2'
+            }).values()
+            var delegated_trial_times = delegated.length
+            var delegated_info = delegated[delegated_trial_times - 1]
+            var delegated_info = JSON.stringify(delegated_info)
+            var delegated_info = eval(JSON.parse(delegated_info)).response.P0_Q2
+            if (jsPsych.pluginAPI.compareKeys(delegated_info, '使用算法')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+    //选择不使用算法
+    var algo_delegation_no_2 = {
+        type: jsPsychSurvey,
+        data: {
+            task: jsPsych.timelineVariable('Date')
+        },
+        pages: [
+            [{
+                type: 'html',
+                prompt: function() {
+                    var team_intro_info = jsPsych.data.get().filter({
+                        task: 'AIAD_manip'
+                    }).values()[0]
+                    var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                    var html = `
+                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你未授权<b> ${algo_info}</b> 为你做接下来5次的销量预测】</p></br>
+                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
+                    请你根据以下信息进行预测: </p>
+                <div style="text-indent:4.375rem /* 70/16 */; font:1.4rem SimSun; line-height: 1em; text-align:left">
+                    <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
+                <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
+                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')}</p>
+                <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
+                <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
+                <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
+                <p>⑦ 降水量：${jsPsych.timelineVariable('Rainfall')} mm</p>
+                </div>
+                </br>
+                `;
+                    return html;
+                }
+            }, {
+                type: 'html',
+                prompt: '请根据提供的5项信息，进行预测：'
+            }, {
+                type: 'text',
+                prompt: '· 你预计制作多少个蛋糕？',
+                name: 'pred_num',
+                required: true
+            }, {
+                type: 'likert',
+                prompt: '· 你对自己的预测结果有多大信心？',
+                name: 'pred_confi_2',
+                likert_scale_min_label: '完全没有信心',
+                likert_scale_max_label: '非常有信心',
+                likert_scale_values: likert_scale,
+                required: true
+            }, ]
+        ],
+        button_label_finish: '查看真实销量'
+
+    }
+
+    var algo_delegation_no_result_eval_2 = {
+        type: jsPsychHtmlKeyboardResponse,
+        data: {
+            taskname: 'result_eval',
+            taskdate: jsPsych.timelineVariable('Date'),
+            turevalue: jsPsych.timelineVariable('Sales'),
+
+        },
+        stimulus: function() {
+            var self_pre = jsPsych.data.get().filter({
+                task: jsPsych.timelineVariable('Date')
+            }).values()[0]
+            var self_pre = eval(JSON.parse(JSON.stringify(self_pre))).response.pred_num
+            var ture_sale = jsPsych.timelineVariable('Sales')
+            var bias = (Math.abs(self_pre - ture_sale)) / ture_sale
+            if (bias == 0) {
+                var daily_profit = 10
+            } else if (0 < bias <= 0.04) {
+                var daily_profit = 9
+            } else if (0.04 < bias <= 0.08) {
+                var daily_profit = 8
+            } else if (0.08 < bias <= 0.12) {
+                var daily_profit = 7
+            } else if (0.12 < bias <= 0.16) {
+                var daily_profit = 6
+            } else if (0.16 < bias <= 0.20) {
+                var daily_profit = 5
+            } else if (0.2 < bias <= 0.24) {
+                var daily_profit = 4
+            } else if (0.24 < bias <= 0.28) {
+                var daily_profit = 3
+            } else if (0.28 < bias <= 0.32) {
+                var daily_profit = 2
+            } else if (0.32 < bias <= 0.36) {
+                var daily_profit = 1
+            } else {
+                var daily_profit = 0
+            }
+            var bias_percent = bias * 100
+            var bias_percent = bias_percent.toFixed(2)
+
+            return `
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【销量预测结果评估】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>实际销量为${ture_sale}个</p>
+                            <p>你的预测为${self_pre}个</p>
+                            <p>你的预测偏差为${bias_percent}%</p>
+                            <p>你本次的预测收益为${daily_profit}元</p></br>
+                            <p style='color:Gray;'>（按任意键继续）</p>
+                            </div>`
+        },
+        on_finish: function(data) {
+            var self_pre = jsPsych.data.get().filter({
+                task: jsPsych.timelineVariable('Date')
+            }).values()[0]
+            var self_pre = eval(JSON.parse(JSON.stringify(self_pre))).response.pred_num
+            var ture_sale = jsPsych.timelineVariable('Sales')
+            var bias = (Math.abs(self_pre - ture_sale)) / ture_sale
+            if (bias == 0) {
+                var daily_profit = 10
+            } else if (0 < bias <= 0.04) {
+                var daily_profit = 9
+            } else if (0.04 < bias <= 0.08) {
+                var daily_profit = 8
+            } else if (0.08 < bias <= 0.12) {
+                var daily_profit = 7
+            } else if (0.12 < bias <= 0.16) {
+                var daily_profit = 6
+            } else if (0.16 < bias <= 0.20) {
+                var daily_profit = 5
+            } else if (0.2 < bias <= 0.24) {
+                var daily_profit = 4
+            } else if (0.24 < bias <= 0.28) {
+                var daily_profit = 3
+            } else if (0.28 < bias <= 0.32) {
+                var daily_profit = 2
+            } else if (0.32 < bias <= 0.36) {
+                var daily_profit = 1
+            } else {
+                var daily_profit = 0
+            }
+            data.profit_part2 = daily_profit
+        }
+
+    }
+
+    var if_shown_no_algo_delegation_2 = {
+        timeline: [algo_delegation_no_2, algo_delegation_no_result_eval_2],
+        conditional_function: function() {
+            var delegated = jsPsych.data.get().filter({
+                task: 'delegate_decision_2'
+            }).values()
+            var delegated_trial_times = delegated.length
+            var delegated_info = delegated[delegated_trial_times - 1]
+            var delegated_info = JSON.stringify(delegated_info)
+            var delegated_info = eval(JSON.parse(delegated_info)).response.P0_Q2
+            if (jsPsych.pluginAPI.compareKeys(delegated_info, '不使用算法')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+
+    var exp_delegation_part2 = {
+            timeline: [exp_algo_delegation_2, if_shown_algo_delegation_2, if_shown_no_algo_delegation_2],
+            timeline_variables: exp_sales_stimuli_part2_free,
+            data: {
+                phase: 'exp_delegation_part2'
+            },
+            //sample: {
+            //    type: 'without-replacement',
+            //    size: 4
+            //}
+        }
+        //timeline.push(exp_delegation_part2)
+
+
+    //*******************************************算法付费**************************************
+
+
+    var exp_delegation_part2_algo_price_intro = {
+        type: jsPsychFullscreen,
+        fullscreen_mode: true,
+        message: `
+        <div style="max-width: 85%; margin:0 atuo; ">
+            <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.5em;color:Gray; ">【算法使用付费通知】</p></br>
+            <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
+            经过一段时间的免费投放，AIplus科技公司宣布该AI预测算法的免费试用阶段已经结束，接下来如果使用需要进行<font color='red'>付费</font>。</p>
+            <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
+            （1）公司将算法使用的单价定位：<font color='red'>3元/次</font>。</p>
+            <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
+            （2）如果选择购买算法，<font color='red'>购买成本将从最终的实验报酬中扣除</font>。</p>
+            <p class='context' style='text-indent:4rem /* 50/16 */; line-height: 1.5em; color:Gray'>
+            例如你在接下来购买了两次算法服务，则最后的实验报酬扣除6元。</p>
+            </br></br>
+            <p>`,
+        button_label: '我已了解付费信息',
+        delay_after: 100
+    }
+
+    var exp_algo_delegation_2_price = {
+            type: jsPsychSurvey,
+            pages: [
+                [{
+                    type: 'html',
+                    prompt: function() {
+                        var team_intro_info = jsPsych.data.get().filter({
+                            task: 'AIAD_manip'
+                        }).values()[0]
+                        var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                        var html = `
+
+                            <p style='line-height: 1.2em; font-weight:500'>现在<b>${algo_info}</b>每次使用需要支付<b>3元</b>。请你做出以下决策：</p>`
+                        return html
+                    }
+                }, {
+                    type: 'likert',
+                    prompt: '你有多大意愿购买该算法来预测接下来1次的蛋糕销量？',
+                    name: 'purchase_willingness',
+                    likert_scale_min_label: '完全不愿使用',
+                    likert_scale_max_label: '非常愿意使用',
+                    likert_scale_values: likert_scale,
+                    required: true
+                }, {
+                    type: 'multi-choice',
+                    prompt: '请你决定是否购买该算法为你做接下来1次的销量预测:',
+                    name: 'purchase_decision',
+                    options: ["不购买算法", "购买算法"],
+                    required: true,
+                }]
+            ],
+            data: {
+                task: 'delegate_decision_2_price'
+            },
+            button_label_finish: '继续'
+        }
+        //timeline.push(exp_algo_delegation_2)
+
+    var algo_delegation_yes_2_price = {
+        type: jsPsychSurvey,
+        pages: [
+            [{
+                type: 'html',
+                prompt: function() {
+                    var team_intro_info = jsPsych.data.get().filter({
+                        task: 'AIAD_manip'
+                    }).values()[0]
+                    var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                    var html = `
+                    <p style="font: 20pt 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你已购买<b> ${algo_info}</b> 为你做接下来1次的销量预测】</p></br>
+                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
+                    算法使用的预测信息：</p>
+                <div style="text-indent:4.375rem /* 70/16 */; font:18pt SimSun; line-height: 1em; text-align:left">
+                    <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
+                <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
+                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')}</p>
+                <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
+                <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
+                <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
+                <p>⑦ 降水量：${jsPsych.timelineVariable('Rainfall')} mm</p>
+                </div>
+                </br></br>
+                `;
+                    return html;
+                }
+            }, {
+                type: 'html',
+                prompt: function() {
+                    var html = `
+                    <p style="font:1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em; text-align:left; color:black">
+                    · 算法的预测结果为：<b>${jsPsych.timelineVariable('pre_1')}</b>个。</p>
+                    
+                    </br>
+                `
+                    return html
+                }
+            }, {
+                type: 'likert',
+                prompt: '· 你对算法的预测结果有多大信心？',
+                name: 'pred_algo_2',
+                required: true,
+                likert_scale_min_label: '完全没有信心',
+                likert_scale_max_label: '非常有信心',
+                likert_scale_values: likert_scale
+            }]
+        ],
+        button_label_finish: '查看真实销量'
+    }
+
+    var algo_delegation_yes_result_eval_2_price = {
+        type: jsPsychHtmlKeyboardResponse,
+        data: {
+            taskname: 'result_eval_price',
+            taskdate: jsPsych.timelineVariable('Date'),
+            turevalue: jsPsych.timelineVariable('Sales'),
+            algovalue: jsPsych.timelineVariable('pre_1'),
+            //algovalue: jsPsych.timelineVariable('Flyers'),
+        },
+        stimulus: function() {
+            var ture_sale = jsPsych.timelineVariable('Sales')
+            var algo_pre = jsPsych.timelineVariable('pre_1')
+            var bias = (Math.abs(algo_pre - ture_sale)) / ture_sale
+            if (bias == 0) {
+                var daily_profit = 10
+            } else if (0 < bias <= 0.04) {
+                var daily_profit = 9
+            } else if (0.04 < bias <= 0.08) {
+                var daily_profit = 8
+            } else if (0.08 < bias <= 0.12) {
+                var daily_profit = 7
+            } else if (0.12 < bias <= 0.16) {
+                var daily_profit = 6
+            } else if (0.16 < bias <= 0.20) {
+                var daily_profit = 5
+            } else if (0.2 < bias <= 0.24) {
+                var daily_profit = 4
+            } else if (0.24 < bias <= 0.28) {
+                var daily_profit = 3
+            } else if (0.28 < bias <= 0.32) {
+                var daily_profit = 2
+            } else if (0.32 < bias <= 0.36) {
+                var daily_profit = 1
+            } else {
+                var daily_profit = 0
+            }
+            var bias_percent = bias * 100
+            var bias_percent = bias_percent.toFixed(2)
+
+            return `
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【销量预测结果评估】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>实际销量为${ture_sale}个</p>
+                            <p>算法的预测为${algo_pre}个</p>
+                            <p>算法的预测偏差为<b>${bias_percent}%</b></p>
+                            <p>算法本次的预测收益为<b>${daily_profit}</b>元</p></br>
+                            <p style='color:Gray;'>（按任意键继续）</p>
+                            </div>`
+        },
+        on_finish: function(data) {
+            var ture_sale = jsPsych.timelineVariable('Sales')
+            var algo_pre = jsPsych.timelineVariable('pre_1')
+            var bias = (Math.abs(algo_pre - ture_sale)) / ture_sale
+            if (bias == 0) {
+                var daily_profit = 10
+            } else if (0 < bias <= 0.04) {
+                var daily_profit = 9
+            } else if (0.04 < bias <= 0.08) {
+                var daily_profit = 8
+            } else if (0.08 < bias <= 0.12) {
+                var daily_profit = 7
+            } else if (0.12 < bias <= 0.16) {
+                var daily_profit = 6
+            } else if (0.16 < bias <= 0.20) {
+                var daily_profit = 5
+            } else if (0.2 < bias <= 0.24) {
+                var daily_profit = 4
+            } else if (0.24 < bias <= 0.28) {
+                var daily_profit = 3
+            } else if (0.28 < bias <= 0.32) {
+                var daily_profit = 2
+            } else if (0.32 < bias <= 0.36) {
+                var daily_profit = 1
+            } else {
+                var daily_profit = 0
+            }
+            data.profit_part2 = daily_profit
+        }
+
+    }
+
+    var if_shown_algo_delegation_2_price = {
+        timeline: [algo_delegation_yes_2_price, algo_delegation_yes_result_eval_2_price],
+        conditional_function: function() {
+            var delegated = jsPsych.data.get().filter({
+                task: 'delegate_decision_2_price'
+            }).values()
+            var delegated_trial_times = delegated.length
+            var delegated_info = delegated[delegated_trial_times - 1]
+            var delegated_info = JSON.stringify(delegated_info)
+            var delegated_info = eval(JSON.parse(delegated_info)).response.purchase_decision
+            if (jsPsych.pluginAPI.compareKeys(delegated_info, '购买算法')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+    //选择不使用算法
+    var algo_delegation_no_2_price = {
+        type: jsPsychSurvey,
+        data: {
+            task: jsPsych.timelineVariable('Date')
+        },
+        pages: [
+            [{
+                type: 'html',
+                prompt: function() {
+                    var team_intro_info = jsPsych.data.get().filter({
+                        task: 'AIAD_manip'
+                    }).values()[0]
+                    var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                    var html = `
+                    <p style="font: 20pt 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你未购买<b> ${algo_info}</b> 为你做接下来1次的销量预测】</p></br>
+                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
+                    接下来你需要<font color='red'>自己预测蛋糕销量</font>：</p>
+                <div style="text-indent:4.375rem /* 70/16 */; font:18pt SimSun; line-height: 1em; text-align:left">
+                    <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
+                <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
+                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')}</p>
+                <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
+                <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
+                <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
+                <p>⑦ 降水量：${jsPsych.timelineVariable('Rainfall')} mm</p>
+                </div>
+                </br></br>
+                `;
+                    return html;
+                }
+            }, {
+                type: 'html',
+                prompt: '请根据提供的5项信息，进行预测：'
+            }, {
+                type: 'text',
+                prompt: '· 你预计制作多少个蛋糕？',
+                name: 'pred_num',
+                required: true
+            }, {
+                type: 'likert',
+                prompt: '· 你对自己的预测结果有多大信心？',
+                name: 'pred_confi_2',
+                likert_scale_min_label: '完全没有信心',
+                likert_scale_max_label: '非常有信心',
+                likert_scale_values: likert_scale,
+                required: true
+            }, ]
+        ],
+        button_label_finish: '查看真实销量',
+        data: {
+            task: jsPsych.timelineVariable('Date')
+        }
+    }
+
+    var algo_delegation_no_result_eval_2_price = {
+        type: jsPsychHtmlKeyboardResponse,
+        data: {
+            taskname: 'result_eval_price',
+            taskdate: jsPsych.timelineVariable('Date'),
+            turevalue: jsPsych.timelineVariable('Sales'),
+
+        },
+        stimulus: function() {
+            var self_pre = jsPsych.data.get().filter({
+                task: jsPsych.timelineVariable('Date')
+            }).values()[0]
+            var self_pre = eval(JSON.parse(JSON.stringify(self_pre))).response.pred_num
+                //var self_pre = parseInt(self_pre)
+            var ture_sale = jsPsych.timelineVariable('Sales')
+                //var ture_sale = parseInt(ture_sale)
+            var bias = (Math.abs(self_pre - ture_sale)) / ture_sale
+            if (bias == 0) {
+                var daily_profit = 10
+            } else if (0 < bias <= 0.04) {
+                var daily_profit = 9
+            } else if (0.04 < bias <= 0.08) {
+                var daily_profit = 8
+            } else if (0.08 < bias <= 0.12) {
+                var daily_profit = 7
+            } else if (0.12 < bias <= 0.16) {
+                var daily_profit = 6
+            } else if (0.16 < bias <= 0.20) {
+                var daily_profit = 5
+            } else if (0.2 < bias <= 0.24) {
+                var daily_profit = 4
+            } else if (0.24 < bias <= 0.28) {
+                var daily_profit = 3
+            } else if (0.28 < bias <= 0.32) {
+                var daily_profit = 2
+            } else if (0.32 < bias <= 0.36) {
+                var daily_profit = 1
+            } else {
+                var daily_profit = 0
+            }
+            var bias_percent = bias * 100
+            var bias_percent = bias_percent.toFixed(2)
+
+            return `
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【销量预测结果评估】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>实际销量为${ture_sale}个</p>
+                            <p>你的预测为${self_pre}个</p>
+                            <p>你的预测偏差为${bias_percent}%</p>
+                            <p>你本次的预测收益为${daily_profit}元</p></br>
+                            <p style='color:Gray;'>（按任意键继续）</p>
+                            </div>`
+        },
+        on_finish: function(data) {
+            var self_pre = jsPsych.data.get().filter({
+                task: jsPsych.timelineVariable('Date')
+            }).values()[0]
+            var self_pre = eval(JSON.parse(JSON.stringify(self_pre))).response.pred_num
+            var ture_sale = jsPsych.timelineVariable('Sales')
+            var bias = (Math.abs(self_pre - ture_sale)) / ture_sale
+            if (bias == 0) {
+                var daily_profit = 10
+            } else if (0 < bias <= 0.04) {
+                var daily_profit = 9
+            } else if (0.04 < bias <= 0.08) {
+                var daily_profit = 8
+            } else if (0.08 < bias <= 0.12) {
+                var daily_profit = 7
+            } else if (0.12 < bias <= 0.16) {
+                var daily_profit = 6
+            } else if (0.16 < bias <= 0.20) {
+                var daily_profit = 5
+            } else if (0.2 < bias <= 0.24) {
+                var daily_profit = 4
+            } else if (0.24 < bias <= 0.28) {
+                var daily_profit = 3
+            } else if (0.28 < bias <= 0.32) {
+                var daily_profit = 2
+            } else if (0.32 < bias <= 0.36) {
+                var daily_profit = 1
+            } else {
+                var daily_profit = 0
+            }
+            data.profit_part2 = daily_profit
+        }
+
+    }
+
+    var if_shown_no_algo_delegation_2_price = {
+        timeline: [algo_delegation_no_2_price, algo_delegation_no_result_eval_2_price],
+        conditional_function: function() {
+            var delegated = jsPsych.data.get().filter({
+                task: 'delegate_decision_2_price'
+            }).values()
+            var delegated_trial_times = delegated.length
+            var delegated_info = delegated[delegated_trial_times - 1]
+            var delegated_info = JSON.stringify(delegated_info)
+            var delegated_info = eval(JSON.parse(delegated_info)).response.purchase_decision
+            if (jsPsych.pluginAPI.compareKeys(delegated_info, '不购买算法')) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+
+    var exp_delegation_part2_price = {
+            timeline: [exp_algo_delegation_2_price, if_shown_algo_delegation_2_price, if_shown_no_algo_delegation_2_price],
+            timeline_variables: exp_sales_stimuli_part2_pay,
+            data: {
+                phase: 'exp_delegation_part2_price'
+            },
+            //sample: {
+            //    type: 'without-replacement',
+            //    size: 3
+            //}
+        }
+        //timeline.push(exp_delegation_part2)
+
+    var algo_price_change = {
+            timeline: [{
+                type: jsPsychHtmlKeyboardResponse,
+                stimulus: function() {
+                    var html = `
+                        <p style="font: 20pt 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【算法费用调整】：</p></br>
+                        <div style="font:20pt SimSun; line-height: 1em; text-align:left; color:black">
+                        <p style="font:20pt SimSun; line-height: 1.5em; text-align:left; color:black">该算法投入市场一段时间之后，AIplus科技公司将算法使用定价<b><font color='red'>${jsPsych.timelineVariable('change')}</font></b>为：</p></br>
+                        <p style="font:20pt SimSun; line-height: 1em; text-align:center; color:black"><b><font color='red'>${jsPsych.timelineVariable('price')}</font></b>元/次</p><br>
+                        <p style='font:20pt SimSun; line-height: 1em; text-align:center;color:Gray;'>（按任意键继续）</p>
+                        `;
+                    return html;
+                },
+                name: 'algo_price_change',
+                button_label: '已了解价格变动'
+            }],
+            timeline_variables: [{
+                change: '提高',
+                price: '5'
+            }, {
+                change: '降低',
+                price: '1'
+            }],
+            sample: {
+                type: 'without-replacement',
+                size: 1
+            }
+
+        }
+        //timeline.push(algo_price_change);
+
+    var algo_purchase_2 = {
+            type: jsPsychSurvey,
+            pages: [
+                [{
+                    type: 'likert',
+                    prompt: '· 请问你愿意购买该算法进行下一次的销量预测吗？',
+                    likert_scale_min_label: '完全不愿意',
+                    likert_scale_max_label: '非常愿意',
+                    name: 'purchase_intention_2',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }, {
+                    type: 'text',
+                    prompt: "· 当前，你最多愿意支付多少元购买该算法的服务？(单位：元/次）",
+                    name: 'max_pay_2',
+                    required: true,
+                }, {
+                    type: 'text',
+                    prompt: "· 你认为该公司为什么会调整算法的价格？",
+                    name: 'price_change_reason',
+                    required: true,
+                }]
+            ]
+        }
+        //timeline.push(algo_purchase_2);
+
+
+    //***************************************************第二阶段问卷*******************************************
+    var scale = ["完全没有信心", "没有信心", "有点没有信心", "不确定", "有点信心", "有信心", "非常有信心"];
+
+    var key_factors_survey_2 = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+        <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【问卷填写】</p></br>
+        <div style="font:20pt SimSun; line-height: 1em; text-align:center">
+        <p>接下来你将进入第二阶段的问卷填写。请认真填写！</p>
+        </div>
+        <p>`,
+            button_lable: '填写问卷',
+            delay_after: 100
+        }
+        //timeline.push(key_factors_survey_2)
+
+
+    var variables_measurement_part2 = {
+            type: jsPsychSurvey,
+            pages: [
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 1/5 】</p>`,
+                }, {
+                    type: 'text',
+                    prompt: '请问你对当前这个算法有什么想法或者感受？(10-200字之内)',
+                    textbox_rows: 3,
+                    name: 'feeling_about_algo',
+                    required: true
+                }],
+
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 2/5 】</p>`,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你现在认为这份预测工作的难度如何？',
+                    likert_scale_min_label: '难度很低',
+                    likert_scale_max_label: '难度很高',
+                    name: 'Difficulty',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 您认为该公司的算法开发能力如何？（请你选择4）',
+                    likert_scale_min_label: '很低',
+                    likert_scale_max_label: '很高',
+                    name: 'Attention_check_3',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 到目前为止，你对自己的预测表现满意吗？',
+                    likert_scale_min_label: '非常不满意',
+                    likert_scale_max_label: '非常满意',
+                    name: 'Performance_eval',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }],
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 3/5 】</p>`,
+                }, {
+                    type: 'ranking',
+                    prompt: '· 你认为柠蛋糕预测任务中6个预测信息的重要性排序是怎样的？(上下拖动选项进行排序）',
+                    name: 'Self_reasoning',
+                    options: ['日期', '星期几', '温度', '降水量', '宣传单数量', '是否促销', '两天前销量'],
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为该AI预测算法中6个因素的重要性排序和你自己的排序一样吗？',
+                    likert_scale_min_label: '完全不一致',
+                    likert_scale_max_label: '完全一致',
+                    name: 'Reasoning_consistency',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }],
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 4/5 】</p>`,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你现在在多大程度上相信此算法可以预测出准确的蛋糕销量？',
+                    likert_scale_min_label: '完全不相信',
+                    likert_scale_max_label: '完全相信',
+                    name: 'Trust2',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你现在有多大意愿在之后的预测任务中使用该AI预测算法？',
+                    likert_scale_min_label: '完全没有意愿',
+                    likert_scale_max_label: '非常有意愿',
+                    name: 'Usage_willingness_part2',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你有多大可能向别的烘焙店店主推荐这个AI预测算法？',
+                    likert_scale_min_label: '不可能推荐',
+                    likert_scale_max_label: '一定会推荐',
+                    name: 'Recommendation',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }],
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 5/5 】</p>`,
+                }, {
+                    type: 'multi-select',
+                    prompt: '· 关于本实验中提到的算法，以下哪些说法是正确的？',
+                    options: ["这个算法是基于AI实现的预测算法", "这个算法开发过程中全部是专业人士", "这个算法的预测正确率是100%", "这个算法到目前为止都是免费使用的"],
+                    name: 'attention_check_3',
+                    required: true,
+                }, {
+                    type: 'multi-select',
+                    prompt: '·  根据你看的算法信息，算法开发过程中涉及到哪些人？',
+                    options: ["没有介绍包括哪些人", "AI算法工程师", "蛋糕消费者", "烘焙店店主", "AIplus公司销售人员"],
+                    name: 'attention_check_4',
+                    required: true,
+                }]
+            ],
+            button_label_back: '上一页',
+            button_label_next: '下一页',
+            button_label_finish: '继续'
+        }
+        //timeline.push(variables_measurement_part2)
+
+
+
+
+
+    var key_factors_survey_3 = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+        <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【问卷填写】</p></br>
+        <div style="font:20pt SimSun; line-height: 1em; text-align:center">
+        <p>接下来你将进入<b>最后一阶段</b>的问卷填写，请认真回答。</p>
+        </div>
+        <p>`,
+            button_lable: '填写问卷',
+            delay_after: 100
+        }
+        //timeline.push(key_factors_survey_3)
+
+    var variables_measurement_part3_PDB = {
+            type: jsPsychSurveyLikert,
+            preamble: `
+            <p style="font: 10pt 微软雅黑; line-height: 1 em;color:Gray; text-align:center">【 4/6 】</p>
+            <p style="font: 10pt 微软雅黑; line-height: 0.1em; text-align:left">请回答对以下观点的赞成程度</p>
+            `,
+            questions: [{
+                prompt: "组织中较低层次的人应该毫无疑义地执行较高层次的人的要求。",
+                name: 'Self_PDB_1',
+                labels: ['完全不同意', '不同意', '有点不同意', '不确定', '有点同意', '同意', '非常同意'],
+                required: true,
+            }, {
+                prompt: "一个高效率的组织需要明确谁是领导者谁是追随者。",
+                name: 'Self_PDB_2',
+                labels: ['完全不同意', '不同意', '有点不同意', '不确定', '有点同意', '同意', '非常同意'],
+                required: true,
+            }, {
+                prompt: "当追随者全心全意地信任他们的领导者时，这个团队更有机会取得最大的成功。",
+                name: 'Self_PDB_3',
+                labels: ['完全不同意', '不同意', '有点不同意', '不确定', '有点同意', '同意', '非常同意'],
+                required: true,
+            }, {
+                prompt: "组织中的低层级人员在组织中不应该有太大的权力。",
+                name: 'Self_PDB_4',
+                labels: ['完全不同意', '不同意', '有点不同意', '不确定', '有点同意', '同意', '非常同意'],
+                required: true,
+            }],
+            button_label: '继续'
+        }
+        //timeline.push(variables_measurement_part3_PDB);
+
+    var likert_scale_3 = [{
+        value: 1,
+        text: '错误'
+    }, {
+        value: 2,
+        text: '不清楚'
+    }, {
+        value: 3,
+        text: '正确'
+    }]
+
+    var variables_measurement_part3_literacy = {
+            type: jsPsychSurvey,
+            pages: [
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 5/6 】</p>`,
+                }, {
+                    type: 'html',
+                    prompt: '算法的应用十分广泛。接下来你将看到关于算法的一些陈述，请判断是否正确。',
+                }, {
+                    type: 'likert',
+                    prompt: '· 算法所使用的数据库不能成为影响算法质量的决定性因素之一。',
+                    name: 'Algo_literacy_1',
+                    likert_scale_values: likert_scale_3,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 我可以通过自己的使用行为影响算法。',
+                    name: 'Algo_literacy_2',
+                    likert_scale_values: likert_scale_3,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 在有的应用场景下，算法给出的建议可能随着用户不同而不同。',
+                    name: 'Algo_literacy_3',
+                    likert_scale_values: likert_scale_3,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 当使用个性化算法时，算法推荐的内容是和你之前的偏好一致的。',
+                    name: 'Algo_literacy_4',
+                    likert_scale_values: likert_scale_3,
+                    required: true,
+                }],
+                [{
+                    type: 'html',
+                    prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 6/6 】</p>`,
+                }, {
+                    type: 'likert',
+                    prompt: '· 算法可以像人类一样思考。',
+                    name: 'Algo_literacy_5',
+                    likert_scale_values: likert_scale_3,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 算法不受政府审查机制的影响。',
+                    name: 'Algo_literacy_6',
+                    likert_scale_values: likert_scale_3,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 算法带来的机会与风险并存。',
+                    name: 'Algo_literacy_7',
+                    likert_scale_values: likert_scale_3,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 一些公司或者组织发布的定期重复的内容是已经由算法写好的了。',
+                    name: 'Algo_literacy_8',
+                    likert_scale_values: likert_scale_3,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 在使用算法时，人类从未参与其中。',
+                    name: 'Algo_literacy_9',
+                    likert_scale_values: likert_scale_3,
+                    required: true,
+                }, ]
+            ],
+            button_label_back: '上一页',
+            button_label_next: '下一页',
+            button_label_finish: '结束填写问卷'
+        }
+        //timeline.push(variables_measurement_part3_literacy);
+
+
+    var basic_info_survey = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+        <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【基本信息填写】</p></br>
+        <div style="font:20pt SimSun; line-height: 1em; text-align:center">
+        <p>在正式进入实验之前，你首先需要填写个人基本信息，并回答相关问项。</p>
+        <p>你的信息我们将完全保密。</p>
+        <p>填写结果影响到你之后的实验报酬，因此请认真填写！</p>
+        </div>
+        <p>`,
+            button_lable: '填写个人信息',
+            delay_after: 100
+        }
+        //timeline.push(basic_info_survey)
+
+    var basic_info = {
+            type: jsPsychSurveyHtmlForm,
+            preamble: `
+                    <p style="font: 18pt 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">请如实填写以下信息。</p>
+            `,
+            html: '<div style="font: 14pt SimSun; text-align: left; line-height: 1.5em; font-weight:bold"> <p> 1. 你的性别：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 2. 你的年龄：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 3. 你所学的专业：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br></div>',
+            autofocus: 'test-resp-box',
+            button_label: '下一页',
+            name: 'basic_info',
+        }
+        //timeline.push(basic_info)
+
+    var basic_info_efficacy = {
+        type: jsPsychSurvey,
+        pages: [
+            [{
+                type: 'html',
+                prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 1/6 】</p>`,
+            }, {
+                type: 'html',
+                prompt: '请判断下列陈述是否符合你的情况。',
+            }, {
+                type: 'likert',
+                prompt: '· 我相信自己可以有效地处理突发事件',
+                likert_scale_min_label: '完全不符合',
+                likert_scale_max_label: '完全符合',
+                name: 'self_efficacy1',
+                likert_scale_values: likert_scale,
+                required: true,
+            }, {
+                type: 'likert',
+                prompt: '· 由于我的足智多谋，我知道如何处理不可预见的情况',
+                likert_scale_min_label: '完全不符合',
+                likert_scale_max_label: '完全符合',
+                name: 'self_efficacy2',
+                likert_scale_values: likert_scale,
+                required: true,
+            }, {
+                type: 'likert',
+                prompt: '· 如果我投入必要的努力，我可以解决大多数问题',
+                likert_scale_min_label: '完全不符合',
+                likert_scale_max_label: '完全符合',
+                name: 'self_efficacy3',
+                likert_scale_values: likert_scale,
+                required: true,
+            }, {
+                type: 'likert',
+                prompt: '· 我可以在面对困难时保持冷静，因为我相信自己的应对能力',
+                likert_scale_min_label: '完全不符合',
+                likert_scale_max_label: '完全符合',
+                name: 'self_efficacy4',
+                likert_scale_values: likert_scale,
+                required: true,
+            }, {
+                type: 'likert',
+                prompt: '· 我通常可以处理遇到的任何事情',
+                likert_scale_min_label: '完全不符合',
+                likert_scale_max_label: '完全符合',
+                name: 'self_efficacy5',
+                likert_scale_values: likert_scale,
+                required: true,
+            }],
+            [{
+                type: 'html',
+                prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 2/6 】</p>`,
+            }, {
+                type: 'html',
+                prompt: '请判断下列陈述是否符合你的情况。',
+            }, {
+                type: 'likert',
+                prompt: '· 我更喜欢可以很大程度上控制自己工作内容和时间的工作',
+                likert_scale_min_label: '完全不符合',
+                likert_scale_max_label: '完全符合',
+                name: 'desire_for_control_1',
+                likert_scale_values: likert_scale,
+                required: true,
+            }, {
+                type: 'likert',
+                prompt: '· 我更愿意成为领导者而不是追随者',
+                likert_scale_min_label: '完全不符合',
+                likert_scale_max_label: '完全符合',
+                name: 'desire_for_control_2',
+                likert_scale_values: likert_scale,
+                required: true,
+            }, {
+                type: 'likert',
+                prompt: '· 我喜欢自己做决定',
+                likert_scale_min_label: '完全不符合',
+                likert_scale_max_label: '完全符合',
+                name: 'desire_for_control_3',
+                likert_scale_values: likert_scale,
+                required: true,
+            }, {
+                type: 'likert',
+                prompt: '· 我喜欢自己控制自己的命运',
+                likert_scale_min_label: '完全不符合',
+                likert_scale_max_label: '完全符合',
+                name: 'desire_for_control_4',
+                likert_scale_values: likert_scale,
+                required: true,
+            }, {
+                type: 'likert',
+                prompt: '· 我尽量避免别人来告诉我我应该做什么',
+                likert_scale_min_label: '完全不符合',
+                likert_scale_max_label: '完全符合',
+                name: 'desire_for_control_5',
+                likert_scale_values: likert_scale,
+                required: true,
+            }, ],
+            [{
+                type: 'html',
+                prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 3/6 】</p>`,
+            }, {
+                type: 'likert-table',
+                prompt: '在一项游戏中，收益结果是根据抛硬币的结果决定的，请仔细阅读收益规则并决定是否接受游戏挑战。',
+                statements: [{
+                    prompt: '# 1.如果硬币正面朝上，你会失去20元；如果硬币背面朝上，你会获得60元。',
+                    name: 'loss_aversion_1'
+                }, {
+                    prompt: '# 2.如果硬币正面朝上，你会失去30元；如果硬币背面朝上，你会获得60元。',
+                    name: 'loss_aversion_2'
+                }, {
+                    prompt: '# 3.如果硬币正面朝上，你会失去40元；如果硬币背面朝上，你会获得60元。',
+                    name: 'loss_aversion_3'
+                }, {
+                    prompt: '# 4.如果硬币正面朝上，你会失去50元；如果硬币背面朝上，你会获得60元。',
+                    name: 'loss_aversion_4'
+                }, {
+                    prompt: '# 5.如果硬币正面朝上，你会失去60元；如果硬币背面朝上，你会获得60元。',
+                    name: 'loss_aversion_5'
+                }, {
+                    prompt: '# 6.如果硬币正面朝上，你会失去70元；如果硬币背面朝上，你会获得60元。',
+                    name: 'loss_aversion_6'
+                }],
+                options: ['接受', '拒绝'],
+                required: true
+            }]
+        ],
+        button_label_back: '上一页',
+        button_label_next: '下一页',
+        button_label_finish: '继续填写问卷'
+    };
+    //timeline.push(basic_info_efficacy);
+
+    var exp_game_end = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+                    <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.6em">
+                    <b>
+                        实验到这里已经完全结束。感谢你的参与！<br/><br/>
+                        请点击按钮随机选取浮动酬金。<br/><br/>
+			            为了保证你的实验数据可以有效保存，请你在<font color='red'>点击按钮之后不要有任何操作，并联系实验人员</font>。
+                        </b> </br></br></br>
+                    `,
+            button_label: '随机抽取浮动酬金',
+            delay_after: 100
+        }
+        //timeline.push(exp_game_end);
+
+    var exp_end_pay = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: function() {
+            //实验环节1
+
+            var part1_feedback = jsPsych.data.get().filter({
+                taskname: 'exp_part1_feedback'
+            }).values()[0]
+            var part1_profit = eval(JSON.parse(JSON.stringify(part1_feedback))).profit_part1
+
+            if (part1_profit < 0) {
+                part1_profit = 0
+            } else {
+                part1_profit = part1_profit
+            }
+
+
+            //实验环节2
+            var i = Math.floor(Math.random() * 7)
+            if (i <= 3) {
+                var part2_feedback = jsPsych.data.get().filter({
+                    taskname: "result_eval"
+                }).values()[i]
+            } else {
+                var part2_feedback = jsPsych.data.get().filter({
+                    taskname: "result_eval_price"
+                }).values()[i - 4]
+            }
+            var part2_profit = eval(JSON.parse(JSON.stringify(part2_feedback))).profit_part2
+
+            //购买算法次数
+            var purchase_time = 0
+            for (var j = 0; j < 3; j++) {
+                var purchase_info = jsPsych.data.get().filter({
+                    task: "delegate_decision_2_price"
+                }).values()[j]
+                var purchase = eval(JSON.parse(JSON.stringify(purchase_info))).response.purchase_decision
+                if (purchase == '购买算法') {
+                    purchase_time = purchase_time + 1
+                }
+            }
+            console.log(purchase_time)
+
+            var cost = purchase_time * 3
+            var select_all_profit = 15.0 + part2_profit + part1_profit - cost
+            var select_all_profit = Math.floor(select_all_profit * 100) / 100
+            return `
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【实验酬金】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1.2em; text-align:center; color:black">
+                            <p>1. 基本酬金：<b>15</b> 元</p>
+                            <p>2. 实验阶段一：浮动酬金（5次总收益）为<b>${part1_profit}</b>元</p>
+                            <p>3. 实验阶段二：浮动酬金（7次随机抽取）为<b>${part2_profit}</b>元</p>
+                            <p>4. 算法购买：购买算法<b>${purchase_time}</b>次，购买成本<b>${cost}</b>元</p>
+                            <p> 你的总收益为<font color='red'><b>${select_all_profit}</b></font>元</p></br>
+                            <p> 请不要继续操作，并及时联系实验人员~</p></br>
+                            </div>`
+        }
+    }
+
+
+
+
+
+
+
+    var global_var = {
+        timeline: [set_html_style, preload, exp_open_remarks]
+    }
+
+    var exp_background_remuneration = {
+        timeline: [exp_game_task_intro, exp_interest_intro, exp_interest_test, exp_rule_intro]
+    }
+
+    var seven_day_prac = {
+        timeline: [practice_trial_intro, exp_pre_pract7]
+    }
+
+
+    var formal_exp_intro = {
+        timeline: [exp_pre_pract_end]
+    }
+
+    var manip_Team = {
+        timeline: [exp_manipu_intro, exp_manipu_intro_copy, exp_algorithm_web_0_show, exp_algorithm_web_1_show, exp_algorithm_web_2_show, exp_algorithm_web_3_show, exp_algo_delegation_1, if_shown_algo_delegation_yes_1_intro, if_shown_algo_delegation_no_1_intro, exp_delegation_part1_1]
+    }
+
+    var factors_survey_1 = {
+        timeline: [key_factors_survey_1, variables_measurement]
+    }
+
+    //var feedback_part = {
+    //    timeline: [exp_delegation_part1_1, exp_algo_delegation_2, exp_delegation_part1_2,
+    //        exp_algo_delegation_3, exp_delegation_part1_3, exp_algo_delegation_4, exp_delegation_part2
+    //    ]
+    //}
+
+    var feedback_part = {
+        timeline: [if_shown_exp_algo_part1_feedback, if_shown_exp_no_algo_part1_feedback, exp_part1_end, exp_part2_intro, exp_delegation_part2, exp_delegation_part2_algo_price_intro, exp_delegation_part2_price, algo_price_change, algo_purchase_2]
+    }
+
+    var factors_survey_2 = {
+        timeline: [key_factors_survey_2, variables_measurement_part2]
+    }
+
+
+    var factors_survey_3 = {
+        timeline: [key_factors_survey_3, variables_measurement_part3_PDB, variables_measurement_part3_literacy]
+    }
+
+    var factors_survey_3_new = {
+        timeline: [key_factors_survey_3, basic_info, basic_info_efficacy, variables_measurement_part3_PDB, variables_measurement_part3_literacy]
+    }
+
+    var exp_end = {
+        timeline: [exp_game_end, exp_end_pay]
+    }
+
+
+    var timeline = [
+        global_var,
+        //basic_info_survey,
+        exp_background_remuneration,
+        seven_day_prac,
+        //manip_PDB,
+        formal_exp_intro,
+        manip_Team,
+        factors_survey_1,
+        feedback_part,
+        factors_survey_2,
+        //algo_payment,
+        factors_survey_3_new,
+        exp_end
+    ]
+
+    jsPsych.run(timeline);
+</script>
+
+</html>

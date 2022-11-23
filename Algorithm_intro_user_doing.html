@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>AIpuls科技公司-蛋糕销量预测算法</title>
+    <link rel="stylesheet" href="./algortithm.css">
+</head>
+
+<body>
+
+
+    <div class="site-header js-site-header --is-visible">
+        <div class="site-header__inner">
+            <!--
+            <a href="https://www.deskpass.com/" class="site-header__logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1077.27 300.35">
+                    <path class="word" style="fill:#110734;fill-rule:evenodd" d="M586.09,300.35h-29.6V119.17h29.6v8.42c9.7-7.14,22.21-11.23,36.76-11.23,33.67,0,60.73,28.07,60.73,63.29,0,35-27.06,63-60.73,63-14.55,0-27.06-4.09-36.76-11.24v68.9ZM995.36,199.3c2.55,14.29,13.27,20.41,29.6,20.41,14.29,0,24.25-5.1,24.25-13.27,0-6.38-5.11-11-14.55-12.76l-26.29-4.33C990,186,972.64,176.59,972.64,154.64c0-24.24,20.68-38.79,50.79-38.79,20.67,0,50.53,7.14,53.34,40.07l-27.31.25c-1-12.25-12.24-17.61-26-17.61-14.29,0-21.69,5.87-21.69,13,0,5.87,4.08,11.48,17.1,13.78l22.46,3.57c18.37,3.32,36,11.48,36,35,0,25.78-22.7,39.81-53.07,39.81-27.56,0-53.09-11.48-55.89-44.65l27.05.25Zm-684.07,0c2.56,14.29,13.28,20.41,29.61,20.41,14.29,0,24.24-5.1,24.24-13.27,0-6.38-5.1-11-14.55-12.76l-26.28-4.33c-18.38-3.32-35.73-12.76-35.73-34.71,0-24.24,20.67-38.79,50.79-38.79,20.67,0,50.52,7.14,53.33,40.07l-27.3.25c-1-12.25-12.25-17.61-26-17.61-14.3,0-21.69,5.87-21.69,13,0,5.87,4.08,11.48,17.09,13.78l22.46,3.57c18.38,3.32,36,11.48,36,35,0,25.78-22.71,39.81-53.08,39.81-27.56,0-53.08-11.48-55.89-44.65l27.05.25Zm561.59,0c2.56,14.29,13.27,20.41,29.6,20.41,14.29,0,24.25-5.1,24.25-13.27,0-6.38-5.11-11-14.55-12.76l-26.28-4.33c-18.37-3.32-35.73-12.76-35.73-34.71,0-24.24,20.67-38.79,50.78-38.79,20.67,0,50.53,7.14,53.34,40.07l-27.3.25c-1-12.25-12.25-17.61-26-17.61-14.29,0-21.68,5.87-21.68,13,0,5.87,4.08,11.48,17.09,13.78l22.46,3.57c18.37,3.32,36,11.48,36,35,0,25.78-22.71,39.81-53.08,39.81-27.55,0-53.08-11.48-55.89-44.65l27,.25Zm-695.8-12c2.56,17.1,14.29,30.37,36.25,30.37,11.73,0,20.16-3.82,24.49-11.23h31.39c-6.89,22.21-29.09,37.26-56.65,37.26-38.53,0-64.32-28.32-64.32-64,0-37,25.79-64.31,63.55-64.31,34.2,0,59.46,25,59.72,62.27a51.37,51.37,0,0,1-.77,9.69Zm-50,52.58H97.75v-8.69c-10,7.41-22.47,11.5-37,11.5C27.05,242.69,0,214.61,0,179.39c0-35,27.05-63,60.74-63,14.54,0,27,4.09,37,11.23V58.69h29.34V239.88Zm698.61,0H796.35v-8.43c-10,7.15-22.46,11.24-37,11.24-33.69,0-60.74-28.08-60.74-63,0-35.22,27-63.29,60.74-63.29,14.54,0,27,4.09,37,11.23v-8.42H825.7Zm-379.69,0H416.67V58.69H446V174l53.09-54.86h37.51l-48.49,50,55.38,70.7H505.22l-37.51-49.52L446,212.82v27.06ZM97.75,200.06V158.73c-8.43-12.25-20.17-16.85-32.67-16.85-20.67,0-35.73,17.61-35.73,37.51,0,20.17,15.06,37.77,35.73,37.77C77.58,217.16,89.32,212.57,97.75,200.06Zm698.6,0V159c-8.42-12.5-20.16-17.1-32.66-17.1C743,141.88,728,159.49,728,179.65c0,19.91,15.06,37.51,35.73,37.51C776.19,217.16,787.93,212.57,796.35,200.06ZM654.23,179.65c0-20.16-14.8-37.77-35.73-37.77-12.5,0-24,4.6-32.41,16.85v41.59c8.42,12.25,19.91,16.84,32.41,16.84,20.93,0,35.73-17.6,35.73-37.51ZM177.6,169.18h64.05c-2-17.86-12.76-28.83-29.86-28.83C192.14,140.35,180.91,152.6,177.6,169.18Z">
+                    </path>
+                    <rect class="bar" x="97.74" width="348.27" height="29.34" style="fill:#4760FF"></rect></svg> 
+            </a>
+        -->
+            <a class="site-header__logo">
+                <object data="./images/AIPLUS.svg" type="image/svg+xml" style="fill:#110734;fill-rule:evenodd" viewBox="0 0 1077.27 300.35"></object>
+                <rect class="bar" x="97.74" width="348.27" height="29.34" style="fill:#4760FF"></rect>
+                </svg>
+            </a>
+
+            <div class="site-header__nav">
+                <nav class="nav-primary js-mobile-nav">
+
+                    <div class="nav-primary__mobile-nav-extras">
+                        <div class="nav-primary__mobile-nav-extras-link">
+                            <a class="js-mobile-nav-toggle">下一页</a>
+                        </div>
+                </nav>
+                </div>
+                <div class="nav-contact__links">
+                    <ul class="nav-primary__links --minor">
+                        <li class="nav-primary__link">
+                            <!-- <a href="#" data-modal-target="home-popup" class="btn --sign-up">我已了解</a> -->
+                            <button class="btn --sign-up" id="return" type="button" onClick="alert('您确定已经仔细了解本页面提供的算法信息？');">下一页</button>
+                        </li>
+                </div>
+            </div>
+        </div>
+
+        <section class="section home-hero-new --padded u-bg-light-grey">
+            <div class="section --padded-less">
+                <div class=" l-container ">
+                    <div class="l-how-it-works --image-right">
+                        <div class="l-how-it-works__image  --with-padding ">
+                            <img class=" ls-is-cached lazyloaded" src="images/Algorithm_user_doing.png" style="max-width: 700px">
+                        </div>
+                        <div class="l-how-it-works__content">
+                            <!-- <h3 class="l-how-it-works__subtitle eyebrow-xs">Deskpass Teams</h3> -->
+                            <h4 class="l-how-it-works__title heading-m">蛋糕销售智能预测算法</h4>
+                            </br>
+                            </br>
+                            </br>
+                            </br>
+                            </br>
+                            <h5 style="color:black; font-family:KaiTi; font-size: 26px; line-height: 2em;">
+                                由
+                                <font color="red">多名烘焙店店主</font> <span style="text-decoration:underline">制定算法目标</span>，</br>
+                                <font color="red">并与算法工程师一起</font><span style="text-decoration:underline">设计算法细节、实现算法功能、完善算法优化</span>的预测算法！</h5>
+                            </br>
+                            </br>
+                            </br>
+                            </br>
+                            <p class="l-how-it-works__descr --not-bold body-xs" style="color:black; font-family:Microsoft YaHei">为您持续提供准确的蛋糕销量预测服务！</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

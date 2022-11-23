@@ -1,0 +1,134 @@
+.jspsych-content {
+    width: 65%;
+    height: 60%;
+    padding: 5%;
+    display: flex;
+    background-color: #ddd;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+
+.context {
+    text-align: left;
+    margin: 0;
+    margin-bottom: 20px;
+    font-family: SimSun;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+button#jspsych-fullscreen-btn {
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: inherit;
+    padding: 12px 15px;
+    width: fit-content;
+}
+
+.jspsych-survey-text-preamble {
+    text-align: left;
+    font-size: 22px;
+    font-family: "微软雅黑";
+    height: 80px;
+}
+
+.jspsych-survey-text {
+    text-align: left;
+    font-family: STKaiti;
+    font-size: 22px;
+}
+
+.jspsych-survey-text-question {
+    margin: 0;
+    text-align: left;
+}
+
+input[type='text'] {
+    width: 300px;
+    height: 30px;
+    font-size: 22px !important;
+    margin: 0em, auto;
+}
+
+input#jspsych-survey-text-next {
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: inherit;
+    padding: 12px 15px;
+    width: fit-content;
+}
+
+.jspsych-survey-likert-opt-label {
+    line-height: 2em !important;
+}
+
+.jspsych-survey-likert-statement {
+    display: block;
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-family: SimSun;
+    font-weight: bold;
+}
+
+input#jspsych-survey-likert-next {
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: inherit;
+    padding: 6px 15px;
+    width: fit-content;
+}
+
+#jspsych-survey-html-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#jspsych-survey-html-form p {
+    text-align: left;
+}
+
+#jspsych-survey-html-form input[type='submit'] {
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: inherit;
+    padding: 12px 15px;
+    width: fit-content;
+}
+
+canvas {
+    width: 65%;
+}
+
+.sv_main {
+    font-family: KaiTi_GB2312;
+    font-size: 20px;
+    text-align: left;
+    line-height: 1.2em;
+    font-weight: 600;
+}
+
+.sv_main .sv_container .sv_body .sv_p_root .sv_q_title {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin: 0.5em 0;
+    font-family: SimSun;
+    /* font-weight: 100; */
+}
+
+.sv-string-viewer {
+    font-size: 18px;
+    font-family: SimSun;
+}
+
+div#jspsych-html-keyboard-response-stimulus {
+    font-size: 20px;
+    color: gray;
+}
+
+.jspsych-content-wrapper {
+    /* background-image: url(./images/happy_face_1.jpg); */
+    /* background-image: url(./images/happy_face_1.jpg); */
+}
