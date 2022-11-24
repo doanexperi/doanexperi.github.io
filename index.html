@@ -151,20 +151,6 @@
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     var conditional_web = Math.floor(Math.random() * 4)
 
 
@@ -240,7 +226,7 @@
             type: jsPsychFullscreen,
             fullscreen_mode: true,
             message: `
-                    <p style="font: bold 28pt 微软雅黑; color: #B22222"> 判断与预测实验 </p></br>
+                    <p style="font: bold 37px 微软雅黑; color: #B22222"> 判断与预测实验 </p></br>
 
                     <div style="max-width: 75%; margin:0 atuo; ">
   
@@ -283,13 +269,13 @@
             fullscreen_mode: true,
             message: `
             
-                    <p style="font: 18pt 微软雅黑; text-align: left; line-height: 1.5em">【酬金规则介绍】</p></br>
+                    <p style="font: 24px 微软雅黑; text-align: left; line-height: 1.5em">【酬金规则介绍】</p></br>
                     <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em; font-size:1.3rem'>
                     本次实验酬金包括<font color="red">基本酬金和浮动酬金</font>：</br>
                     <p> 1. 基本酬金：完整参与实验，获得<font color="red">15</font>元。</p>
                     <p> 2. 浮动酬金：总的浮动酬金共由两个正式实验环节对应的浮动酬金组成: </p>
-                    <p style='text-indent:5rem'> (1)正式实验环节1：包含<font color="red">5次预测</font>，浮动酬金1= 5个单此预测收益的<font color="red">总和</font>。</p>
-                    <p style='text-indent:5rem'> (2)正式实验环节2：包含<font color="red">7次预测</font>，浮动酬金2= <font color="red">随机选取</font>7次中的一个单次预测收益。</p>
+                    <p style='text-indent:5rem'> (1)正式实验环节1：包含<font color="red">5次预测</font>，浮动酬金1 = 5个单次预测收益的<font color="red">总和</font>。<font color="red">(0-50元)</font></p>
+                    <p style='text-indent:5rem'> (2)正式实验环节2：包含<font color="red">7次预测</font>，浮动酬金2 = <font color="red">随机选取</font>7次中的一个单次预测收益。<font color="red">(0-10元)</font></p>
                     <p style='text-indent:5rem'> (3)单次预测收益计算规则：根据预测偏差计算预测收益。</p>
                     <div style='text-indent:6rem /* 50/16 */; line-height: 1.1em; font-size:1.1rem; font-family: "微软雅黑";font-weight:100; '>
                     <p>· <b> 单次预测偏差=|预测值-真实值|/真实值</b>
@@ -305,7 +291,7 @@
                     <p>· 偏差不超过<font color="red">36%</font>，单次预测收益<font color="red">1元</font>;
                     <p>· 偏差超过<font color="red">36%</font>，单次预测收益<font color="red">0元</font>.
                     </div>
-                    <p line-height: 0em> # 最终酬金=基本酬金+浮动酬金1+浮动酬金2, 最终酬金在<b><font color="red">30~60元</font></b>之间浮动。</p></div>`,
+                    <p line-height: 0em> # 最终酬金=基本酬金+浮动酬金1+浮动酬金2, 最终酬金在<b><font color="red">15~75元</font></b>之间浮动。</p></div>`,
             button_label: '已了解酬金规则',
             delay_after: 100
         }
@@ -322,7 +308,7 @@
             preamble: `
             <div style="max-width: 100%; margin:0 atuo; ">
 
-            <p style="font: 18pt 微软雅黑; text-align: center; line-height: 1.5em">【酬金计算】</p></br>
+            <p style="font: 24px 微软雅黑; text-align: center; line-height: 1.5em">【酬金计算】</p></br>
 
                     <div class='context' style='text-indent:6rem /* 50/16 */; line-height: 1.5em'>为了更清楚地了解酬金规则，请在3分钟之内计算以下浮动酬金：
                     <div style='text-indent:6rem /* 50/16 */; line-height: 1.1em; font-size:1.1rem; font-family: "微软雅黑";font-weight:100; '>
@@ -354,13 +340,13 @@
             fullscreen_mode: true,
             message: `
             <div style="max-width: 100%; margin:0 atuo; ">
-                    <p style="font: 18pt 微软雅黑; text-align: left; line-height: 1.2em">【预测要点】</p></br>
+                    <p style="font: 24px 微软雅黑; text-align: left; line-height: 1.2em">【预测要点】</p></br>
                     <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1em'>
                     你的主要任务是根据<font color="red">有限的7项信息预测相应的蛋糕销量</font>并提前制作。7项相关信息的介绍如下：</p>
                     <div style="text-indent:4.375rem /* 70/16 */; font:1.45rem /* 20/16 */ SimSun; line-height: 0.8em; text-align:left">
-                    <p>① <font color="red">日期</font>：例如5月27日。在3——5月随机抽取，日期并不会一直连续出现。</p>
+                    <p>① <font color="red">日期</font>：例如5月27日。在4——5月随机抽取，日期并不会一直连续出现。</p>
                     <p>② <font color="red">星期</font>：周一到周日，与日期匹配。</p>
-                    <p>③ <font color="red">两天前销量</font>：当前日期前两天的销量。例如当前是5月3日，则表示5月1日的销量。</p>
+                    <p>③ <font color="red">前一周平均每天客流量</font>：当前日期前一周每天的平均客流量。</p>
                     <p>④ <font color="red">制作传单数</font>：为当天准备和制作的烘焙店宣传单数量。</p>
                     <p>⑤ <font color="red">促销</font>：门店是否有促销活动。包括蛋糕的打折优惠活动。</p>
                     <p>⑥ <font color="red">气温</font>：摄氏度，根据天气预报得到。</p>
@@ -371,7 +357,7 @@
                     <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1em'>
                     根据过去年份的销量数据，有以下几点提示：</p>
                     <div style="text-indent:4.375rem /* 70/16 */; font:1.3rem /* 20/16 */ SimSun; line-height: 0.8em; text-align:left"> 
-                    <p>· 过去年份的3-5月，蛋糕销量整体呈现<font color="red">上升再下降</font>的趋势，每天销量不可避免地存在不同幅度的<font color="red">波动</font>。</p>
+                    <p>· 过去年份的4-5月，蛋糕销量整体呈现<font color="red">上升再下降</font>的趋势，每天销量不可避免地存在不同幅度的<font color="red">波动</font>。</p>
                     <p>· 通常，周末的客流量更多，但是宣传力度、促销活动和天气等因素会影响最终的销量。</p>
                     <p>· 不要过多考虑生活场景中特殊节日的影响，例如520、618等。</p>
                     <p>· 实验预测过程中的数据在数据集中随机抽取，你可以<font color="red">使用提供的纸和笔</font>帮助自己更好地进行决策。</p>
@@ -412,13 +398,13 @@
                 type: 'html',
                 prompt: function() {
                     var html = `
-                    <p style="font: 18pt 微软雅黑; text-align: center; line-height: 1.5em;color:Gray; ">蛋糕销量预测</p></br>
+                    <p style="font: 24px 微软雅黑; text-align: center; line-height: 1.5em;color:Gray; ">蛋糕销量预测</p></br>
                 <p class='context' style='line-height: 1.2em'>
                 请你根据以下信息预测蛋糕销量(提前制作蛋糕数量）：</p>
                 <div style="text-indent:4.375rem /* 70/16 */; font:1.3rem SimSun; line-height: 1em; text-align:left">
                 <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
                 <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
-                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')} 个</p>
+                <p>③ 前一周平均每天客流量：${jsPsych.timelineVariable('Pre_2_cakes')} 人</p>
                 <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
                 <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
                 <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
@@ -544,28 +530,106 @@
         }
         //timeline.push(exp_pre_pract_end);
 
-    var exp_manipu_intro = {
+    var exp_manipu_intro_1 = {
             type: jsPsychFullscreen,
             fullscreen_mode: true,
             message: `
 
-            <div style="max-width: 80%; margin:0 atuo; ">    
-            <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.5em">【蛋糕销量预测算法介绍】</p></br>
-                    <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
-                    由于蛋糕预测对烘焙店盈利的至关重要，AIplus科技公司现提供了一个<font color='red'>针对蛋糕销量的AI预测算法</font>。有关信息如下：</br>
-                    <p> · 该AI预测算法是针对蛋糕销售的。</p>
-                    <p> · 该AI预测算法是基于过去的蛋糕销售数据得到的，使用的信息与你看到的7项信息相同。 </p>
-                    <p> · 该AI预测算法是有关人员设计得到的复杂模型。 </p>
-                    <p> · 该AI预测算法并不是百分百准确的，预测表现受到实际环境波动的影响。</p></br>
+        <div style="max-width: 100%; margin:0 atuo; ">    
+        <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.5em">【正式预测环节一】</p></br>
 
-                    <p style='text-align:center;font-family: "微软雅黑"; font-weight:300; font-size:1.3rem'> 了解关于蛋糕预测算法的更多信息，请点击按钮<b>访问AIplus的算法产品网页</b>。</p></div>
-                    
-                <p>`,
-            button_label: '查看算法介绍页面',
+        <div style="font:20pt SimSun; line-height: 1.3em; text-align:left; color:black">
+                <p> * 预测环节一包含 <font color='red'>5次</font> 蛋糕销量预测。</p>
+                <p> * <font color='red'>预测准确率</font>决定了本环节的浮动报酬 <font color='red'>(0-50元)</font>。</p>
+               </div>
+
+
+               </br>
+                
+            <p>`,
+            button_label: '继续',
             delay_after: 100
         }
-        //timeline.push(exp_manipu_intro);
+        //timeline.push(exp_manipu_intro_1);
 
+    var exp_manipu_intro_2 = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+
+        <div style="max-width: 100%; margin:0 atuo; ">    
+        <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.5em">【正式预测环节一】</p></br></br>
+
+        <p style="font:20pt SimSun; line-height: 1.2em; text-align:left; color:black">
+                在本预测环节，有一个<font color='red'>蛋糕销量预测算法</font>可供使用。</br>
+                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>· 该算法是针对蛋糕销售的。</p>
+                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'> · 该算法是基于过去的蛋糕销售数据得到的，使用的信息与你看到的7项信息相同。 </p>
+                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'> · 该算法是有关人员设计得到的复杂模型。 </p>
+                </br>
+              </div>                   
+            <p>`,
+            button_label: '继续',
+            delay_after: 100
+        }
+        //timeline.push(exp_manipu_intro_2)
+
+    var exp_manipu_intro_3 = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+
+        <div style="max-width: 100%; margin:0 atuo; ">    
+        <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.5em">【正式预测环节一】</p></br>
+
+        <div style="font:1.3rem SimSun; line-height: 1.2em; text-align:left; color:black">
+        * <b>在预测环节一，预测方式和收益有两种选择,你<font color="red">必须选择其中的一种</font>进行预测：</b></br>
+        <p> ①<b> 自己完成5次预测</b>，将<font color="red">自己5次收益的总和</font>作为浮动报酬1，报酬为10-50元。</p>
+        <p> ② <b>算法完成5次预测</b>，将<font color="red">算法5次收益的总和</font>作为浮动报酬1，报酬为10-50元。</p></div> </br>
+
+        <div class='context' style='line-height: 1.5em; font-height:100'>预测准确性决定了你在本阶段的实验报酬。
+        <div style='text-indent:6rem /* 50/16 */; line-height: 1.1em; font-size:1.1rem; font-family: "微软雅黑";font-weight:100; '>
+                <p>· <b> 单次预测偏差=|预测值-真实值|/真实值</b>
+                <p>· 偏差为<font color="red">0</font>，单次预测收益<font color="red">10元</font>；
+                <p>· 偏差不超过<font color="red">4%</font>，单次预测收益<font color="red">9元</font>；
+                <p>· 偏差不超过<font color="red">8%</font>，单次预测收益<font color="red">8元</font>；
+                <p>· 偏差不超过<font color="red">12%</font>，单次预测收益<font color="red">7元</font>；
+                <p>· 偏差不超过<font color="red">16%</font>，单次预测收益<font color="red">6元</font>；
+                <p>· 偏差不超过<font color="red">20%</font>，单次预测收益<font color="red">5元</font>；
+                <p>· 偏差不超过<font color="red">24%</font>，单次预测收益<font color="red">4元</font>；
+                <p>· 偏差不超过<font color="red">28%</font>，单次预测收益<font color="red">3元</font>；
+                <p>· 偏差不超过<font color="red">32%</font>，单次预测收益<font color="red">2元</font>；
+                <p>· 偏差不超过<font color="red">36%</font>，单次预测收益<font color="red">1元</font>;
+                <p>· 偏差超过<font color="red">36%</font>，单次预测收益<font color="red">0元</font>.
+                </div>
+
+        <p>为了帮助你更好地决定由自己还是算法进行预测，请仔细了解算法信息。</p> </div>                  
+        <p>`,
+            button_label: '继续了解算法信息',
+            delay_after: 100
+        }
+        //timeline.push(exp_manipu_intro_3)
+
+    var exp_manipu_intro_4 = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+
+        <div style="max-width: 100%; margin:0 atuo; ">    
+        <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.5em">【蛋糕销量预测算法】</p></br></br>
+
+        <div style="font:1.4rem SimSun; line-height: 1.3em; text-align:left; color:black">
+                <b> * 请注意关于这个算法的表现信息：</br>
+                <p style='text-indent:3rem /* 50/16 */;'> · 这个算法<font color="red">不是百分百预测准确</font>的。</p>
+                <p style='text-indent:3rem /* 50/16 */;'> · 对于你即将要预测的小样本销量预测信息，这个<font color="red">算法可能比你表现的好，也可能比你表现的差</font>。</p>      
+                </br>
+
+                <p> 为了帮助你更好地决定是否使用算法，我们现获取了该算法公司关于蛋糕销量预测算法的介绍页面。</br>
+                <p> 该页面可能包含<span style="text-decoration:underline">算法内容、目标、设计、实现和优化等开发环节</span>的信息介绍。请仔细阅读！</p></b> </div> </br></br>                  
+            <p>`,
+            button_label: '访问算法介绍页面',
+            delay_after: 100
+        }
+        //timeline.push(exp_manipu_intro_4)
 
     //不会显示出来
     var exp_manipu_intro_copy = {
@@ -819,7 +883,7 @@
                 <div style="text-indent:4.375rem /* 70/16 */; font:1.4rem SimSun; line-height: 1em; text-align:left">
                     <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
                 <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
-                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')} 个</p>
+                <p>③ 前一周平均每天客流量：${jsPsych.timelineVariable('Pre_2_cakes')} 人</p>
                 <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
                 <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
                 <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
@@ -890,7 +954,7 @@
                 <div style="text-indent:4.375rem /* 70/16 */; font:1.4rem SimSun; line-height: 1em; text-align:left">
                     <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
                 <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
-                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')} 个</p>
+                <p>③ 前一周平均每天客流量：${jsPsych.timelineVariable('Pre_2_cakes')} 人</p>
                 <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
                 <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
                 <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
@@ -1609,7 +1673,6 @@
                             <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【正式预测阶段一结束】</p></br>
                             <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
                             <p>请点击按钮进入<b>正式预测环节二</b>。</p></br>
-
                             </div>
                 <p>`,
         button_label: '进入正式预测环节二',
@@ -1620,11 +1683,11 @@
         type: jsPsychFullscreen,
         fullscreen_mode: true,
         message: `
-                    <p style="font: 18pt 微软雅黑; text-align: left; line-height: 1.5em">【实验环节二】</p></br>
+                    <p style="font: 24px 微软雅黑; text-align: left; line-height: 1.5em">【实验环节二】</p></br>
                     <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
                     <p> · 本实验环节你需要做出<font color='red'><b>7</b></font>次柠檬水销量预测。</p>
                     <p> · 在<font color='red'>每次预测前</font>，你有机会选择<font color='red'>是否选择算法</font>进行预测。</p>
-                    <p> · 实验环节二的浮动酬金规则是：<font color='red'><b>随机抽取一次</b></font>预测收益作为浮动酬金2。</p></div>
+                    <p> · 实验环节二的浮动酬金规则是：<font color='red'><b>随机抽取一次</b></font>预测收益作为浮动酬金2，最终收益在<font color='red'>0-10元</font>。</p></div>
                     <p style='color:red; font-size:1.2rem'>你的决策会影响本阶段的浮动收益，因此请认真阅读信息。</p></br>
                   
                     <p>`,
@@ -1686,7 +1749,7 @@
                 <div style="text-indent:4.375rem /* 70/16 */; font:1.4rem SimSun; line-height: 1em; text-align:left">
                     <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
                 <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
-                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')} 个</p>
+                <p>③ 前一周平均每天客流量：${jsPsych.timelineVariable('Pre_2_cakes')} 人</p>
                 <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
                 <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
                 <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
@@ -1842,7 +1905,7 @@
                 <div style="text-indent:4.375rem /* 70/16 */; font:1.4rem SimSun; line-height: 1em; text-align:left">
                     <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
                 <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
-                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')} 个</p>
+                <p>③ 前一周平均每天客流量：${jsPsych.timelineVariable('Pre_2_cakes')} 人</p>
                 <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
                 <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
                 <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
@@ -2068,10 +2131,10 @@
                     <p style="font: 20pt 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你已购买<b> ${algo_info}</b> 为你做接下来1次的销量预测】</p></br>
                 <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
                     算法使用的预测信息：</p>
-                <div style="text-indent:4.375rem /* 70/16 */; font:18pt SimSun; line-height: 1em; text-align:left">
+                <div style="text-indent:4.375rem /* 70/16 */; font:24px SimSun; line-height: 1em; text-align:left">
                     <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
                 <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
-                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')} 个</p>
+                <p>③ 前一周平均每天客流量：${jsPsych.timelineVariable('Pre_2_cakes')} 人</p>
                 <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
                 <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
                 <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
@@ -2222,10 +2285,10 @@
                     <p style="font: 20pt 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你未购买<b> ${algo_info}</b> 为你做接下来1次的销量预测】</p></br>
                 <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
                     接下来你需要<font color='red'>自己预测蛋糕销量</font>：</p>
-                <div style="text-indent:4.375rem /* 70/16 */; font:18pt SimSun; line-height: 1em; text-align:left">
+                <div style="text-indent:4.375rem /* 70/16 */; font:24px SimSun; line-height: 1em; text-align:left">
                     <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
                 <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
-                <p>③ 两天前销量：${jsPsych.timelineVariable('Pre_2_cakes')} 个</p>
+                <p>③ 前一周平均每天客流量：${jsPsych.timelineVariable('Pre_2_cakes')} 人</p>
                 <p>④ 制作传单数：${jsPsych.timelineVariable('Flyers')} 张</p>
                 <p>⑤ 促销：${jsPsych.timelineVariable('Promotion')} </p>
                 <p>⑥ 气温：${jsPsych.timelineVariable('Temperature')} °C</p>
@@ -2504,7 +2567,7 @@
                     type: 'ranking',
                     prompt: '· 你认为柠蛋糕预测任务中6个预测信息的重要性排序是怎样的？(上下拖动选项进行排序）',
                     name: 'Self_reasoning',
-                    options: ['日期', '星期几', '温度', '降水量', '宣传单数量', '是否促销', '两天前销量'],
+                    options: ['日期', '星期几', '温度', '降水量', '宣传单数量', '是否促销', '前一周平均每天客流量'],
                     required: true,
                 }, {
                     type: 'likert',
@@ -2721,9 +2784,9 @@
     var basic_info = {
             type: jsPsychSurveyHtmlForm,
             preamble: `
-                    <p style="font: 18pt 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">请如实填写以下信息。</p>
+                    <p style="font: 24px 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">请如实填写以下信息。</p>
             `,
-            html: '<div style="font: 14pt SimSun; text-align: left; line-height: 1.5em; font-weight:bold"> <p> 1. 你的性别：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 2. 你的年龄：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 3. 你所学的专业：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br></div>',
+            html: '<div style="font: 19px SimSun; text-align: left; line-height: 1.5em; font-weight:bold"> <p> 1. 你的性别：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 2. 你的年龄：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 3. 你所学的专业：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br></div>',
             autofocus: 'test-resp-box',
             button_label: '下一页',
             name: 'basic_info',
@@ -2961,7 +3024,7 @@
     }
 
     var manip_Team = {
-        timeline: [exp_manipu_intro, exp_manipu_intro_copy, exp_algorithm_web_0_show, exp_algorithm_web_1_show, exp_algorithm_web_2_show, exp_algorithm_web_3_show, exp_algo_delegation_1, if_shown_algo_delegation_yes_1_intro, if_shown_algo_delegation_no_1_intro, exp_delegation_part1_1]
+        timeline: [exp_manipu_intro_1, exp_manipu_intro_2, exp_manipu_intro_3, exp_manipu_intro_4, exp_manipu_intro_copy, exp_algorithm_web_0_show, exp_algorithm_web_1_show, exp_algorithm_web_2_show, exp_algorithm_web_3_show, exp_algo_delegation_1, if_shown_algo_delegation_yes_1_intro, if_shown_algo_delegation_no_1_intro, exp_delegation_part1_1]
     }
 
     var factors_survey_1 = {
