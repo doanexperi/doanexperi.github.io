@@ -268,10 +268,10 @@
             <div style="max-width: 75%; margin:0 atuo; ">
                     <p style="font: bold 22pt 微软雅黑; text-align: left; line-height: 1.8em"> 【实验背景介绍】</p></br></br>
                     <p class='context'>在本实验中，你需要预测<font color="red">蛋糕销量</font>。具体信息如下：</p></br>
-                    <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.8em;'>· 你的角色是<font color="red">烘焙店店长</font>，主要任务是根据提供的信息<font color="red">预测蛋糕销量</font>，以便提前制作好蛋糕。</p>
+                    <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.8em;'>· 你需要为一家烘焙店预测对应日期的蛋糕销量，可以将自己想象成<font color="red">烘焙店店长</font>，主要任务是根据提供的信息<font color="red">预测蛋糕销量</font>，以便提前制作好蛋糕。</p>
                     <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.8em;'>· <font color="red">蛋糕的精准预测对烘焙店盈利十分重要</font>：预测偏少，失去消费者市场；预测太多，制作的蛋糕由于新鲜度的要求会贬值甚至无法售卖。</p></br>
                     
-                    <p class='context' style='line-height: 1.8em; text-indent:3.125rem'>作为店长，你需要根据有限的信息尽可能准确地预测蛋糕制作数量。<font color="red">你有机会通过更精确的预测获得更多的实验报酬</font>，因此请仔细阅读所有的相关信息。</p>
+                    <p class='context' style='line-height: 1.8em; text-indent:3.125rem'>你需要根据有限的信息尽可能准确地预测蛋糕制作数量。<font color="red">你有机会通过更精确的预测获得更多的实验报酬</font>，因此请仔细阅读所有的相关信息。</p>
                     </br><p>`,
             button_label: '继续',
             delay_after: 100
@@ -356,7 +356,7 @@
             <div style="max-width: 100%; margin:0 atuo; ">
                     <p style="font: 18pt 微软雅黑; text-align: left; line-height: 1.2em">【预测要点】</p></br>
                     <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1em'>
-                    你的主要任务是根据<font color="red">有限的6项信息预测相应的蛋糕销量</font>并提前制作。7项相关信息的介绍如下：</p>
+                    你的主要任务是根据<font color="red">有限的7项信息预测相应的蛋糕销量</font>并提前制作。7项相关信息的介绍如下：</p>
                     <div style="text-indent:4.375rem /* 70/16 */; font:1.45rem /* 20/16 */ SimSun; line-height: 0.8em; text-align:left">
                     <p>① <font color="red">日期</font>：例如5月27日。在3——5月随机抽取，日期并不会一直连续出现。</p>
                     <p>② <font color="red">星期</font>：周一到周日，与日期匹配。</p>
@@ -369,14 +369,15 @@
                     </br>
                    
                     <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1em'>
-                    请注意以下提示：</p>
-                    <div style="text-indent:4.375rem /* 70/16 */; font:1.3rem /* 20/16 */ SimSun; line-height: 0.8em; text-align:left">
-                    <p>· 实验数据根据kaggle竞赛数据集进行了合理的修改，不存在根据你的回答修改答案的情况。</p>
+                    根据过去年份的销量数据，有以下几点提示：</p>
+                    <div style="text-indent:4.375rem /* 70/16 */; font:1.3rem /* 20/16 */ SimSun; line-height: 0.8em; text-align:left"> 
+                    <p>· 过去年份的3-5月，蛋糕销量整体呈现<font color="red">上升再下降</font>的趋势，每天销量不可避免地存在不同幅度的<font color="red">波动</font>。</p>
+                    <p>· 通常，周末的客流量更多，但是宣传力度、促销活动和天气等因素会影响最终的销量。</p>
                     <p>· 不要过多考虑生活场景中特殊节日的影响，例如520、618等。</p>
-                    <p>· 过去年份的3-5月，蛋糕销量整体呈现<font color="red">上升再下降</font>的趋势，每天销量不可避免地存在<font color="red">波动</font></p>
-                    <p>· 实验预测过程中的数据在数据集中随机抽取，你可以<font color="red">使用提供的纸和笔</font>辅助决策。</p></div>
+                    <p>· 实验预测过程中的数据在数据集中随机抽取，你可以<font color="red">使用提供的纸和笔</font>帮助自己更好地进行决策。</p>
+                    <p>· 实验数据根据kaggle竞赛数据集进行了合理的修改，不存在根据你的回答修改答案的情况。</p>                   
+                    </div>
                     </br>
-
                     <p></div>`,
             button_label: '继续',
             delay_after: 100
@@ -425,7 +426,7 @@
                 </div>
                 </br></br>
                 <p class='context' style=' line-height: 1em'>
-                请根据提供的5项信息，进行预测：</p>
+                请根据提供的7项信息，进行预测：</p>
                 `;
                     return html;
                 }
@@ -553,8 +554,9 @@
                     <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
                     由于蛋糕预测对烘焙店盈利的至关重要，AIplus科技公司现提供了一个<font color='red'>针对蛋糕销量的AI预测算法</font>。有关信息如下：</br>
                     <p> · 该AI预测算法是针对蛋糕销售的。</p>
-                    <p> · 该AI预测算法是基于过去的蛋糕销售数据得到的，使用的信息与你看到的6项信息相同。 </p>
-                    <p> · 该AI预测算法是有关人员设计得到的复杂模型。 </p></br>
+                    <p> · 该AI预测算法是基于过去的蛋糕销售数据得到的，使用的信息与你看到的7项信息相同。 </p>
+                    <p> · 该AI预测算法是有关人员设计得到的复杂模型。 </p>
+                    <p> · 该AI预测算法并不是百分百准确的，预测表现受到实际环境波动的影响。</p></br>
 
                     <p style='text-align:center;font-family: "微软雅黑"; font-weight:300; font-size:1.3rem'> 了解关于蛋糕预测算法的更多信息，请点击按钮<b>访问AIplus的算法产品网页</b>。</p></div>
                     
@@ -569,20 +571,8 @@
     var exp_manipu_intro_copy = {
         type: jsPsychFullscreen,
         fullscreen_mode: false,
-        message: `
-
-        <div style="max-width: 80%; margin:0 atuo; ">    
-            <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.5em">【蛋糕销量预测算法介绍】</p></br>
-                    <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
-                    由于蛋糕预测对烘焙店盈利的至关重要，AIplus科技公司现提供了一个<font color='red'>针对蛋糕销量的AI预测算法</font>。有关信息如下：</br>
-                    <p> · 该AI预测算法是针对蛋糕销售的。</p>
-                    <p> · 该AI预测算法是基于过去的蛋糕销售数据得到的，使用的信息与你看到的6项信息相同。 </p>
-                    <p> · 该AI预测算法是有关人员设计得到的复杂模型。 </p></br>
-
-                    <p style='text-align:center;font-family: "微软雅黑"; font-weight:300; font-size:1.3rem'> 了解关于蛋糕预测算法的更多信息，请点击按钮<b>访问AIplus的算法产品网页</b>。</p></div>
-                    
-                <p>`,
-        button_label: '查看算法介绍页面',
+        message: ``,
+        //button_label: '查看算法介绍页面',
         delay_after: 100
     }
 
@@ -638,7 +628,7 @@
         cont_btn: 'return',
         data: {
             task: 'AIAD_manip',
-            AIAD_info: '由多名烘焙店店主制定目标，算法工程师设计、实现和完善的AI算法'
+            AIAD_info: '由多名其他烘焙店的店主制定目标，算法工程师设计、实现和完善的AI算法'
         }
     }
     var exp_algorithm_web_2_show = {
@@ -660,7 +650,7 @@
         cont_btn: 'return',
         data: {
             task: 'AIAD_manip',
-            AIAD_info: '由多名烘焙店店主制定目标，并与算法工程师一起设计、实现和完善的AI算法'
+            AIAD_info: '由多名其他烘焙店的店主制定目标，并与算法工程师一起设计、实现和完善的AI算法'
         }
     }
     var exp_algorithm_web_3_show = {
@@ -1052,6 +1042,22 @@
                     name: 'Ability_3',
                     likert_scale_values: likert_scale,
                     required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为这个预测算法的目标和你预测蛋糕销量的目标一致吗？',
+                    likert_scale_min_label: '完全不一致',
+                    likert_scale_max_label: '完全一致',
+                    name: 'Goal_alignment_1',
+                    likert_scale_values: likert_scale,
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为这个预测算法能考虑到终端用户（烘焙店店主）的真正需求吗？',
+                    likert_scale_min_label: '完全不能',
+                    likert_scale_max_label: '完全能',
+                    name: 'Goal_alignment_2',
+                    likert_scale_values: likert_scale,
+                    required: true,
                 }, ],
                 [{
                     type: 'html',
@@ -1106,7 +1112,7 @@
                     likert_scale_min_label: '一点也没趣',
                     likert_scale_max_label: '非常有趣',
                     likert_scale_values: likert_scale,
-                    name: 'attention_check_2',
+                    name: 'attention_check_1',
                     required: true,
                 }, {
                     type: 'likert',
@@ -1123,6 +1129,22 @@
                     likert_scale_max_label: '十分肯定它会表现好',
                     likert_scale_values: likert_scale,
                     name: 'Effectiveness_3',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为这个算法在设计过程中是客观的、不存在主观臆断的吗？',
+                    likert_scale_min_label: '完全主观，全是主观臆断',
+                    likert_scale_max_label: '完全客观，不存在主观臆断',
+                    likert_scale_values: likert_scale,
+                    name: 'objective_1',
+                    required: true,
+                }, {
+                    type: 'likert',
+                    prompt: '· 你认为这个算法的结果是中立且无偏的吗？',
+                    likert_scale_min_label: '完全有偏',
+                    likert_scale_max_label: '完全无偏',
+                    likert_scale_values: likert_scale,
+                    name: 'objective_2',
                     required: true,
                 }, ],
 
@@ -1267,7 +1289,7 @@
                     prompt: '· 你会不会因为想尽快结束本次实验而选择使用算法？',
                     options: ["不会", "会"],
                     required: true,
-                    name: 'attention_check'
+                    name: 'attention_check_2'
                 }],
             ],
             button_label_back: '上一页',
@@ -1658,7 +1680,7 @@
                     }).values()[0]
                     var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
                     var html = `
-                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你已授权<b> ${algo_info}</b> 为你做接下来5次的销量预测】</p></br>
+                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你已授权<b> ${algo_info}</b> 为你做接下来1次的销量预测】</p></br>
                 <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
                     请依次查看算法预测详情：</p>
                 <div style="text-indent:4.375rem /* 70/16 */; font:1.4rem SimSun; line-height: 1em; text-align:left">
@@ -1814,7 +1836,7 @@
                     }).values()[0]
                     var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
                     var html = `
-                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你未授权<b> ${algo_info}</b> 为你做接下来5次的销量预测】</p></br>
+                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你未授权<b> ${algo_info}</b> 为你做接下来1次的销量预测】</p></br>
                 <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
                     请你根据以下信息进行预测: </p>
                 <div style="text-indent:4.375rem /* 70/16 */; font:1.4rem SimSun; line-height: 1em; text-align:left">
@@ -1832,7 +1854,7 @@
                 }
             }, {
                 type: 'html',
-                prompt: '请根据提供的5项信息，进行预测：'
+                prompt: '请根据提供的7项信息，进行预测：'
             }, {
                 type: 'text',
                 prompt: '· 你预计制作多少个蛋糕？',
@@ -2215,7 +2237,7 @@
                 }
             }, {
                 type: 'html',
-                prompt: '请根据提供的5项信息，进行预测：'
+                prompt: '请根据提供的7项信息，进行预测：'
             }, {
                 type: 'text',
                 prompt: '· 你预计制作多少个蛋糕？',
@@ -2486,7 +2508,7 @@
                     required: true,
                 }, {
                     type: 'likert',
-                    prompt: '· 你认为该AI预测算法中6个因素的重要性排序和你自己的排序一样吗？',
+                    prompt: '· 你认为该AI预测算法中7个因素的重要性排序和你自己的排序一样吗？',
                     likert_scale_min_label: '完全不一致',
                     likert_scale_max_label: '完全一致',
                     name: 'Reasoning_consistency',
@@ -2528,13 +2550,13 @@
                     type: 'multi-select',
                     prompt: '· 关于本实验中提到的算法，以下哪些说法是正确的？',
                     options: ["这个算法是基于AI实现的预测算法", "这个算法开发过程中全部是专业人士", "这个算法的预测正确率是100%", "这个算法到目前为止都是免费使用的"],
-                    name: 'attention_check_3',
+                    name: 'attention_check_4',
                     required: true,
                 }, {
                     type: 'multi-select',
                     prompt: '·  根据你看的算法信息，算法开发过程中涉及到哪些人？',
                     options: ["没有介绍包括哪些人", "AI算法工程师", "蛋糕消费者", "烘焙店店主", "AIplus公司销售人员"],
-                    name: 'attention_check_4',
+                    name: 'attention_check_5',
                     required: true,
                 }]
             ],
