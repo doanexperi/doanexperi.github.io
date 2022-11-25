@@ -226,7 +226,7 @@
             type: jsPsychFullscreen,
             fullscreen_mode: true,
             message: `
-                    <p style="font: bold 37px 微软雅黑; color: #B22222"> 判断与预测实验 </p></br>
+                    <p style="font: bold 2.3125rem 微软雅黑; color: #B22222"> 判断与预测实验 </p></br>
 
                     <div style="max-width: 75%; margin:0 atuo; ">
   
@@ -269,7 +269,7 @@
             fullscreen_mode: true,
             message: `
             
-                    <p style="font: 24px 微软雅黑; text-align: left; line-height: 1.5em">【酬金规则介绍】</p></br>
+                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em">【酬金规则介绍】</p></br>
                     <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em; font-size:1.3rem'>
                     本次实验酬金包括<font color="red">基本酬金和浮动酬金</font>：</br>
                     <p> 1. 基本酬金：完整参与实验，获得<font color="red">15</font>元。</p>
@@ -308,7 +308,7 @@
             preamble: `
             <div style="max-width: 100%; margin:0 atuo; ">
 
-            <p style="font: 24px 微软雅黑; text-align: center; line-height: 1.5em">【酬金计算】</p></br>
+            <p style="font: 1.5rem 微软雅黑; text-align: center; line-height: 1.5em">【酬金计算】</p></br>
 
                     <div class='context' style='text-indent:6rem /* 50/16 */; line-height: 1.5em'>为了更清楚地了解酬金规则，请在3分钟之内计算以下浮动酬金：
                     <div style='text-indent:6rem /* 50/16 */; line-height: 1.1em; font-size:1.1rem; font-family: "微软雅黑";font-weight:100; '>
@@ -340,7 +340,7 @@
             fullscreen_mode: true,
             message: `
             <div style="max-width: 100%; margin:0 atuo; ">
-                    <p style="font: 24px 微软雅黑; text-align: left; line-height: 1.2em">【预测要点】</p></br>
+                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.2em">【预测要点】</p></br>
                     <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1em'>
                     你的主要任务是根据<font color="red">有限的7项信息预测相应的蛋糕销量</font>并提前制作。7项相关信息的介绍如下：</p>
                     <div style="text-indent:4.375rem /* 70/16 */; font:1.45rem /* 20/16 */ SimSun; line-height: 0.8em; text-align:left">
@@ -398,7 +398,7 @@
                 type: 'html',
                 prompt: function() {
                     var html = `
-                    <p style="font: 24px 微软雅黑; text-align: center; line-height: 1.5em;color:Gray; ">蛋糕销量预测</p></br>
+                    <p style="font: 1.5rem 微软雅黑; text-align: center; line-height: 1.5em;color:Gray; ">蛋糕销量预测</p></br>
                 <p class='context' style='line-height: 1.2em'>
                 请你根据以下信息预测蛋糕销量(提前制作蛋糕数量）：</p>
                 <div style="text-indent:4.375rem /* 70/16 */; font:1.3rem SimSun; line-height: 1em; text-align:left">
@@ -1683,7 +1683,7 @@
         type: jsPsychFullscreen,
         fullscreen_mode: true,
         message: `
-                    <p style="font: 24px 微软雅黑; text-align: left; line-height: 1.5em">【实验环节二】</p></br>
+                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em">【实验环节二】</p></br>
                     <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
                     <p> · 本实验环节你需要做出<font color='red'><b>7</b></font>次柠檬水销量预测。</p>
                     <p> · 在<font color='red'>每次预测前</font>，你有机会选择<font color='red'>是否选择算法</font>进行预测。</p>
@@ -2131,7 +2131,7 @@
                     <p style="font: 20pt 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你已购买<b> ${algo_info}</b> 为你做接下来1次的销量预测】</p></br>
                 <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
                     算法使用的预测信息：</p>
-                <div style="text-indent:4.375rem /* 70/16 */; font:24px SimSun; line-height: 1em; text-align:left">
+                <div style="text-indent:4.375rem /* 70/16 */; font:1.5rem SimSun; line-height: 1em; text-align:left">
                     <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
                 <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
                 <p>③ 前一周平均每天客流量：${jsPsych.timelineVariable('Pre_2_cakes')} 人</p>
@@ -2285,7 +2285,7 @@
                     <p style="font: 20pt 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">【你未购买<b> ${algo_info}</b> 为你做接下来1次的销量预测】</p></br>
                 <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.2em'>
                     接下来你需要<font color='red'>自己预测蛋糕销量</font>：</p>
-                <div style="text-indent:4.375rem /* 70/16 */; font:24px SimSun; line-height: 1em; text-align:left">
+                <div style="text-indent:4.375rem /* 70/16 */; font:1.5rem SimSun; line-height: 1em; text-align:left">
                     <p>① 日期：${jsPsych.timelineVariable('Date')}</font></p>
                 <p>② 星期：${jsPsych.timelineVariable('Day')}</p>
                 <p>③ 前一周平均每天客流量：${jsPsych.timelineVariable('Pre_2_cakes')} 人</p>
@@ -2784,9 +2784,9 @@
     var basic_info = {
             type: jsPsychSurveyHtmlForm,
             preamble: `
-                    <p style="font: 24px 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">请如实填写以下信息。</p>
+                    <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">请如实填写以下信息。</p>
             `,
-            html: '<div style="font: 19px SimSun; text-align: left; line-height: 1.5em; font-weight:bold"> <p> 1. 你的性别：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 2. 你的年龄：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 3. 你所学的专业：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br></div>',
+            html: '<div style="font: 1.1875rem SimSun; text-align: left; line-height: 1.5em; font-weight:bold"> <p> 1. 你的性别：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 2. 你的年龄：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 3. 你所学的专业：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br></div>',
             autofocus: 'test-resp-box',
             button_label: '下一页',
             name: 'basic_info',
