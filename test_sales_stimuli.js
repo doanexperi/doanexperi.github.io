@@ -252,3 +252,16 @@ var stimuli_samples = [
     { "Date": "5月29日", "Day": "星期一", "Promotion": "有促销活动", "Temperature": "19 ", "Rainfall": "0.65", "Flyers": "30", "Weather": "雨", "Ave_traffic": "76 ", "Sales": "23 ", "pre_1": "25 ", "pre_1_1": "22 ", "pre_2": "25 ", "pre_3": "31 " },
     { "Date": "5月30日", "Day": "星期二", "Promotion": "无促销活动", "Temperature": "24 ", "Rainfall": "0.67", "Flyers": "53", "Weather": "多云", "Ave_traffic": "66 ", "Sales": "33 ", "pre_1": "31 ", "pre_1_1": "31 ", "pre_2": "33 ", "pre_3": "38 " }
 ]
+
+function timer() {
+    var second = document.getElementById('timer')
+    var button = document.getElementsByClassName('jspsych-btn')[0]
+    if (second != null) {
+        if (second.innerHTML > 1) {
+            second.innerHTML = second.innerHTML - 1
+        } else {
+            button.innerHTML = '查看算法预测值'
+            button.disabled = false
+        }
+    }
+}

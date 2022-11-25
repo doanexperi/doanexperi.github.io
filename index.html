@@ -32,6 +32,21 @@
 
     var timeline = [];
 
+    const btn_html_timer =
+        `<style onload="tid=setInterval(timer, 1000)"></style>
+     <button onclick="clearInterval(tid)" class="jspsych-btn" disabled=true>%choice%</button>`
+
+
+    pause_time = [{
+        time_gap: 5
+    }, {
+        time_gap: 10
+    }, {
+        time_gap: 15
+    }, {
+        time_gap: 20
+    }]
+
 
 
     //实验数据处理
@@ -243,7 +258,8 @@
                     <p>
                     `,
             button_label: '开始实验',
-            delay_after: 100
+            delay_after: 100,
+            post_trial_gap: 1500
         }
         //timeline.push(exp_open_remarks);
 
@@ -1259,7 +1275,7 @@
                     prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 6/8 】</p>`,
                 }, {
                     type: 'likert',
-                    prompt: '· 在面对该算法的时候，你认为自己很强大吗？',
+                    prompt: '· 面对这个算法时，你认为自己的能力和地位足够强大吗？',
                     likert_scale_min_label: '完全不强大',
                     likert_scale_max_label: '非常强大',
                     likert_scale_values: likert_scale,
@@ -1275,7 +1291,7 @@
                     required: true,
                 }, {
                     type: 'likert',
-                    prompt: '· 你觉得你有能力改变该算法吗？',
+                    prompt: '· 你觉得你有能力改变这个算法吗？',
                     likert_scale_min_label: '完全没有能力',
                     likert_scale_max_label: '完全有能力',
                     likert_scale_values: likert_scale,
@@ -1283,7 +1299,7 @@
                     required: true,
                 }, {
                     type: 'likert',
-                    prompt: '· 你认为你可以影响该算法的设计和结果吗？',
+                    prompt: '· 你认为你可以影响这个算法的开发过程和它得到的结果吗？',
                     likert_scale_min_label: '完全不可以',
                     likert_scale_max_label: '完全可以',
                     likert_scale_values: likert_scale,
@@ -1690,11 +1706,14 @@
         fullscreen_mode: true,
         message: `
                     <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em">【实验环节二】</p></br>
+
+                    <div style="font:1.4rem SimSun; line-height: 1.3em; text-align:left; color:black"> 本实验环节请注意以下事项：
                     <div class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>
                     <p> · 本实验环节你需要做出<font color='red'><b>7</b></font>次蛋糕销量预测。</p>
                     <p> · 在<font color='red'>每次预测前</font>，你有机会选择<font color='red'>是否选择算法</font>进行预测。</p>
+                    <p> · 若选择使用算法，算法需要<font color='red'>10秒的预测时间</font>，请耐心等待。</p>
                     <p> · 实验环节二的浮动酬金：<font color='red'><b>随机抽取一次</b></font>预测收益作为浮动酬金2，最终收益在<font color='red'>0-10元</font>。</p></div>
-                    <p style='color:red; font-size:1.2rem'>你的决策会影响本阶段的浮动收益，因此请认真阅读信息。</p></br>
+                    <p style='color:red; font-size:1.2rem'>你的决策会影响本阶段的浮动收益，因此请认真阅读信息。</p></br></div>
                   
                     <p>`,
         button_label: '开始预测',
@@ -1737,6 +1756,22 @@
             button_label_finish: '继续'
         }
         //timeline.push(exp_algo_delegation_2)
+    var algo_gap_time_part2_1 = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: '<p>算法正在进行预测……</p></br><br><br>',
+        choices: ['剩余<span id="timer"> 10 </span>秒'],
+        button_html: btn_html_timer,
+    }
+
+    //var time_gap_part2_1 = {
+    //    timeline: [algo_gap_time_part2_1],
+    //    timeline_variables: pause_time,
+    //    sample: {
+    //        type: 'with-replacement',
+    //        size: 1
+    //    }
+    //}
+    //timeline.push(algo_gap_time_part2_1)
 
     var algo_delegation_yes_2 = {
         type: jsPsychSurvey,
@@ -1874,7 +1909,7 @@
     }
 
     var if_shown_algo_delegation_2 = {
-        timeline: [algo_delegation_yes_2, algo_delegation_yes_result_eval_2],
+        timeline: [algo_gap_time_part2_1, algo_delegation_yes_2, algo_delegation_yes_result_eval_2],
         conditional_function: function() {
             var delegated = jsPsych.data.get().filter({
                 task: 'delegate_decision_2'
@@ -2124,6 +2159,22 @@
             button_label_finish: '继续'
         }
         //timeline.push(exp_algo_delegation_2)
+    var algo_gap_time_part2_2 = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: '<p>算法正在进行预测……</p></br><br><br>',
+        choices: ['剩余<span id="timer"> 10 </span>秒'],
+        button_html: btn_html_timer,
+    }
+
+    //var time_gap_part2_2 = {
+    //    timeline: [algo_gap_time_part2_2],
+    //    timeline_variables: pause_time,
+    //    sample: {
+    //        type: 'with-replacement',
+    //        size: 1
+    //    }
+    //}
+    //timeline.push(time_gap_part2_2)
 
     var algo_delegation_yes_2_price = {
         type: jsPsychSurvey,
@@ -2258,7 +2309,7 @@
     }
 
     var if_shown_algo_delegation_2_price = {
-        timeline: [algo_delegation_yes_2_price, algo_delegation_yes_result_eval_2_price],
+        timeline: [algo_gap_time_part2_2, algo_delegation_yes_2_price, algo_delegation_yes_result_eval_2_price],
         conditional_function: function() {
             var delegated = jsPsych.data.get().filter({
                 task: 'delegate_decision_2_price'
