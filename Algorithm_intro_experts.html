@@ -4,6 +4,7 @@
 <head>
     <title>AIpuls科技公司-蛋糕销量预测算法</title>
     <link rel="stylesheet" href="./algortithm.css">
+    <script src="test_sales_stimuli.js"></script>
 </head>
 
 <body>
@@ -38,8 +39,10 @@
                 <div class="nav-contact__links">
                     <ul class="nav-primary__links --minor">
                         <li class="nav-primary__link">
+                            <style onload="tid=setInterval(timer2, 1000)"></style>
                             <!-- <a href="#" data-modal-target="home-popup" class="btn --sign-up">我已了解</a> -->
-                            <button class="btn --sign-up" id="return" type="button" onClick="alert('您确定已经仔细了解本页面提供的算法信息？');">下一页</button>
+                            <!-- <button class="btn --sign-up" id="return" type="button" onClick="alert('您确定已经仔细了解本页面提供的算法信息？');">剩余<span id="timer"> 10 </span>秒</button>-->
+                            <button class="btn --sign-up" id="return" type="button" onClick="clearInterval(tid)" disabled=true>仔细阅读页面内容 <span id="timer2"> 30 </span>秒</button>
                         </li>
                 </div>
             </div>

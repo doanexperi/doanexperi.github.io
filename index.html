@@ -259,7 +259,6 @@
                     `,
             button_label: '开始实验',
             delay_after: 100,
-            post_trial_gap: 1500
         }
         //timeline.push(exp_open_remarks);
 
@@ -503,13 +502,16 @@
             }
             var bias_percent = bias * 100
             var bias_percent = bias_percent.toFixed(2)
+                //修改了每次反馈的内容，不要直观地反馈收益
+                //<p>你本次的预测偏差为 <b> ${bias_percent}% </b> </p>
+                //<p>你本次的预测收益为 <b> ${daily_profit} </b>元</p>
             return `
                             <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【销量预测结果评估】</p></br>
                             <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
                             <p>实际销量为 ${ture_sale} 个</p>
                             <p>你的预测为 ${self_pre} 个</p>
                             <p>你本次的预测偏差为 <b> ${bias_percent}% </b> </p>
-                            <p>你本次的预测收益为 <b> ${daily_profit} </b>元</p></br>
+                            </br>
                             <p style='color:Gray;'>（按任意键继续）</p>
                             </div>`
         },
@@ -583,7 +585,7 @@
                 在本预测环节，有一个<font color='red'>蛋糕销量预测算法</font>可供使用。</br>
                 <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>· 该算法是针对蛋糕销售的。</p>
                 <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'> · 该算法是基于过去的蛋糕销售数据得到的，使用的信息与你看到的8项信息相同。 </p>
-                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'> · 该算法是有关人员设计得到的复杂模型。 </p>
+                
                 </br>
               </div>                   
             <p>`,
@@ -621,7 +623,8 @@
                 <p>· 偏差超过<font color="red">36%</font>，单次预测收益<font color="red">0元</font>.
                 </div>
 
-        <p>为了帮助你更好地决定由自己还是算法进行预测，请仔细了解算法信息。</p> </div>                  
+        <p><font color="red">选择自己预测还是授权给算法预测，直接影响了你的收益。</font></p> 
+        <p>为了帮助你决策，请仔细阅读接下来的算法信息。</p> </div>                  
         <p>`,
             button_label: '继续了解算法信息',
             delay_after: 100
@@ -637,13 +640,20 @@
         <p style="font: 20pt 微软雅黑; text-align: center; line-height: 1.5em">【蛋糕销量预测算法】</p></br></br>
 
         <div style="font:1.4rem SimSun; line-height: 1.3em; text-align:left; color:black">
-                <b> * 请注意关于这个算法的表现信息：</br>
+                <b> * 请注意关于这个算法表现的客观信息：</br>
+                <p style='text-indent:3rem /* 50/16 */;'> · 这个算法在预测时需要花费一段时间（在页面大概停留5-10秒）。</p>
                 <p style='text-indent:3rem /* 50/16 */;'> · 这个算法<font color="red">不是百分百预测准确</font>的。</p>
-                <p style='text-indent:3rem /* 50/16 */;'> · 对于你即将要预测的小样本销量预测信息，这个<font color="red">算法可能比你表现的好，也可能比你表现的差</font>。</p>      
+                <p style='text-indent:3rem /* 50/16 */;'> · 对于你即将要预测的小样本销量预测任务，这个<font color="red">算法可能比你表现的好，也可能比你表现的差</font>。</p>      
+                <p style='text-indent:3rem /* 50/16 */;'> · 总的来说，对于你即将要预测的小样本销量预测任务，<font color="red">无法保证是你自己预测收益高还是算法预测收益高</font>。</p>    
                 </br>
 
                 <p> 为了帮助你更好地决定是否使用算法，我们现获取了该算法公司关于蛋糕销量预测算法的介绍页面。</br>
-                <p> 该页面包含<span style="text-decoration:underline">算法内容、目标、设计、实现和优化等开发环节</span>的信息介绍。请仔细阅读！</p></b> </div> </br></br>                  
+
+                <p> 该页面包含<span style="text-decoration:underline">算法内容、目标、设计、实现和优化等开发环节</span>的信息介绍。</p></b>
+
+                <p> <font color="red"> 请仔细阅读算法介绍页面！（介绍页面会停留30秒，请耐心阅读并等待）</font></p>
+                
+                </div> </br></br>                  
             <p>`,
             button_label: '访问算法介绍页面',
             delay_after: 100
@@ -711,7 +721,7 @@
         cont_btn: 'return',
         data: {
             task: 'AIAD_manip',
-            AIAD_info: '由多名其他烘焙店的店主制定目标，算法工程师设计、实现和完善的AI算法'
+            AIAD_info: '由多名其他烘焙店的店主制定目标并参与优化，算法工程师设计、实现和完善的AI算法'
         }
     }
     var exp_algorithm_web_2_show = {
@@ -812,6 +822,7 @@
             <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:black; text-align:center">【你已授权<b> ${algo_info}</b> 为你做接下来5次的销量预测】</p></br>
             <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
             <p>接下来你将依次看到<font color='red'>5次算法预测结果</font>。</p></br>
+            <p><font color='Gray'>（每次算法预测需花费5-10秒，请耐心等待！）</font>。</p></br>
          
             </div>
             <p>`;
@@ -878,6 +889,13 @@
     };
     //timeline.push(if_shown_algo_delegation_no_1_intro)
 
+    var algo_gap_time_part1 = {
+        type: jsPsychHtmlButtonResponse,
+        stimulus: '<p>算法正在进行预测……</p></br><br><br>',
+        choices: ['剩余<span id="timer"> 5 </span>秒'],
+        button_html: btn_html_timer,
+    }
+
 
     var algo_delegate_yes_1 = {
         type: jsPsychSurvey,
@@ -937,7 +955,7 @@
     }
 
     var if_shown_algo_delegation_1 = {
-        timeline: [algo_delegate_yes_1],
+        timeline: [algo_gap_time_part1, algo_delegate_yes_1],
         conditional_function: function() {
             var delegated = jsPsych.data.get().filter({
                 task: 'delegate_decision_1'
@@ -1445,16 +1463,17 @@
                 profit_list.push(daily_profit)
             }
             //average = Math.floor(average * 100) / 100
+            //，此次收益为<b>${profit_list[0]}</b>元。(删掉了这次改版)
 
             return `
                             <p style="font: 1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【你已授权 ${algo_info} 为你做5次的销量预测】</p></br>
                             <p style="font: 1.375rem /* 22/16 */ 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">5次销量预测结果评估如下：</p></br>
                             <div style="font:1.25rem /* 20/16 */ SimSun; line-height: 1em; text-align:center; color:black">
-                            <p>第1次：预测日期为${date_list[0]}，实际销量是${sale_list[0]}个，算法的预测为${prediction_list[0]}个，预测偏差为<b>${bias_percent_list[0]}%</b>，此次收益为<b>${profit_list[0]}</b>元。</p>
-                            <p>第2次：预测日期为${date_list[1]}，实际销量是${sale_list[1]}个，算法的预测为${prediction_list[1]}个，预测偏差为<b>${bias_percent_list[1]}%</b>，此次收益为<b>${profit_list[1]}</b>元。</p>
-                            <p>第3次：预测日期为${date_list[2]}，实际销量是${sale_list[2]}个，算法的预测为${prediction_list[2]}个，预测偏差为<b>${bias_percent_list[2]}%</b>，此次收益为<b>${profit_list[2]}</b>元。</p>
-                            <p>第4次：预测日期为${date_list[3]}，实际销量是${sale_list[3]}个，算法的预测为${prediction_list[3]}个，预测偏差为<b>${bias_percent_list[3]}%</b>，此次收益为<b>${profit_list[3]}</b>元。</p>
-                            <p>第5次：预测日期为${date_list[4]}，实际销量是${sale_list[4]}个，算法的预测为${prediction_list[4]}个，预测偏差为<b>${bias_percent_list[4]}%</b>，此次收益为<b>${profit_list[4]}</b>元。</p>
+                            <p>第1次：预测日期为${date_list[0]}，实际销量是${sale_list[0]}个，算法的预测为${prediction_list[0]}个，预测偏差为<b>${bias_percent_list[0]}%</b>。</p>
+                            <p>第2次：预测日期为${date_list[1]}，实际销量是${sale_list[1]}个，算法的预测为${prediction_list[1]}个，预测偏差为<b>${bias_percent_list[1]}%</b>。</p>
+                            <p>第3次：预测日期为${date_list[2]}，实际销量是${sale_list[2]}个，算法的预测为${prediction_list[2]}个，预测偏差为<b>${bias_percent_list[2]}%</b>。</p>
+                            <p>第4次：预测日期为${date_list[3]}，实际销量是${sale_list[3]}个，算法的预测为${prediction_list[3]}个，预测偏差为<b>${bias_percent_list[3]}%</b>。</p>
+                            <p>第5次：预测日期为${date_list[4]}，实际销量是${sale_list[4]}个，算法的预测为${prediction_list[4]}个，预测偏差为<b>${bias_percent_list[4]}%</b>。</p>
                             </br></br>
                             <p style='color:Gray;'>（按任意键继续）</p>
                             </div>`
@@ -1598,16 +1617,17 @@
                 bias_percent_list.push(bias_percent)
                 profit_list.push(daily_profit)
             }
+            // 此次收益为<b>${profit_list[0]}</b>元。(删掉了这次改版)
 
             return `
                             <p style="font: 1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【你未授权 ${algo_info} 为你做5次的销量预测】</p></br>
                             <p style="font: 1.375rem /* 22/16 */ 微软雅黑; line-height: 1.2em;color:Gray; text-align:center">5次销量预测结果评估如下：</p></br>
                             <div style="font:1.25rem /* 20/16 */ SimSun; line-height: 1em; text-align:center; color:black">
-                            <p>第1次：预测日期为${date_list[0]}，实际销量是${sale_list[0]}个，算法的预测为${prediction_list[0]}个，预测偏差为<b>${bias_percent_list[0]}%</b>，此次收益为<b>${profit_list[0]}</b>元。</p>
-                            <p>第2次：预测日期为${date_list[1]}，实际销量是${sale_list[1]}个，算法的预测为${prediction_list[1]}个，预测偏差为<b>${bias_percent_list[1]}%</b>，此次收益为<b>${profit_list[1]}</b>元。</p>
-                            <p>第3次：预测日期为${date_list[2]}，实际销量是${sale_list[2]}个，算法的预测为${prediction_list[2]}个，预测偏差为<b>${bias_percent_list[2]}%</b>，此次收益为<b>${profit_list[2]}</b>元。</p>
-                            <p>第4次：预测日期为${date_list[3]}，实际销量是${sale_list[3]}个，算法的预测为${prediction_list[3]}个，预测偏差为<b>${bias_percent_list[3]}%</b>，此次收益为<b>${profit_list[3]}</b>元。</p>
-                            <p>第5次：预测日期为${date_list[4]}，实际销量是${sale_list[4]}个，算法的预测为${prediction_list[4]}个，预测偏差为<b>${bias_percent_list[4]}%</b>，此次收益为<b>${profit_list[4]}</b>元。</p>
+                            <p>第1次：预测日期为${date_list[0]}，实际销量是${sale_list[0]}个，算法的预测为${prediction_list[0]}个，预测偏差为<b>${bias_percent_list[0]}%</b>。</p>
+                            <p>第2次：预测日期为${date_list[1]}，实际销量是${sale_list[1]}个，算法的预测为${prediction_list[1]}个，预测偏差为<b>${bias_percent_list[1]}%</b>。</p>
+                            <p>第3次：预测日期为${date_list[2]}，实际销量是${sale_list[2]}个，算法的预测为${prediction_list[2]}个，预测偏差为<b>${bias_percent_list[2]}%</b>。</p>
+                            <p>第4次：预测日期为${date_list[3]}，实际销量是${sale_list[3]}个，算法的预测为${prediction_list[3]}个，预测偏差为<b>${bias_percent_list[3]}%</b>。</p>
+                            <p>第5次：预测日期为${date_list[4]}，实际销量是${sale_list[4]}个，算法的预测为${prediction_list[4]}个，预测偏差为<b>${bias_percent_list[4]}%</b>。</p>
                             </br></br>
                             <p style='color:Gray;'>（按任意键继续）</p>
                             </div>`
@@ -1865,6 +1885,8 @@
             }
             var bias_percent = bias * 100
             var bias_percent = bias_percent.toFixed(2)
+                //<p>算法的预测偏差为<b>${bias_percent}%</b></p>
+                //<p>算法本次的预测收益为<b>${daily_profit}</b>元</p>(修改删掉1128)
 
             return `
                             <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【销量预测结果评估】</p></br>
@@ -1872,7 +1894,7 @@
                             <p>实际销量为${ture_sale}个</p>
                             <p>算法的预测为${algo_pre}个</p>
                             <p>算法的预测偏差为<b>${bias_percent}%</b></p>
-                            <p>算法本次的预测收益为<b>${daily_profit}</b>元</p></br>
+                            </br>
                             <p style='color:Gray;'>（按任意键继续）</p>
                             </div>`
         },
@@ -2020,6 +2042,8 @@
             }
             var bias_percent = bias * 100
             var bias_percent = bias_percent.toFixed(2)
+                //<p>你的预测偏差为${bias_percent}%</p>
+                //                <p>你本次的预测收益为${daily_profit}元</p>
 
             return `
                             <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【销量预测结果评估】</p></br>
@@ -2027,7 +2051,7 @@
                             <p>实际销量为${ture_sale}个</p>
                             <p>你的预测为${self_pre}个</p>
                             <p>你的预测偏差为${bias_percent}%</p>
-                            <p>你本次的预测收益为${daily_profit}元</p></br>
+                           </br>
                             <p style='color:Gray;'>（按任意键继续）</p>
                             </div>`
         },
@@ -2265,6 +2289,8 @@
             }
             var bias_percent = bias * 100
             var bias_percent = bias_percent.toFixed(2)
+                //<p>算法的预测偏差为<b>${bias_percent}%</b></p>
+                //                <p>算法本次的预测收益为<b>${daily_profit}</b>元</p>
 
             return `
                             <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【销量预测结果评估】</p></br>
@@ -2272,7 +2298,7 @@
                             <p>实际销量为${ture_sale}个</p>
                             <p>算法的预测为${algo_pre}个</p>
                             <p>算法的预测偏差为<b>${bias_percent}%</b></p>
-                            <p>算法本次的预测收益为<b>${daily_profit}</b>元</p></br>
+                            </br>
                             <p style='color:Gray;'>（按任意键继续）</p>
                             </div>`
         },
@@ -2424,6 +2450,8 @@
             }
             var bias_percent = bias * 100
             var bias_percent = bias_percent.toFixed(2)
+                //<p>你的预测偏差为${bias_percent}%</p>
+                //                <p>你本次的预测收益为${daily_profit}元</p>
 
             return `
                             <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【销量预测结果评估】</p></br>
@@ -2431,7 +2459,7 @@
                             <p>实际销量为${ture_sale}个</p>
                             <p>你的预测为${self_pre}个</p>
                             <p>你的预测偏差为${bias_percent}%</p>
-                            <p>你本次的预测收益为${daily_profit}元</p></br>
+                            </br>
                             <p style='color:Gray;'>（按任意键继续）</p>
                             </div>`
         },
@@ -2591,7 +2619,6 @@
                     name: 'feeling_about_algo',
                     required: true
                 }],
-
                 [{
                     type: 'html',
                     prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 2/5 】</p>`,
@@ -2677,7 +2704,7 @@
                     required: true,
                 }, {
                     type: 'multi-select',
-                    prompt: '·  根据你看的算法信息，算法开发过程中涉及到哪些人？',
+                    prompt: '·  根据现在提供的算法信息，算法开发过程中涉及到哪些人？',
                     options: ["没有介绍包括哪些人", "AI算法工程师", "蛋糕消费者", "烘焙店店主", "AIplus公司销售人员"],
                     name: 'attention_check_5',
                     required: true,
@@ -3052,7 +3079,7 @@
                             <div style="font:20pt SimSun; line-height: 1.2em; text-align:center; color:black">
                             <p>1. 基本酬金：<b>15</b> 元</p>
                             <p>2. 实验阶段一：浮动酬金（5次总收益）为<b>${part1_profit}</b>元</p>
-                            <p>3. 实验阶段二：浮动酬金（7次随机抽取）为<b>${part2_profit}</b>元</p>
+                            <p>3. 实验阶段二：浮动酬金（7次随机抽取一次）为<b>${part2_profit}</b>元</p>
                             <p>4. 算法购买：购买算法<b>${purchase_time}</b>次，购买成本<b>${cost}</b>元</p>
                             <p> 你的总收益为<font color='red'><b>${select_all_profit}</b></font>元</p></br>
                             <p> 请不要继续操作，并及时联系实验人员~</p></br>

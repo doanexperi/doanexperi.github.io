@@ -265,3 +265,16 @@ function timer() {
         }
     }
 }
+
+function timer2() {
+    var second = document.getElementById('timer2')
+    var button = document.getElementsByClassName('btn --sign-up')[0]
+    if (second != null) {
+        if (second.innerHTML > 1) {
+            second.innerHTML = second.innerHTML - 1
+        } else {
+            button.innerHTML = '下一页'
+            button.disabled = false
+        }
+    }
+}
