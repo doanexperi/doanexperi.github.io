@@ -372,8 +372,8 @@
                     <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1em'>
                     根据过去年份的销量数据，有以下几点提示：</p>
                     <div style="text-indent:4.375rem /* 70/16 */; font:1.3rem /* 20/16 */ SimSun; line-height: 0.8em; text-align:left"> 
-                    <p>· 过去年份的4-5月，蛋糕销量整体呈现<font color="red">上升再下降</font>的趋势，每天销量不可避免地存在不同幅度的<font color="red">波动</font>。</p>
-                    <p>· 通常，周末的客流量更多，但是宣传力度、促销活动和天气等因素会影响最终的销量。</p>
+                    <p>· 过去年份的4-5月，蛋糕销量整体呈现<font color="red">下降</font>的趋势，每天销量不可避免地存在不同幅度的<font color="red">波动</font>。</p>
+                    <p>· 以上提供的8项信息的重要性不同，有的影响很大有的几乎没有影响。</p>
                     <p>· 不要过多考虑生活场景中特殊节日的影响，例如520、618等。</p>
                     <p>· 实验预测过程中的数据在数据集中随机抽取，你可以<font color="red">使用提供的纸和笔</font>帮助自己更好地进行决策。</p>
                     <p>· 实验数据来自kaggle竞赛数据集。</p>                   
@@ -902,7 +902,7 @@
         data: {
             task: 'exp_detail_info',
             turevalue: jsPsych.timelineVariable('Sales'),
-            predictvalue: jsPsych.timelineVariable('pre_1'),
+            predictvalue: jsPsych.timelineVariable('pre_3'),
             taskdate: jsPsych.timelineVariable('Date')
         },
         pages: [
@@ -937,7 +937,7 @@
                 prompt: function() {
                     var html = `
                     <p style="font:1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em; text-align:left; color:black">
-                    · 算法的预测结果为：<b>${jsPsych.timelineVariable('pre_1')}</b>个。</p>
+                    · 算法的预测结果为：<b>${jsPsych.timelineVariable('pre_3')}</b>个。</p>
                 `
                     return html
                 }
@@ -1827,7 +1827,7 @@
                     var html = `
                         
                     <p style="font:1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em; text-align:left; color:black">
-                    · 算法的预测结果为：<b>${jsPsych.timelineVariable('pre_1')}</b>个。</p>
+                    · 算法的预测结果为：<b>${jsPsych.timelineVariable('pre_3')}</b>个。</p>
                     
                     </br>
                 `
@@ -1853,12 +1853,12 @@
             taskname: 'result_eval',
             taskdate: jsPsych.timelineVariable('Date'),
             turevalue: jsPsych.timelineVariable('Sales'),
-            algovalue: jsPsych.timelineVariable('pre_1'),
+            algovalue: jsPsych.timelineVariable('pre_3'),
             //algovalue: jsPsych.timelineVariable('Flyers'),
         },
         stimulus: function() {
             var ture_sale = jsPsych.timelineVariable('Sales')
-            var algo_pre = jsPsych.timelineVariable('pre_1')
+            var algo_pre = jsPsych.timelineVariable('pre_3')
             var bias = (Math.abs(algo_pre - ture_sale)) / ture_sale
             if (bias == 0) {
                 var daily_profit = 10
@@ -1900,7 +1900,7 @@
         },
         on_finish: function(data) {
             var ture_sale = jsPsych.timelineVariable('Sales')
-            var algo_pre = jsPsych.timelineVariable('pre_1')
+            var algo_pre = jsPsych.timelineVariable('pre_3')
             var bias = (Math.abs(algo_pre - ture_sale)) / ture_sale
             if (bias == 0) {
                 var daily_profit = 10
@@ -2232,7 +2232,7 @@
                 prompt: function() {
                     var html = `
                     <p style="font:1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em; text-align:left; color:black">
-                    · 算法的预测结果为：<b>${jsPsych.timelineVariable('pre_1')}</b>个。</p>
+                    · 算法的预测结果为：<b>${jsPsych.timelineVariable('pre_3')}</b>个。</p>
                     
                     </br>
                 `
@@ -2257,12 +2257,12 @@
             taskname: 'result_eval_price',
             taskdate: jsPsych.timelineVariable('Date'),
             turevalue: jsPsych.timelineVariable('Sales'),
-            algovalue: jsPsych.timelineVariable('pre_1'),
+            algovalue: jsPsych.timelineVariable('pre_3'),
             //algovalue: jsPsych.timelineVariable('Flyers'),
         },
         stimulus: function() {
             var ture_sale = jsPsych.timelineVariable('Sales')
-            var algo_pre = jsPsych.timelineVariable('pre_1')
+            var algo_pre = jsPsych.timelineVariable('pre_3')
             var bias = (Math.abs(algo_pre - ture_sale)) / ture_sale
             if (bias == 0) {
                 var daily_profit = 10
@@ -2304,7 +2304,7 @@
         },
         on_finish: function(data) {
             var ture_sale = jsPsych.timelineVariable('Sales')
-            var algo_pre = jsPsych.timelineVariable('pre_1')
+            var algo_pre = jsPsych.timelineVariable('pre_3')
             var bias = (Math.abs(algo_pre - ture_sale)) / ture_sale
             if (bias == 0) {
                 var daily_profit = 10
