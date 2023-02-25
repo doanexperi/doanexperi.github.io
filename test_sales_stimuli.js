@@ -189,7 +189,7 @@ var stimuli_samples = [
     { "Date": "4月29日", "Day": "星期六", "Temperature": "18 ", "Rainfall": "0.71", "Flyers": "42", "Promotion": "无促销活动", "Sales": "17", "pre_1": "14 ", "pre_2": "14 ", "pre_3": "22 " },
     { "Date": "4月30日", "Day": "星期日", "Temperature": "20 ", "Rainfall": "0.74", "Flyers": "52", "Promotion": "有促销活动", "Sales": "44", "pre_1": "41 ", "pre_2": "40 ", "pre_3": "37 " }
 ]*/
-
+/*
 var stimuli_samples = [
     { "Date": "4月1日", "Day": "星期六", "Promotion": "无促销活动", "Temperature": "14 ", "Rainfall": "0.8", "Flyers": "25", "Weather": "雨", "Ave_traffic": "76 ", "Sales": "24 ", "pre_1": "23 ", "pre_1_1": "23 ", "pre_2": "27 ", "pre_3": "31 " },
     { "Date": "4月2日", "Day": "星期日", "Promotion": "无促销活动", "Temperature": "19 ", "Rainfall": "0.74", "Flyers": "47", "Weather": "阴", "Ave_traffic": "78 ", "Sales": "32 ", "pre_1": "36 ", "pre_1_1": "35 ", "pre_2": "39 ", "pre_3": "36 " },
@@ -252,6 +252,71 @@ var stimuli_samples = [
     { "Date": "5月29日", "Day": "星期一", "Promotion": "有促销活动", "Temperature": "19 ", "Rainfall": "0.65", "Flyers": "30", "Weather": "雨", "Ave_traffic": "76 ", "Sales": "23 ", "pre_1": "25 ", "pre_1_1": "22 ", "pre_2": "25 ", "pre_3": "27 " },
     { "Date": "5月30日", "Day": "星期二", "Promotion": "无促销活动", "Temperature": "24 ", "Rainfall": "0.67", "Flyers": "53", "Weather": "多云", "Ave_traffic": "66 ", "Sales": "33 ", "pre_1": "31 ", "pre_1_1": "31 ", "pre_2": "33 ", "pre_3": "38 " }
 ]
+*/
+
+var stimuli_samples = [
+    { "Date": "4月1日", "Day": "星期六", "Promotion": "无促销活动", "Temperature": "14 ", "Flyers": "25", "Weather": "-1", "Ave_traffic": "76 ", "Sales": "34 ", "pre_1": "31 ", "pre_2": "36 ", "pre_3": "39 " },
+    { "Date": "4月2日", "Day": "星期日", "Promotion": "无促销活动", "Temperature": "19 ", "Flyers": "47", "Weather": "0", "Ave_traffic": "78 ", "Sales": "38 ", "pre_1": "37 ", "pre_2": "38 ", "pre_3": "39 " },
+    { "Date": "4月3日", "Day": "星期一", "Promotion": "无促销活动", "Temperature": "16 ", "Flyers": "68", "Weather": "1", "Ave_traffic": "84 ", "Sales": "40 ", "pre_1": "37 ", "pre_2": "40 ", "pre_3": "38 " },
+    { "Date": "4月4日", "Day": "星期二", "Promotion": "有促销活动", "Temperature": "17 ", "Flyers": "35", "Weather": "1", "Ave_traffic": "88 ", "Sales": "53 ", "pre_1": "53 ", "pre_2": "52 ", "pre_3": "55 " },
+    { "Date": "4月5日", "Day": "星期三", "Promotion": "有促销活动", "Temperature": "18 ", "Flyers": "52", "Weather": "-1", "Ave_traffic": "91 ", "Sales": "48 ", "pre_1": "49 ", "pre_2": "48 ", "pre_3": "49 " },
+    { "Date": "4月6日", "Day": "星期四", "Promotion": "有促销活动", "Temperature": "14 ", "Flyers": "50", "Weather": "0", "Ave_traffic": "100 ", "Sales": "56 ", "pre_1": "59 ", "pre_2": "56 ", "pre_3": "56 " },
+    { "Date": "4月7日", "Day": "星期五", "Promotion": "无促销活动", "Temperature": "15 ", "Flyers": "44", "Weather": "2", "Ave_traffic": "93 ", "Sales": "41 ", "pre_1": "45 ", "pre_2": "42 ", "pre_3": "39 " },
+    { "Date": "4月8日", "Day": "星期六", "Promotion": "无促销活动", "Temperature": "18 ", "Flyers": "67", "Weather": "-1", "Ave_traffic": "89 ", "Sales": "41 ", "pre_1": "37 ", "pre_2": "35 ", "pre_3": "39 " },
+    { "Date": "4月9日", "Day": "星期日", "Promotion": "无促销活动", "Temperature": "17 ", "Flyers": "52", "Weather": "1", "Ave_traffic": "89 ", "Sales": "46 ", "pre_1": "44 ", "pre_2": "39 ", "pre_3": "40 " },
+    { "Date": "4月10日", "Day": "星期一", "Promotion": "无促销活动", "Temperature": "15 ", "Flyers": "13", "Weather": "0", "Ave_traffic": "97 ", "Sales": "28 ", "pre_1": "25 ", "pre_2": "35 ", "pre_3": "37 " },
+    { "Date": "4月11日", "Day": "星期二", "Promotion": "有促销活动", "Temperature": "16 ", "Flyers": "52", "Weather": "2", "Ave_traffic": "94 ", "Sales": "62 ", "pre_1": "61 ", "pre_2": "57 ", "pre_3": "56 " },
+    { "Date": "4月12日", "Day": "星期三", "Promotion": "有促销活动", "Temperature": "19 ", "Flyers": "54", "Weather": "2", "Ave_traffic": "91 ", "Sales": "59 ", "pre_1": "60 ", "pre_2": "57 ", "pre_3": "55 " },
+    { "Date": "4月13日", "Day": "星期四", "Promotion": "有促销活动", "Temperature": "16 ", "Flyers": "40", "Weather": "1", "Ave_traffic": "98 ", "Sales": "56 ", "pre_1": "59 ", "pre_2": "54 ", "pre_3": "55 " },
+    { "Date": "4月14日", "Day": "星期五", "Promotion": "无促销活动", "Temperature": "16 ", "Flyers": "69", "Weather": "-1", "Ave_traffic": "108 ", "Sales": "34 ", "pre_1": "39 ", "pre_2": "35 ", "pre_3": "36 " },
+    { "Date": "4月15日", "Day": "星期六", "Promotion": "有促销活动", "Temperature": "19 ", "Flyers": "51", "Weather": "1", "Ave_traffic": "105 ", "Sales": "66 ", "pre_1": "63 ", "pre_2": "59 ", "pre_3": "57 " },
+    { "Date": "4月16日", "Day": "星期日", "Promotion": "无促销活动", "Temperature": "18 ", "Flyers": "73", "Weather": "2", "Ave_traffic": "103 ", "Sales": "54 ", "pre_1": "52 ", "pre_2": "42 ", "pre_3": "41 " },
+    { "Date": "4月17日", "Day": "星期一", "Promotion": "无促销活动", "Temperature": "18 ", "Flyers": "36", "Weather": "-1", "Ave_traffic": "105 ", "Sales": "26 ", "pre_1": "24 ", "pre_2": "29 ", "pre_3": "35 " },
+    { "Date": "4月18日", "Day": "星期二", "Promotion": "有促销活动", "Temperature": "17 ", "Flyers": "45", "Weather": "-1", "Ave_traffic": "108 ", "Sales": "49 ", "pre_1": "49 ", "pre_2": "48 ", "pre_3": "50 " },
+    { "Date": "4月19日", "Day": "星期三", "Promotion": "无促销活动", "Temperature": "15 ", "Flyers": "70", "Weather": "-1", "Ave_traffic": "107 ", "Sales": "35 ", "pre_1": "37 ", "pre_2": "34 ", "pre_3": "36 " },
+    { "Date": "4月20日", "Day": "星期四", "Promotion": "有促销活动", "Temperature": "20 ", "Flyers": "60", "Weather": "2", "Ave_traffic": "99 ", "Sales": "60 ", "pre_1": "63 ", "pre_2": "55 ", "pre_3": "54 " },
+    { "Date": "4月21日", "Day": "星期五", "Promotion": "有促销活动", "Temperature": "20 ", "Flyers": "42", "Weather": "-1", "Ave_traffic": "92 ", "Sales": "44 ", "pre_1": "49 ", "pre_2": "48 ", "pre_3": "50 " },
+    { "Date": "4月22日", "Day": "星期六", "Promotion": "有促销活动", "Temperature": "14 ", "Flyers": "37", "Weather": "1", "Ave_traffic": "90 ", "Sales": "66 ", "pre_1": "63 ", "pre_2": "63 ", "pre_3": "61 " },
+    { "Date": "4月23日", "Day": "星期日", "Promotion": "有促销活动", "Temperature": "16 ", "Flyers": "55", "Weather": "1", "Ave_traffic": "83 ", "Sales": "67 ", "pre_1": "66 ", "pre_2": "63 ", "pre_3": "58 " },
+    { "Date": "4月24日", "Day": "星期一", "Promotion": "无促销活动", "Temperature": "18 ", "Flyers": "48", "Weather": "2", "Ave_traffic": "75 ", "Sales": "37 ", "pre_1": "34 ", "pre_2": "34 ", "pre_3": "37 " },
+    { "Date": "4月25日", "Day": "星期二", "Promotion": "有促销活动", "Temperature": "18 ", "Flyers": "52", "Weather": "-1", "Ave_traffic": "68 ", "Sales": "45 ", "pre_1": "44 ", "pre_2": "46 ", "pre_3": "49 " },
+    { "Date": "4月26日", "Day": "星期三", "Promotion": "无促销活动", "Temperature": "17 ", "Flyers": "72", "Weather": "2", "Ave_traffic": "77 ", "Sales": "43 ", "pre_1": "43 ", "pre_2": "42 ", "pre_3": "39 " },
+    { "Date": "4月27日", "Day": "星期四", "Promotion": "有促销活动", "Temperature": "18 ", "Flyers": "50", "Weather": "1", "Ave_traffic": "79 ", "Sales": "54 ", "pre_1": "57 ", "pre_2": "54 ", "pre_3": "55 " },
+    { "Date": "4月28日", "Day": "星期五", "Promotion": "有促销活动", "Temperature": "15 ", "Flyers": "60", "Weather": "2", "Ave_traffic": "75 ", "Sales": "63 ", "pre_1": "67 ", "pre_2": "59 ", "pre_3": "56 " },
+    { "Date": "4月29日", "Day": "星期六", "Promotion": "无促销活动", "Temperature": "18 ", "Flyers": "42", "Weather": "2", "Ave_traffic": "76 ", "Sales": "46 ", "pre_1": "41 ", "pre_2": "40 ", "pre_3": "40 " },
+    { "Date": "4月30日", "Day": "星期日", "Promotion": "有促销活动", "Temperature": "20 ", "Flyers": "52", "Weather": "1", "Ave_traffic": "85 ", "Sales": "63 ", "pre_1": "62 ", "pre_2": "60 ", "pre_3": "57 " },
+    { "Date": "5月1日", "Day": "星期一", "Promotion": "有促销活动", "Temperature": "19 ", "Flyers": "36", "Weather": "2", "Ave_traffic": "91 ", "Sales": "55 ", "pre_1": "52 ", "pre_2": "54 ", "pre_3": "55 " },
+    { "Date": "5月2日", "Day": "星期二", "Promotion": "无促销活动", "Temperature": "19 ", "Flyers": "13", "Weather": "1", "Ave_traffic": "88 ", "Sales": "27 ", "pre_1": "26 ", "pre_2": "31 ", "pre_3": "36 " },
+    { "Date": "5月3日", "Day": "星期三", "Promotion": "有促销活动", "Temperature": "22 ", "Flyers": "62", "Weather": "1", "Ave_traffic": "90 ", "Sales": "54 ", "pre_1": "55 ", "pre_2": "54 ", "pre_3": "51 " },
+    { "Date": "5月4日", "Day": "星期四", "Promotion": "无促销活动", "Temperature": "22 ", "Flyers": "12", "Weather": "1", "Ave_traffic": "93 ", "Sales": "24 ", "pre_1": "27 ", "pre_2": "25 ", "pre_3": "33 " },
+    { "Date": "5月5日", "Day": "星期五", "Promotion": "无促销活动", "Temperature": "21 ", "Flyers": "45", "Weather": "0", "Ave_traffic": "100 ", "Sales": "28 ", "pre_1": "33 ", "pre_2": "28 ", "pre_3": "35 " },
+    { "Date": "5月6日", "Day": "星期六", "Promotion": "有促销活动", "Temperature": "19 ", "Flyers": "38", "Weather": "0", "Ave_traffic": "92 ", "Sales": "58 ", "pre_1": "54 ", "pre_2": "56 ", "pre_3": "56 " },
+    { "Date": "5月7日", "Day": "星期日", "Promotion": "有促销活动", "Temperature": "21 ", "Flyers": "59", "Weather": "1", "Ave_traffic": "92 ", "Sales": "64 ", "pre_1": "62 ", "pre_2": "57 ", "pre_3": "55 " },
+    { "Date": "5月8日", "Day": "星期一", "Promotion": "有促销活动", "Temperature": "24 ", "Flyers": "36", "Weather": "0", "Ave_traffic": "94 ", "Sales": "43 ", "pre_1": "41 ", "pre_2": "45 ", "pre_3": "44 " },
+    { "Date": "5月9日", "Day": "星期二", "Promotion": "有促销活动", "Temperature": "22 ", "Flyers": "56", "Weather": "2", "Ave_traffic": "95 ", "Sales": "57 ", "pre_1": "56 ", "pre_2": "53 ", "pre_3": "53 " },
+    { "Date": "5月10日", "Day": "星期三", "Promotion": "无促销活动", "Temperature": "21 ", "Flyers": "32", "Weather": "2", "Ave_traffic": "93 ", "Sales": "33 ", "pre_1": "34 ", "pre_2": "30 ", "pre_3": "36 " },
+    { "Date": "5月11日", "Day": "星期四", "Promotion": "有促销活动", "Temperature": "23 ", "Flyers": "20", "Weather": "2", "Ave_traffic": "82 ", "Sales": "48 ", "pre_1": "50 ", "pre_2": "48 ", "pre_3": "50 " },
+    { "Date": "5月12日", "Day": "星期五", "Promotion": "有促销活动", "Temperature": "19 ", "Flyers": "32", "Weather": "0", "Ave_traffic": "88 ", "Sales": "46 ", "pre_1": "51 ", "pre_2": "49 ", "pre_3": "50 " },
+    { "Date": "5月13日", "Day": "星期六", "Promotion": "有促销活动", "Temperature": "21 ", "Flyers": "45", "Weather": "2", "Ave_traffic": "84 ", "Sales": "64 ", "pre_1": "61 ", "pre_2": "58 ", "pre_3": "56 " },
+    { "Date": "5月14日", "Day": "星期日", "Promotion": "有促销活动", "Temperature": "25 ", "Flyers": "38", "Weather": "0", "Ave_traffic": "78 ", "Sales": "50 ", "pre_1": "49 ", "pre_2": "46 ", "pre_3": "48 " },
+    { "Date": "5月15日", "Day": "星期一", "Promotion": "有促销活动", "Temperature": "17 ", "Flyers": "32", "Weather": "-1", "Ave_traffic": "81 ", "Sales": "43 ", "pre_1": "41 ", "pre_2": "45 ", "pre_3": "50 " },
+    { "Date": "5月16日", "Day": "星期二", "Promotion": "无促销活动", "Temperature": "19 ", "Flyers": "55", "Weather": "0", "Ave_traffic": "84 ", "Sales": "31 ", "pre_1": "30 ", "pre_2": "32 ", "pre_3": "36 " },
+    { "Date": "5月17日", "Day": "星期三", "Promotion": "有促销活动", "Temperature": "22 ", "Flyers": "25", "Weather": "0", "Ave_traffic": "88 ", "Sales": "42 ", "pre_1": "44 ", "pre_2": "46 ", "pre_3": "44 " },
+    { "Date": "5月18日", "Day": "星期四", "Promotion": "无促销活动", "Temperature": "22 ", "Flyers": "75", "Weather": "0", "Ave_traffic": "84 ", "Sales": "31 ", "pre_1": "34 ", "pre_2": "27 ", "pre_3": "33 " },
+    { "Date": "5月19日", "Day": "星期五", "Promotion": "无促销活动", "Temperature": "24 ", "Flyers": "68", "Weather": "0", "Ave_traffic": "90 ", "Sales": "29 ", "pre_1": "33 ", "pre_2": "25 ", "pre_3": "30 " },
+    { "Date": "5月20日", "Day": "星期六", "Promotion": "有促销活动", "Temperature": "18 ", "Flyers": "59", "Weather": "0", "Ave_traffic": "98 ", "Sales": "64 ", "pre_1": "60 ", "pre_2": "56 ", "pre_3": "56 " },
+    { "Date": "5月21日", "Day": "星期日", "Promotion": "有促销活动", "Temperature": "22 ", "Flyers": "35", "Weather": "0", "Ave_traffic": "92 ", "Sales": "54 ", "pre_1": "53 ", "pre_2": "54 ", "pre_3": "53 " },
+    { "Date": "5月22日", "Day": "星期一", "Promotion": "无促销活动", "Temperature": "22 ", "Flyers": "34", "Weather": "-1", "Ave_traffic": "83 ", "Sales": "19 ", "pre_1": "17 ", "pre_2": "23 ", "pre_3": "34 " },
+    { "Date": "5月23日", "Day": "星期二", "Promotion": "有促销活动", "Temperature": "25 ", "Flyers": "45", "Weather": "1", "Ave_traffic": "89 ", "Sales": "47 ", "pre_1": "47 ", "pre_2": "49 ", "pre_3": "47 " },
+    { "Date": "5月24日", "Day": "星期三", "Promotion": "无促销活动", "Temperature": "21 ", "Flyers": "18", "Weather": "2", "Ave_traffic": "96 ", "Sales": "30 ", "pre_1": "32 ", "pre_2": "28 ", "pre_3": "36 " },
+    { "Date": "5月25日", "Day": "星期四", "Promotion": "有促销活动", "Temperature": "22 ", "Flyers": "60", "Weather": "-1", "Ave_traffic": "92 ", "Sales": "45 ", "pre_1": "48 ", "pre_2": "49 ", "pre_3": "47 " },
+    { "Date": "5月26日", "Day": "星期五", "Promotion": "无促销活动", "Temperature": "22 ", "Flyers": "63", "Weather": "0", "Ave_traffic": "81 ", "Sales": "28 ", "pre_1": "33 ", "pre_2": "26 ", "pre_3": "33 " },
+    { "Date": "5月27日", "Day": "星期六", "Promotion": "有促销活动", "Temperature": "25 ", "Flyers": "46", "Weather": "-1", "Ave_traffic": "78 ", "Sales": "48 ", "pre_1": "45 ", "pre_2": "49 ", "pre_3": "48 " },
+    { "Date": "5月28日", "Day": "星期日", "Promotion": "无促销活动", "Temperature": "22 ", "Flyers": "45", "Weather": "2", "Ave_traffic": "84 ", "Sales": "43 ", "pre_1": "41 ", "pre_2": "35 ", "pre_3": "39 " },
+    { "Date": "5月29日", "Day": "星期一", "Promotion": "有促销活动", "Temperature": "19 ", "Flyers": "30", "Weather": "-1", "Ave_traffic": "76 ", "Sales": "40 ", "pre_1": "38 ", "pre_2": "43 ", "pre_3": "47 " },
+    { "Date": "5月30日", "Day": "星期二", "Promotion": "无促销活动", "Temperature": "24 ", "Flyers": "53", "Weather": "1", "Ave_traffic": "66 ", "Sales": "27 ", "pre_1": "26 ", "pre_2": "25 ", "pre_3": "30 " }
+]
+
 
 function timer() {
     var second = document.getElementById('timer')
