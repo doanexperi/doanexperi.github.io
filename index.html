@@ -265,6 +265,9 @@
     var exp_game_task_intro = {
             type: jsPsychFullscreen,
             fullscreen_mode: true,
+            data: {
+                phasename: 'role_intro',
+            },
             message: `
             <div style="max-width: 75%; margin:0 atuo; ">
                     <p style="font: bold 22pt 微软雅黑; text-align: left; line-height: 1.8em"> 【实验背景介绍】</p></br></br>
@@ -340,9 +343,9 @@
                     <p>· 偏差超过<font color="red">36%</font>，单次预测收益<font color="red">0元</font>.
                     </div>`,
             html: `<div class='context' style='text-indent:6rem /* 50/16 */; line-height: 1.5em; font-size:1.3rem'>
-                    <p>1. 你预测需提前制作13个蛋糕，实际市场需求18个蛋糕，单次预测收益<input type="text" name="profit_calcu1" size="2"/>元；
-                    <p>2. 你预测需提前制作25个蛋糕，实际市场需求22个蛋糕，单次预测收益<input type="text" name="profit_calcu2" size="2"/>元；
-                    <p>3. 你预测需提前制作8个蛋糕，实际市场需求8个蛋糕，单次预测收益<input type="text" name="profit_calcu3" size="2"/>元。
+                    <p>1. 你预测需提前制作13个蛋糕，实际市场需求18个蛋糕，单次预测收益<input type="text" name="profit_calcu1" size="2" required/>元；
+                    <p>2. 你预测需提前制作25个蛋糕，实际市场需求22个蛋糕，单次预测收益<input type="text" name="profit_calcu2" size="2" required/>元；
+                    <p>3. 你预测需提前制作8个蛋糕，实际市场需求8个蛋糕，单次预测收益<input type="text" name="profit_calcu3" size="2" required/>元。
                     
                     </div>`,
             button_label: '确认提交',
@@ -352,6 +355,9 @@
     var exp_rule_intro = {
             type: jsPsychFullscreen,
             fullscreen_mode: true,
+            data: {
+                phasename: 'varaiables_intro',
+            },
             message: `
             <div style="max-width: 100%; margin:0 atuo; ">
                     <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.2em">【预测要点】</p></br>
@@ -405,7 +411,8 @@
     var exp_predict_practice = {
         type: jsPsychSurvey,
         data: {
-            task: jsPsych.timelineVariable('Date')
+            //task: jsPsych.timelineVariable('Date')
+            task: 'exp_practice_per_task'
         },
         pages: [
             [{
@@ -594,6 +601,10 @@
 
     var exp_manipu_intro_3 = {
             type: jsPsychFullscreen,
+            data: {
+                //task: jsPsych.timelineVariable('Date')
+                phasename: 'exp1_algo_intro'
+            },
             fullscreen_mode: true,
             message: `
 
@@ -632,6 +643,10 @@
     var exp_manipu_intro_4 = {
             type: jsPsychFullscreen,
             fullscreen_mode: true,
+            data: {
+                //task: jsPsych.timelineVariable('Date')
+                phasename: 'exp1_algo_intro'
+            },
             message: `
 
         <div style="max-width: 100%; margin:0 atuo; ">    
@@ -1075,6 +1090,10 @@
 
     var variables_measurement = {
             type: jsPsychSurvey,
+
+            data: {
+                phasename: 'exp1_survey',
+            },
             pages: [
                 [{
                     type: 'html',
@@ -1720,6 +1739,9 @@
     var exp_part2_intro = {
         type: jsPsychFullscreen,
         fullscreen_mode: true,
+        data: {
+            phasename: 'exp2_intro',
+        },
         message: `
                     <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em">【实验环节二】</p></br>
 
@@ -1791,6 +1813,10 @@
 
     var algo_delegation_yes_2 = {
         type: jsPsychSurvey,
+        data: {
+            //task: jsPsych.timelineVariable('Date')
+            task: 'exp2_pre_task_info'
+        },
         pages: [
             [{
                 type: 'html',
@@ -1831,7 +1857,7 @@
             }, {
                 type: 'likert',
                 prompt: '· 你对算法的预测结果有多大信心？',
-                name: 'pred_algo_2',
+                name: 'pred_confi_2',
                 required: true,
                 likert_scale_min_label: '完全没有信心',
                 likert_scale_max_label: '非常有信心',
@@ -1947,7 +1973,8 @@
     var algo_delegation_no_2 = {
         type: jsPsychSurvey,
         data: {
-            task: jsPsych.timelineVariable('Date')
+            //task: jsPsych.timelineVariable('Date')
+            task: 'exp2_pre_task_info'
         },
         pages: [
             [{
@@ -2044,7 +2071,7 @@
                             <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
                             <p>实际销量为${ture_sale}个</p>
                             <p>你的预测为${self_pre}个</p>
-                            <p>你的预测偏差为${bias_percent}%</p>
+                            <p>你的预测偏差为<b>${bias_percent}%</b></p>
                            </br>
                             <p style='color:Gray;'>（按任意键继续）</p>
                             </div>`
@@ -2196,6 +2223,10 @@
 
     var algo_delegation_yes_2_price = {
         type: jsPsychSurvey,
+        data: {
+            //task: jsPsych.timelineVariable('Date')
+            task: 'exp2_pre_task_info'
+        },
         pages: [
             [{
                 type: 'html',
@@ -2234,7 +2265,7 @@
             }, {
                 type: 'likert',
                 prompt: '· 你对算法的预测结果有多大信心？',
-                name: 'pred_algo_2',
+                name: 'pred_confi_2',
                 required: true,
                 likert_scale_min_label: '完全没有信心',
                 likert_scale_max_label: '非常有信心',
@@ -2349,7 +2380,7 @@
     var algo_delegation_no_2_price = {
         type: jsPsychSurvey,
         data: {
-            task: jsPsych.timelineVariable('Date')
+            task: 'exp2_pre_task_info'
         },
         pages: [
             [{
@@ -2450,7 +2481,7 @@
                             <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
                             <p>实际销量为${ture_sale}个</p>
                             <p>你的预测为${self_pre}个</p>
-                            <p>你的预测偏差为${bias_percent}%</p>
+                            <p>你的预测偏差为<b>${bias_percent}%</b></p>
                             </br>
                             <p style='color:Gray;'>（按任意键继续）</p>
                             </div>`
@@ -2523,6 +2554,9 @@
         //timeline.push(exp_delegation_part2)
 
     var algo_price_change = {
+            data: {
+                phasename: 'price_change',
+            },
             timeline: [{
                 type: jsPsychHtmlKeyboardResponse,
                 stimulus: function() {
@@ -2555,6 +2589,9 @@
 
     var algo_purchase_2 = {
             type: jsPsychSurvey,
+            data: {
+                phasename: 'price_change_survey',
+            },
             pages: [
                 [{
                     type: 'likert',
@@ -2600,6 +2637,9 @@
 
     var variables_measurement_part2 = {
             type: jsPsychSurvey,
+            data: {
+                phasename: 'exp2_survey_1',
+            },
             pages: [
                 [{
                     type: 'html',
@@ -2728,6 +2768,9 @@
 
     var variables_measurement_part3_PDB = {
             type: jsPsychSurveyLikert,
+            data: {
+                phasename: 'exp2_survey_3',
+            },
             preamble: `
             <p style="font: 10pt 微软雅黑; line-height: 1 em;color:Gray; text-align:center">【 4/6 】</p>
             <p style="font: 10pt 微软雅黑; line-height: 0.1em; text-align:left">请回答对以下观点的赞成程度</p>
@@ -2770,6 +2813,9 @@
 
     var variables_measurement_part3_literacy = {
             type: jsPsychSurvey,
+            data: {
+                phasename: 'exp2_survey_4',
+            },
             pages: [
                 [{
                     type: 'html',
@@ -2865,15 +2911,20 @@
             preamble: `
                     <p style="font: 1.5rem 微软雅黑; text-align: left; line-height: 1.5em;color:Gray; ">请如实填写以下信息。</p>
             `,
-            html: '<div style="font: 1.1875rem SimSun; text-align: left; line-height: 1.5em; font-weight:bold"> <p> 1. 你的性别：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 2. 你的年龄：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br> <p> 3. 你所学的专业：<input type="text" id="test-resp-box" name="response" size="20" required/></p></br></div>',
+            html: '<div style="font: 1.1875rem SimSun; text-align: left; line-height: 1.5em; font-weight:bold"> <p> 1. 你的性别：<input type="text" id="test-resp-box" name="response1" size="20" required/></p></br> <p> 2. 你的年龄：<input type="text" id="test-resp-box" name="response2" size="20" required/></p></br> <p> 3. 你所学的专业：<input type="text" id="test-resp-box" name="response3" size="20" required/></p></br></div>',
             autofocus: 'test-resp-box',
             button_label: '下一页',
-            name: 'basic_info',
+            data: {
+                phasename: 'basic_info',
+            },
         }
         //timeline.push(basic_info)
 
     var basic_info_efficacy = {
         type: jsPsychSurvey,
+        data: {
+            phasename: 'exp2_survey_2',
+        },
         pages: [
             [{
                 type: 'html',
@@ -3022,6 +3073,9 @@
 
     var exp_end_pay = {
         type: jsPsychHtmlKeyboardResponse,
+        data: {
+            phasename: 'payment',
+        },
         stimulus: function() {
             //实验环节1
 
