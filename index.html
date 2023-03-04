@@ -93,7 +93,7 @@
     }
 
 
-    var conditional_web = Math.floor(Math.random() * 4)
+    var conditional_web = Math.floor(Math.random() * 3)
         //var conditional_web = 2
 
 
@@ -167,7 +167,8 @@
                     <div style="max-width: 75%; margin:0 atuo; ">
   
                     <p class='context' style='line-height: 1.8em; text-indent:3.125rem'>你好！我们是浙江大学管理学院的研究团队，正在进行一项关于判断与预测行为的研究。实验过程中需要你<font color="red">做出判断并进行预测</font>。我们向您保证期间所有数据和信息的安全。
-                    <p class='context' style='line-height: 1.8em; text-indent:3.125rem'>你需要根据提供的信息<font color="red">预测产品销量</font>。整个实验包含<font color="red">练习阶段和正式决策阶段，以及对应的问卷填写阶段</font>，大概需要花费<b>30-40分钟</b>的时间，完整参与实验的报酬在<font color="red">20-75元</font>之间。
+                    <p class='context' style='line-height: 1.8em; text-indent:3.125rem'>你需要根据提供的信息<font color="red">预测产品销量</font>。
+                        <p class='context' style='line-height: 1.8em; text-indent:3.125rem'>整个实验包含<font color="red">1个练习阶段和4个正式决策阶段，以及对应的问卷填写阶段</font>，在每个阶段结束后会进行通知。大概需要花费<b>30-40分钟</b>的时间，完整参与实验的报酬在<font color="red">20-50元</font>之间。
                         <p class='context' style='text-indent:3.125rem'>实验过程中请注意以下事项：
                     <p class='context' style='text-indent:3.125rem /* 50/16 */'>1. 请保证自愿参加本实验，如果中途放弃实验你将失去相关金额。
                     <p class='context' style='text-indent:3.125rem /* 50/16 */'>2. 请仔细阅读接下来的提示信息，<font color="red">你的表现影响你最终的实验报酬</font>。
@@ -229,7 +230,7 @@
                    
                     <p>· 偏差超过<font color="red">32%</font>，单次预测收益<font color="red">0元</font>.
                     </div>
-                    <p line-height: 0em> # 最终酬金=基本酬金+浮动酬金, 最终酬金在<b><font color="red">25~75元</font></b>之间浮动。</p></div>`,
+                    <p line-height: 0em> * 最终酬金=基本酬金+浮动酬金。最终酬金在<b><font color="red">20~50元</font></b>之间浮动。</p></div>`,
             button_label: '已了解酬金规则',
             delay_after: 100
         }
@@ -250,7 +251,7 @@
 
             <p style="font: 1.5rem 微软雅黑; text-align: center; line-height: 1.5em">【酬金计算练习】</p></br>
 
-                    <div class='context' style='text-indent:6rem /* 50/16 */; line-height: 1.5em'>请在3分钟之内计算单次预测收益：
+                    <div class='context' style='text-indent:6rem /* 50/16 */; line-height: 1.5em'>请在3分钟之内计算单次预测收益（计算错误时页面会弹窗提醒，完全正确才能跳转）：
                     <div style='text-indent:6rem /* 50/16 */; line-height: 1.1em; font-size:1.1rem; font-family: "微软雅黑";font-weight:100; '>
                     <p>· <b> 单次预测偏差=|预测值-真实值|/真实值</b>
                     <p>· 偏差为<font color="red">0</font>，单次预测收益<font color="red">5元</font>；
@@ -261,14 +262,20 @@
                     <p>· 偏差超过<font color="red">32%</font>，单次预测收益<font color="red">0元</font>.
                     </div>`,
             html: `<div class='context' style='text-indent:6rem /* 50/16 */; line-height: 1.5em; font-size:1.3rem'>
-                    <p>1. 你预测需提前制作13个蛋糕，实际市场需求18个蛋糕，单次预测收益<input type="text" name="profit_calcu1" size="2" required/>元；
-                    <p>2. 你预测需提前制作25个蛋糕，实际市场需求22个蛋糕，单次预测收益<input type="text" name="profit_calcu2" size="2" required/>元；
-                    <p>3. 你预测需提前制作8个蛋糕，实际市场需求8个蛋糕，单次预测收益<input type="text" name="profit_calcu3" size="2" required/>元。
-                    
+                
+                <p>1. 你预测需提前制作13个蛋糕，实际市场需求18个蛋糕，单次预测收益 <input type="text" name="profit_calcu1" size="1" required  onchange="if (this.value!=1){alert('计算错误！请重新计算。');this.value='';}"/> 元；
+                    <p>2. 你预测需提前制作25个蛋糕，实际市场需求22个蛋糕，单次预测收益 <input type="text" name="profit_calcu2" size="1" required onchange="if (this.value!=3){alert('计算错误！请重新计算。');this.value='';}"/> 元；
+                    <p>3. 你预测需提前制作8个蛋糕，实际市场需求8个蛋糕，单次预测收益 <input type="text" name="profit_calcu3" size="1" required onchange="if (this.value!=5){alert('计算错误！请重新计算。');this.value='';}"/> 元。   
                     </div>`,
             button_label: '确认提交',
         }
         //timeline.push(exp_interest_test)
+
+    var fullscreen_open = {
+        type: jsPsychFullscreen,
+        fullscreen_mode: true,
+        delay_after: 10
+    }
 
     var exp_rule_intro = {
             type: jsPsychFullscreen,
@@ -467,9 +474,9 @@
             type: jsPsychFullscreen,
             fullscreen_mode: true,
             message: `
-        <p style="font: 1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em; text-align:center">【正式预测阶段一】</p></br>
+        <p style="font: 1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em; text-align:center">【预测阶段一】</p></br>
         <div style="font:1.5rem /* 24/16 */ SimSun; line-height: 1.2em; text-align:center">
-        <p>· 本阶段需要你自己完成<font color='red'>7次</font>蛋糕销量预测任务。</p>
+        <p>· 本阶段需要完成<font color='red'>7次</font>蛋糕销量预测任务。</p>
         <p>· 每一次预测任务都有助于你未来更好地预测加盟店的蛋糕销量，因此请认真对待！</p>
         <p style='color:red;'>· 完整完成7次预测任务是获得基本酬金的必要条件。</p>
         </div>
@@ -609,18 +616,33 @@
             type: jsPsychFullscreen,
             fullscreen_mode: true,
             message: `
-                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【正式预测阶段一结束】</p></br>
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【预测阶段一结束】</p></br>
                             <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
-                            <p>请点击按钮进入<b>下一预测阶段</b>。</p></br>
-                            <p style='color:red;'>你的决策会影响本阶段的浮动收益，因此请认真阅读信息。</p></br></br>
+                            <p>请点击按钮进入<b>预测阶段二</b>。</p></br>
+                            </br></br>
                             </div>
                 <p>`,
-            button_label: '进入下一预测阶段',
+            button_label: '进入预测阶段二',
             delay_after: 100
         }
         //timeline.push(self_pre_7_end);
 
     /*操纵环节*/
+    var exp_manipu_phase1_intro = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【预测阶段二】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>本阶段需要做<b>5次</b>销量预测。</p></br>
+                            <p style='color:red;'>你的决策会影响本阶段的浮动收益，因此请认真阅读信息。</p></br></br>
+                            </div>
+                <p>`,
+            button_label: '开始预测阶段二',
+            delay_after: 100
+        }
+        //timeline.push(self_pre_7_end);
+
     var exp_manipu_interest_intro = {
             type: jsPsychFullscreen,
             fullscreen_mode: true,
@@ -660,7 +682,7 @@
         <p style="font:1.5rem SimSun; line-height: 1.2em; text-align:left; color:black">
                 请注意！你所在的烘培加盟店的母公司邀请一家AI算法公司（AIplus）设计了一个<font color='red'>蛋糕销量预测算法</font>。</br>
                 <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>· 该算法是针对蛋糕销量预测的。</p>
-                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>· 该算法使用是需要付费的，5元购买一次，每次购买可以提供5次预测。</p>
+                <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>· 该算法使用是需要付费的，<font color="red">5元购买一次，每次购买可以提供5次预测</font>。</p>
                 <p class='context' style='text-indent:3.125rem /* 50/16 */; line-height: 1.5em'>· 该算法是基于过去的蛋糕销售数据得到的，使用的信息与你看到的7项信息相同。 </p>               
                 </br>
                 <p style="font:1.5rem SimSun; line-height: 1.2em; text-align:left; color:black">
@@ -690,9 +712,9 @@
 
         <div style="font:1.4rem SimSun; line-height: 1.3em; text-align:left; color:black">
                 <b> * 关于这个预测算法，请注意以下几点：</br>
-                <p style='text-indent:3rem /* 50/16 */;'> · 这个算法在每次预测时需要花费一段时间（页面大概停留5-10秒）。</p>
+                <p style='text-indent:3rem /* 50/16 */;'> · 这个算法在每次预测时需要花费一段时间（大留5-10秒）。</p>
                 <p style='text-indent:3rem /* 50/16 */;'> · 这个算法<font color="red">不是百分百预测准确</font>的。</p>
-                <p style='text-indent:3rem /* 50/16 */;'> · 对于你即将要预测的小样本销量预测任务，这个<font color="red">算法可能比你表现的好，也可能比你表现的差</font>。</p>      
+                <p style='text-indent:3rem /* 50/16 */;'> · 对于你即将要进行的小样本销量预测任务，这个<font color="red">算法可能比你表现的好，也可能比你表现的差</font>。</p>      
                 <p style='text-indent:3rem /* 50/16 */;'> · <font color="red">总的来说，无法保证短期小样本预测任务中是你自己预测收益高还是算法预测收益高</font>。</p>    
                 </br>
 
@@ -700,7 +722,7 @@
 
                 <p> 该页面包含<span style="text-decoration:underline">算法预测目标、代码设计、实现和优化等开发环节</span>的信息介绍。</p></b>
 
-                <p> <font color="red"> 请仔细阅读算法介绍页面！（介绍页面会停留15秒，请耐心阅读并等待，出现“下一页”按钮即可跳转）</font></p>
+                <p> <font color="red"> 请仔细阅读算法介绍页面！（介绍页面会强制停留15-20秒，请耐心阅读并等待，出现“下一页”按钮即可跳转）</font></p>
                 
                 </div> </br></br>                  
             <p>`,
@@ -731,16 +753,16 @@
         }
     }
     var exp_algorithm_web_0_show = {
-        timeline: [exp_algorithm_web_0],
-        conditional_function: function() {
-            if (conditional_web == 0) {
-                return true;
-            } else {
-                return false;
+            timeline: [exp_algorithm_web_0],
+            conditional_function: function() {
+                if (conditional_web == 0) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
-    }
-    timeline.push(exp_algorithm_web_0_show);
+        //timeline.push(exp_algorithm_web_0_show);
 
 
 
@@ -754,16 +776,16 @@
         }
     }
     var exp_algorithm_web_1_show = {
-        timeline: [exp_algorithm_web_1],
-        conditional_function: function() {
-            if (conditional_web == 1) {
-                return true;
-            } else {
-                return false;
+            timeline: [exp_algorithm_web_1],
+            conditional_function: function() {
+                if (conditional_web == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
-    }
-    timeline.push(exp_algorithm_web_1_show);
+        //timeline.push(exp_algorithm_web_1_show);
 
     var exp_algorithm_web_2 = {
         type: jsPsychExternalHtml,
@@ -775,38 +797,38 @@
         }
     }
     var exp_algorithm_web_2_show = {
-        timeline: [exp_algorithm_web_2],
-        conditional_function: function() {
-            if (conditional_web == 2) {
-                return true;
-            } else {
-                return false;
+            timeline: [exp_algorithm_web_2],
+            conditional_function: function() {
+                if (conditional_web == 2) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
-    }
-    timeline.push(exp_algorithm_web_2_show);
+        //timeline.push(exp_algorithm_web_2_show);
 
 
-    var exp_algorithm_web_3 = {
-        type: jsPsychExternalHtml,
-        url: 'Algorithm_intro_user_doing.html',
-        cont_btn: 'return',
-        data: {
-            task: 'AIAD_manip',
-            AIAD_info: '由多名其他烘焙店的店主制定目标，并与算法工程师一起设计、实现和完善的AI算法'
-        }
-    }
-    var exp_algorithm_web_3_show = {
-        timeline: [exp_algorithm_web_3],
-        conditional_function: function() {
-            if (conditional_web == 3) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    timeline.push(exp_algorithm_web_3_show);
+    //var exp_algorithm_web_3 = {
+    //    type: jsPsychExternalHtml,
+    //    url: 'Algorithm_intro_user_doing.html',
+    //    cont_btn: 'return',
+    //    data: {
+    //        task: 'AIAD_manip',
+    //        AIAD_info: '由多名其他烘焙店的店主制定目标，并与算法工程师一起设计、实现和完善的AI算法'
+    //    }
+    //}
+    //var exp_algorithm_web_3_show = {
+    //    timeline: [exp_algorithm_web_3],
+    //    conditional_function: function() {
+    //        if (conditional_web == 3) {
+    //            return true;
+    //        } else {
+    //            return false;
+    //        }
+    //    }
+    //}
+    //timeline.push(exp_algorithm_web_3_show);
 
 
 
@@ -857,7 +879,7 @@
                 }, {
                     type: 'multi-select',
                     prompt: '· 关于本实验中提到的算法，以下哪些说法是正确的？（可多选）',
-                    options: ["这个算法是基于AI实现的预测算法", "这个算法开发过程中全部是专业人士", "这个算法的预测正确率是100%", "这个算法到是免费使用的"],
+                    options: ["这个算法是基于AI实现的预测算法", "算法开发过程中全部是专业的算法工程师", "这个算法的预测正确率是100%", "这个算法到是免费使用的"],
                     name: 'manipulation_check_3',
                     required: true,
                 }, ]
@@ -1137,11 +1159,24 @@
                 likert_scale_values: likert_scale
             }]
         ],
-        button_label_finish: '继续预测'
+        button_label_finish: '提交结果'
+    }
+
+    var pred_notice = {
+        type: jsPsychFullscreen,
+        fullscreen_mode: true,
+        message: `
+        <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">预测结果提交成功！</p></br>
+        <div style="font:20pt SimSun; line-height: 1em; text-align:center">
+        <p></p>
+        </div>
+        <p>`,
+        button_lable: '继续实验',
+        delay_after: 100
     }
 
     var if_shown_no_algo_delegation_1 = {
-        timeline: [algo_delegation_no_1],
+        timeline: [algo_delegation_no_1, pred_notice],
         conditional_function: function() {
             var delegated = jsPsych.data.get().filter({
                 task: 'delegate_decision_1'
@@ -1231,10 +1266,29 @@
                     prompt: `<p style="font: 10pt 微软雅黑; line-height: 0.1em;color:Gray; text-align:center">【 2/8 】</p>`,
                 }, {
                     type: 'html',
-                    prompt: `<p style="font: 1.25rem 微软雅黑; line-height: 0.1em;text-align:left;font-weight:550">在没有得到算法预测结果反馈之前，你在多大程度上同意以下说法：</p>`,
+                    prompt: function() {
+                        var team_intro_info = jsPsych.data.get().filter({
+                            task: 'AIAD_manip'
+                        }).values()[0]
+                        var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
+                        if (algo_info == 'AI算法') {
+                            img_path = 'images/Algorithm_control_web.png'
+                        } else if (algo_info == '由算法工程师制定目标、设计、实现和完善的AI算法') {
+                            img_path = 'images/Algorithm_experts_web.png'
+                        } else if (algo_info == '由多名其他烘焙店的店主制定目标并参与优化，算法工程师设计、实现和完善的AI算法') {
+                            img_path = 'images/Algorithm_user_advising_web.png'
+                        }
+                        var html = `                       
+                        <p style="font: 1.25rem 微软雅黑; line-height: 0.1em;text-align:left;font-weight:550">你之前看到的算法介绍页面如下:</p></br> </br> 
+                        <p style="text-align:center"><img src=${img_path} width='70%'/></p></br>
+                        <p></p> <p style="font: 1.25rem 微软雅黑; line-height: 0.1em;text-align:left;font-weight:550">在没有得到算法预测结果反馈之前，根据算法信息，你在多大程度上同意以下说法：</p> 
+                        `
+                        return html
+                    }
+
                 }, {
                     type: 'likert',
-                    prompt: '· 根据算法介绍页面中AI算法开发过程推测，该公司设计出合格的AI预测算法的能力很高。',
+                    prompt: '· 根据算法介绍页面中AI算法开发过程推测，该公司具备设计出合格预测算法的高能力。',
                     likert_scale_min_label: '完全不同意',
                     likert_scale_max_label: '完全同意',
                     name: 'Ability_1',
@@ -1281,7 +1335,7 @@
                     prompt: `<p style="font: 1.25rem 微软雅黑; line-height: 0.1em;text-align:left;font-weight:550">根据算法的介绍信息，你在多大程度上同意以下说法：</p>`,
                 }, {
                     type: 'likert',
-                    prompt: '· 我认同这个公司的算法开发团队。',
+                    prompt: '· 我认可这个公司的算法开发团队。',
                     likert_scale_min_label: '完全不同意',
                     likert_scale_max_label: '完全同意',
                     likert_scale_values: likert_scale,
@@ -1344,7 +1398,7 @@
                     required: true,
                 }, {
                     type: 'likert',
-                    prompt: '· 根据已有的算法信息推测，这个算法的预测表现会是不错的。',
+                    prompt: '· 根据已有的算法信息推测，这个算法的预测表现会比较好。',
                     likert_scale_min_label: '完全不同意',
                     likert_scale_max_label: '完全同意',
                     likert_scale_values: likert_scale,
@@ -1352,7 +1406,7 @@
                     required: true,
                 }, {
                     type: 'likert',
-                    prompt: '· 这个算法在开发过程中是人观的、不存在主观臆断的。',
+                    prompt: '· 这个算法在开发过程中是客观的、不存在主观臆断的。',
                     likert_scale_min_label: '完全不同意',
                     likert_scale_max_label: '完全同意',
                     likert_scale_values: likert_scale,
@@ -1523,24 +1577,39 @@
             ],
             button_label_back: '上一页',
             button_label_next: '下一页',
-            button_label_finish: '继续下一轮实验'
+            button_label_finish: '继续实验'
         }
         //timeline.push(variables_measurement);
+
+    var exp_manipu_phase1_end = {
+        type: jsPsychFullscreen,
+        fullscreen_mode: true,
+        message: `
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【预测阶段二结束】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>* 本轮5次预测任务已经结束。</p>
+                            <p>* 请点击按钮进入<b>预测阶段三</b>。</p></br>
+                            </br></br>
+                            </div>
+                <p>`,
+        button_label: '进入预测阶段三',
+        delay_after: 100
+    }
 
     //************************下一轮实验设计***********************
     var exp_algo_delegation_2_intro = {
             type: jsPsychFullscreen,
             fullscreen_mode: true,
             message: `
-                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【正式预测阶段三】</p></br>
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【预测阶段三】</p></br>
                             <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
-                            <p>* 正式实验阶段二中一轮五次预测已经结束。</p>
-                            <p>* 接下来一轮的<b>实验规则和之前相同</b>。</p>
-                            <p>* 请点击按钮进入<b>下一预测阶段</b>。</p></br>
+                            <p>* 本阶段你依然要连续做出<b>5次销量预测</b>。</p>
+                            <p>* 本阶段的<b>实验规则和酬金政策与阶段二相同</b>。</p>
+                            <p>* 请点击按钮正式进入<b>预测阶段三</b>。</p></br>
                             <p style='color:red;'>你的决策会影响本阶段的浮动收益，因此请认真阅读信息。</p></br></br>
                             </div>
                 <p>`,
-            button_label: '进入下一预测阶段',
+            button_label: '进入预测阶段三',
             delay_after: 100
         }
         //timeline.push(exp_algo_delegation_2_intro);
@@ -1816,11 +1885,11 @@
                 likert_scale_values: likert_scale
             }]
         ],
-        button_label_finish: '继续预测'
+        button_label_finish: '提交结果'
     }
 
     var if_shown_no_algo_delegation_2 = {
-        timeline: [algo_delegation_no_2],
+        timeline: [algo_delegation_no_2, pred_notice],
         conditional_function: function() {
             var delegated = jsPsych.data.get().filter({
                 task: 'delegate_decision_2'
@@ -1849,10 +1918,10 @@
             type: jsPsychFullscreen,
             fullscreen_mode: true,
             message: `
-        <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【问卷填写】</p></br>
+        <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【5轮预测结束】</p></br>
         <div style="font:20pt SimSun; line-height: 1em; text-align:center">
         <p>* 你已完成本阶段的预测任务。</p>
-        <p>* 请根据你目前看到的信息和判断认真填写！</p>
+        <p>* 接下来需要填写关于本阶段决策的一些问题。</p>
         </div>
         <p>`,
             button_lable: '填写问卷',
@@ -1882,7 +1951,7 @@
                         }).values()[0]
                         var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
                         var html = `                       
-                            当看到<b>${algo_info}</b>时，请列出三个理由说明你本轮为什么选择 <font color='red'>${delegated}</font> ：
+                            面对<b>${algo_info}</b>，你在第2次决定是否购买时选择了<font color='red'>${delegated}</font>，请列出你做出这个决定的理由 ：
                         `
                         return html
                     }
@@ -1906,24 +1975,39 @@
                     required: true
                 }]
             ],
-            button_label_finish: '继续下一轮实验'
+            button_label_finish: '继续实验'
         }
         //timeline.push(variables_measurement_2)
+    var exp_manipu_phase2_end = {
+        type: jsPsychFullscreen,
+        fullscreen_mode: true,
+        message: `
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【预测阶段三结束】</p></br>
+                            <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
+                            <p>* 本轮5次预测任务已经结束。</p>
+                            <p>* 请点击按钮进入<b>预测阶段四</b>。</p></br>
+                            </br></br>
+                            </div>
+                <p>`,
+        button_label: '进入预测阶段四',
+        delay_after: 100
+    }
+
 
     //************************第三个5轮***********************
     var exp_algo_delegation_3_intro = {
             type: jsPsychFullscreen,
             fullscreen_mode: true,
             message: `
-                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【正式预测阶段四】</p></br>
+                            <p style="font: 20pt 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【预测阶段四】</p></br>
                             <div style="font:20pt SimSun; line-height: 1em; text-align:center; color:black">
-                            <p>* 正式实验阶段三中一轮五次预测已经结束。</p>
-                            <p>* 接下来一轮的<b>实验规则和之前相同</b>。</p>
-                            <p>* 请点击按钮进入<b>下一预测阶段</b>。</p></br>
+                            <p>* 本阶段你依然需要连续做出<b>5次销量预测</b></p>
+                            <p>* 本阶段的<b>实验规则和酬金规则与之前相同</b>。</p>
+                            <p>* 请点击按钮进入<b>预测阶段四</b>。</p></br>
                             <p style='color:red;'>你的决策会影响本阶段的浮动收益，因此请认真阅读信息。</p></br></br>
                             </div>
                 <p>`,
-            button_label: '进入下一预测阶段',
+            button_label: '进入预测阶段四',
             delay_after: 100
         }
         //timeline.push(exp_algo_delegation_3_intro);
@@ -2199,11 +2283,11 @@
                 likert_scale_values: likert_scale
             }]
         ],
-        button_label_finish: '继续预测'
+        button_label_finish: '提交结果'
     }
 
     var if_shown_no_algo_delegation_3 = {
-        timeline: [algo_delegation_no_3],
+        timeline: [algo_delegation_no_3, pred_notice],
         conditional_function: function() {
             var delegated = jsPsych.data.get().filter({
                 task: 'delegate_decision_3'
@@ -2231,10 +2315,10 @@
             type: jsPsychFullscreen,
             fullscreen_mode: true,
             message: `
-        <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【问卷填写】</p></br>
+            <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【5轮预测结束】</p></br>
         <div style="font:20pt SimSun; line-height: 1em; text-align:center">
         <p>* 你已完成本阶段的预测任务。</p>
-        <p>* 请根据你目前看到的信息和判断认真填写！</p>
+        <p>* 接下来需要填写关于本阶段决策的一些问题。</p>
         </div>
         <p>`,
             button_lable: '填写问卷',
@@ -2264,7 +2348,7 @@
                         }).values()[0]
                         var algo_info = eval(JSON.parse(JSON.stringify(team_intro_info))).AIAD_info
                         var html = `                       
-                            当看到<b>${algo_info}</b>时，请列出三个理由说明你本轮为什么选择 <font color='red'>${delegated}</font> ：
+                            面对<b>${algo_info}</b>，在第3次连续五次预测的场景下，你选择了 <font color='red'>${delegated}</font>。</br>请说出做出这个决策的三个理由 ：
                         `
                         return html
                     }
@@ -2288,12 +2372,29 @@
                     required: true
                 }]
             ],
-            button_label_finish: '查看15次的预测结果及表现'
+            button_label_finish: '继续实验'
         }
         //timeline.push(variables_measurement_3)
 
 
     //******************************第一次5轮预测结果反馈************************************
+    var exp_feedback15_intro = {
+            type: jsPsychFullscreen,
+            fullscreen_mode: true,
+            message: `
+            <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【预测阶段结束】</p></br>
+        <div style="font:20pt SimSun; line-height: 1em; text-align:center">
+        <p>* 到现在为止，你已经完成了3次连续五轮的预测任务。</p>
+        <p>* 接下来请依次查看预测任务的表现。</p>
+        </div>
+        <p>`,
+            button_lable: '依次查看预测结果',
+            delay_after: 100
+        }
+        //timeline.push(key_factors_survey_3)
+
+
+
     var exp_algo_part1_feedback = {
         type: jsPsychHtmlKeyboardResponse,
         data: {
@@ -2895,7 +2996,7 @@
                 //，此次收益为<b>${profit_list[0]}</b>元。(删掉了这次改版)
 
             return `
-                            <p style="font: 1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【你已授权 ${algo_info} 为你做第二轮5次的销量预测】</p></br>
+                            <p style="font: 1.5rem /* 24/16 */ 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">【你已授权 ${algo_info} 为你做第三轮5次的销量预测】</p></br>
                             <p style="font: 1.375rem /* 22/16 */ 微软雅黑; line-height: 1.5em;color:Gray; text-align:center">5次销量预测结果评估如下：</p></br>
                             <div style="font:1.25rem /* 20/16 */ SimSun; line-height: 1em; text-align:center; color:black">
                             <p>第1次：预测日期为${date_list[0]}，实际销量是${sale_list[0]}个，算法的预测为${prediction_list[0]}个，预测偏差为<b>${bias_percent_list[0]}%</b>。</p>
@@ -3113,9 +3214,9 @@
             type: jsPsychFullscreen,
             fullscreen_mode: true,
             message: `
-        <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【第四阶段问卷填写】</p></br>
+        <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【预测任务结束的问卷填写】</p></br>
         <div style="font:20pt SimSun; line-height: 1em; text-align:center">
-        <p>接下来你将进入第四阶段的问卷填写。请根据目前你得到的信息和感受认真填写！</p>
+        <p>接下来你将进入有关预测任务的问卷填写阶段。请根据目前你得到的信息和感受认真填写！</p>
         </div>
         <p>`,
             button_lable: '填写问卷',
@@ -3256,7 +3357,7 @@
         <p style="font: 20pt 微软雅黑; line-height: 1.5em; text-align:center">【最后一阶段问卷填写】</p></br>
         <div style="font:20pt SimSun; line-height: 1em; text-align:center">
         <p>接下来你将进入<b>最后一阶段</b>的问卷填写，也是本实验的最后一个环节。</p>
-        <p><font color='red'>完成本环节，你将会查看到自己的最终收益！</font>本实验的报酬有机会高达90元！</p>
+        <p><font color='red'>完成本环节的问卷填写，你将会查看到自己的最终收益！</font>本实验的报酬有机会高达50元！</p>
         </div>
         <p>`,
             button_lable: '填写问卷',
@@ -3415,7 +3516,7 @@
                     prompt: '参与社交媒体互动的自动化程序也叫作社交机器人（bot），请根据您使用社交媒体的经验回答以下问题。',
                 }, {
                     type: 'multi-choice',
-                    prompt: "你认为自己常用的社交媒体上bot占比多少？（例如，微博，知乎，豆瓣，小红书，推特等）",
+                    prompt: "你认为自己常用的社交媒体上bot用户占全部用户的比例是多少？（例如，微博）",
                     options: ['0-20%', '20%-40%', '40%-60%', '60%-80%', '80%-100%'],
                     name: 'bot_percent',
                     required: true,
@@ -3747,20 +3848,21 @@
     }
 
     var manipulation = {
-        timeline: [exp_manipu_interest_intro, exp_manipu_algo_intro_1, exp_manipu_algo_intro_2, exp_algorithm_web_0_show,
-            exp_algorithm_web_1_show, exp_algorithm_web_2_show,
-            exp_algorithm_web_3_show, manipulation_check
+        timeline: [exp_manipu_phase1_intro, exp_manipu_interest_intro, exp_manipu_algo_intro_1, exp_manipu_algo_intro_2, exp_algorithm_web_0_show,
+            exp_algorithm_web_1_show, exp_algorithm_web_2_show, manipulation_check
         ]
     }
 
     var pre5_delegation_1 = {
-        timeline: [exp_algo_delegation_1, if_shown_algo_delegation_yes_1_intro, if_shown_algo_delegation_no_1_intro, exp_delegation_part1, key_factors_survey_1, variables_measurement]
+        timeline: [exp_algo_delegation_1, if_shown_algo_delegation_yes_1_intro, if_shown_algo_delegation_no_1_intro, exp_delegation_part1, key_factors_survey_1,
+            variables_measurement, exp_manipu_phase1_end
+        ]
     }
 
 
     var pre5_delegation_2 = {
         timeline: [exp_algo_delegation_2_intro, exp_algo_delegation_2, if_shown_algo_delegation_yes_2_intro,
-            if_shown_algo_delegation_no_2_intro, exp_delegation_part2, key_factors_survey_2, variables_measurement_2
+            if_shown_algo_delegation_no_2_intro, exp_delegation_part2, key_factors_survey_2, variables_measurement_2, exp_manipu_phase2_end
         ]
     }
 
@@ -3772,7 +3874,7 @@
 
     var pre15_feedback = {
         timeline: [
-            if_shown_exp_algo_part1_feedback, if_shown_exp_no_algo_part1_feedback, if_shown_exp_algo_part2_feedback,
+            exp_feedback15_intro, if_shown_exp_algo_part1_feedback, if_shown_exp_no_algo_part1_feedback, if_shown_exp_algo_part2_feedback,
             if_shown_exp_no_algo_part2_feedback, if_shown_exp_algo_part3_feedback, if_shown_exp_no_algo_part3_feedback
         ]
     }
